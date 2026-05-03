@@ -4,27 +4,31 @@ interface Service { icon: string; title: string; desc: string; }
 interface Testimonial { name: string; role: string; text: string; avatar: string; }
 interface FaqItem { q: string; a: string; }
 
+const BLUE = "#0ea5e9";
+const DARK = "#0c1a2e";
+const PINK = "#e91e8c";
+
 const SERVICES: Service[] = [
   { icon: "🧠", title: "Individual Therapy", desc: "One-on-one sessions for anxiety, depression, trauma, and life transitions in a safe, confidential space." },
-  { icon: "💑", title: "Couples Counselling", desc: "Rebuild trust, improve communication, and reconnect with your partner using evidence-based tools." },
-  { icon: "🌿", title: "Mindfulness & Stress", desc: "Practical mindfulness techniques to manage stress and cultivate lasting calm in daily life." },
-  { icon: "🏢", title: "Corporate Wellness", desc: "Team building, workshops, debriefing, and wellness programmes tailored for organisations." },
-  { icon: "🧒", title: "Child & Adolescent", desc: "Specialised support for young people navigating emotional challenges and identity development." },
-  { icon: "💻", title: "Online Sessions", desc: "Secure, confidential video sessions from wherever you are — flexible and fully professional." },
+  { icon: "💑", title: "Couples Counselling", desc: "Rebuild trust, improve communication, and reconnect using evidence-based tools." },
+  { icon: "🌿", title: "Mindfulness & Stress", desc: "Practical techniques to manage stress and cultivate lasting calm in daily life." },
+  { icon: "🏢", title: "Corporate Wellness", desc: "Team building, workshops, debriefing, and wellness programmes for organisations." },
+  { icon: "🧒", title: "Child & Adolescent", desc: "Specialised support for young people navigating emotional challenges and growth." },
+  { icon: "💻", title: "Online Sessions", desc: "Secure, confidential video sessions from wherever you are — flexible and professional." },
 ];
 
 const TESTIMONIALS: Testimonial[] = [
   { name: "Sarah M.", role: "Individual Therapy", text: "After years of struggling with anxiety, I finally have the tools to manage my thoughts and live fully. Truly life-changing.", avatar: "SM" },
   { name: "James & Priya", role: "Couples Counselling", text: "We came on the brink of separation. Through counselling, we rediscovered what brought us together.", avatar: "JP" },
-  { name: "Tom R.", role: "Mindfulness Programme", text: "My stress levels have dropped dramatically. I learned to pause, breathe, and respond rather than react.", avatar: "TR" },
+  { name: "Tom R.", role: "Mindfulness", text: "My stress levels have dropped dramatically. I learned to pause, breathe, and respond rather than react.", avatar: "TR" },
   { name: "Leila H.", role: "Online Sessions", text: "The flexibility of online sessions meant I could finally prioritise my mental health without disrupting my family.", avatar: "LH" },
 ];
 
 const FAQS: FaqItem[] = [
   { q: "Do I need to be in crisis to start therapy?", a: "Not at all. Therapy benefits anyone wanting to improve their wellbeing, work through challenges, or simply understand themselves better." },
   { q: "What happens in the first session?", a: "We get to know you — what brings you here, your background, and your goals. There's no pressure. It's a conversation." },
-  { q: "How long will I need therapy?", a: "It varies. Some benefit from 6–12 sessions, others prefer ongoing support. We review progress together regularly." },
   { q: "Is everything confidential?", a: "Yes. What you share stays between you and your therapist, with very limited exceptions explained upfront." },
+  { q: "Do you offer online and in-person sessions?", a: "We offer both. Many clients mix and match depending on their schedule and preference." },
   { q: "Do you offer corporate packages?", a: "Yes — tailored corporate wellness programmes including team building, workshops, and debriefing sessions." },
 ];
 
@@ -52,7 +56,7 @@ function Reveal({ children, delay = 0, className = "" }: {
     <div ref={ref} className={className} style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(20px)",
-      transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+      transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
     }}>
       {children}
     </div>
@@ -73,52 +77,57 @@ function Navbar() {
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
   return (
-    <nav style={{ fontFamily: "'DM Sans', sans-serif", background: scrolled ? "#fff" : "rgba(255,255,255,0.92)", backdropFilter: "blur(12px)" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "shadow-sm" : ""}`}>
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between" style={{ height: "68px" }}>
+    <nav style={{
+      fontFamily: "'DM Sans', sans-serif",
+      background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.92)",
+      backdropFilter: "blur(12px)",
+      boxShadow: scrolled ? "0 1px 20px rgba(0,0,0,0.06)" : "none",
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+      transition: "all 0.3s ease",
+    }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", height: "68px", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="text-xl font-bold tracking-tight" style={{ color: "#111" }}>
-          <span style={{ color: "#e91e8c" }}>Mynd</span>Works
-          <span style={{ fontSize: "10px", verticalAlign: "super", color: "#999", fontWeight: 400 }}>™</span>
+          style={{ background: "none", border: "none", cursor: "pointer", padding: 0 }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.4rem", fontWeight: 900, letterSpacing: "-0.03em", color: DARK }}>
+            <span style={{ color: PINK }}>Mynd</span>Works
+          </span>
         </button>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex" style={{ alignItems: "center", gap: "8px" }}>
           {[["Services","#services"],["About","#about"],["FAQ","#faq"]].map(([label, href]) => (
             <button key={label} onClick={() => go(href)}
-              className="text-sm font-medium transition-colors"
-              style={{ color: "#555" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#111")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#555")}>
+              style={{ background: "none", border: "none", cursor: "pointer", padding: "8px 16px", borderRadius: "999px", fontSize: "0.875rem", fontWeight: 500, color: "#555", transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.color = DARK; e.currentTarget.style.background = "#f5f5f5"; }}
+              onMouseLeave={e => { e.currentTarget.style.color = "#555"; e.currentTarget.style.background = "none"; }}>
               {label}
             </button>
           ))}
           <button onClick={() => go("#contact")}
-            className="px-5 py-2.5 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90"
-            style={{ background: "#111" }}>
+            style={{ marginLeft: "8px", padding: "10px 22px", borderRadius: "999px", background: BLUE, color: "#fff", border: "none", cursor: "pointer", fontSize: "0.875rem", fontWeight: 700, transition: "all 0.2s", boxShadow: `0 4px 14px ${BLUE}55` }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.04)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}>
             Book Session
           </button>
         </div>
 
-        <button className="md:hidden p-2" style={{ color: "#111" }} onClick={() => setOpen(!open)}>
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {open
-              ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/>
-              : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>}
+        <button className="md:hidden" onClick={() => setOpen(!open)}
+          style={{ background: "none", border: "none", cursor: "pointer", padding: "8px", color: DARK }}>
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {open ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>}
           </svg>
         </button>
       </div>
 
       {open && (
-        <div className="md:hidden bg-white border-t border-slate-100 px-6 py-5 space-y-2">
+        <div style={{ background: "#fff", borderTop: "1px solid #f0f0f0", padding: "16px 24px" }}>
           {[["Services","#services"],["About","#about"],["FAQ","#faq"]].map(([label, href]) => (
             <button key={label} onClick={() => go(href)}
-              className="block w-full text-left py-2.5 text-sm font-medium border-b border-slate-50" style={{ color: "#444" }}>
+              style={{ display: "block", width: "100%", textAlign: "left", padding: "12px 0", background: "none", border: "none", borderBottom: "1px solid #f5f5f5", fontSize: "0.9rem", fontWeight: 500, color: DARK, cursor: "pointer" }}>
               {label}
             </button>
           ))}
           <button onClick={() => go("#contact")}
-            className="w-full mt-3 py-3 rounded-full text-white text-sm font-semibold"
-            style={{ background: "#111" }}>
+            style={{ width: "100%", marginTop: "12px", padding: "14px", borderRadius: "999px", background: BLUE, color: "#fff", border: "none", cursor: "pointer", fontSize: "0.9rem", fontWeight: 700 }}>
             Book a Session
           </button>
         </div>
@@ -130,55 +139,84 @@ function Navbar() {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function Hero() {
   return (
-    <section style={{ background: "#f8f6f1", minHeight: "100vh", fontFamily: "'DM Sans', sans-serif" }}
-      className="relative flex items-center overflow-hidden">
-      <div className="max-w-6xl mx-auto px-6 w-full py-32 md:py-0" style={{ minHeight: "100vh", display: "flex", alignItems: "center" }}>
-        <div className="grid md:grid-cols-2 gap-10 items-center w-full">
+    <section style={{ background: BLUE, minHeight: "100vh", fontFamily: "'DM Sans', sans-serif", position: "relative", overflow: "hidden", display: "flex", alignItems: "center" }}>
+      {/* Background circles */}
+      <div style={{ position: "absolute", top: "-80px", right: "-80px", width: "400px", height: "400px", borderRadius: "50%", background: "rgba(255,255,255,0.07)", pointerEvents: "none" }}/>
+      <div style={{ position: "absolute", bottom: "-60px", left: "-60px", width: "300px", height: "300px", borderRadius: "50%", background: "rgba(255,255,255,0.05)", pointerEvents: "none" }}/>
+
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px", width: "100%", paddingTop: "100px", paddingBottom: "60px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "48px", alignItems: "center" }} className="hero-grid">
           {/* Left */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#e91e8c" }}>
-              Mental Wellness Support
-            </p>
-            <h1 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2.8rem, 5vw, 4.2rem)", lineHeight: 1.1, color: "#111", marginBottom: "1.5rem" }}>
-              Feel better.<br/>
-              <span style={{ fontStyle: "italic", color: "#e91e8c" }}>Think clearer.</span>
+            {/* Stars */}
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "24px" }}>
+              {[...Array(5)].map((_, i) => (
+                <svg key={i} width="18" height="18" fill="#f59e0b" viewBox="0 0 20 20">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              ))}
+              <span style={{ color: "rgba(255,255,255,0.9)", fontSize: "0.875rem", fontWeight: 600 }}>4.9/5 Average Rating</span>
+            </div>
+
+            <h1 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(2.4rem, 4.5vw, 3.6rem)", fontWeight: 900, color: "#fff", lineHeight: 1.1, marginBottom: "20px", letterSpacing: "-0.02em" }}>
+              Feel better.<br/>Think clearer.<br/>
+              <span style={{ fontWeight: 900 }}>Mental wellness</span>{" "}
+              <span style={{ fontWeight: 400 }}>support<br/>that fits your life.</span>
             </h1>
-            <p style={{ color: "#666", fontSize: "1.1rem", lineHeight: 1.7, maxWidth: "420px", marginBottom: "2.5rem" }}>
-              Compassionate, evidence-based therapy that fits your life — in person or online.
+
+            <p style={{ color: "rgba(255,255,255,0.8)", fontSize: "1rem", lineHeight: 1.7, marginBottom: "36px", maxWidth: "400px" }}>
+              Book therapy, talk to a professional, or get the guidance you need — whenever you need it.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+
+            <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
               <button onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-7 py-3.5 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90"
-                style={{ background: "#111" }}>
-                Book Free Consultation
+                style={{ padding: "16px 36px", borderRadius: "999px", background: "#fff", color: DARK, border: "none", cursor: "pointer", fontSize: "1rem", fontWeight: 800, transition: "all 0.2s", boxShadow: "0 8px 24px rgba(0,0,0,0.15)" }}
+                onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.03)"; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}>
+                Start your session
               </button>
               <button onClick={() => document.querySelector("#services")?.scrollIntoView({ behavior: "smooth" })}
-                className="px-7 py-3.5 rounded-full text-sm font-semibold border transition-all hover:bg-white"
-                style={{ color: "#111", borderColor: "#ddd", background: "transparent" }}>
-                Our Services →
+                style={{ padding: "16px 28px", borderRadius: "999px", background: "rgba(255,255,255,0.15)", color: "#fff", border: "2px solid rgba(255,255,255,0.3)", cursor: "pointer", fontSize: "1rem", fontWeight: 600, transition: "all 0.2s" }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(255,255,255,0.25)"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "rgba(255,255,255,0.15)"; }}>
+                Our services →
               </button>
             </div>
           </div>
 
-          {/* Right image */}
-          <div className="relative hidden md:block">
-            <div className="rounded-3xl overflow-hidden" style={{ height: "540px" }}>
+          {/* Right */}
+          <div style={{ position: "relative" }} className="hero-image-col">
+            <div style={{ borderRadius: "28px", overflow: "hidden", height: "500px", position: "relative" }}>
               <img
                 src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&auto=format&fit=crop&q=80"
                 alt="Therapist"
-                className="w-full h-full object-cover"
-                style={{ objectPosition: "top" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
               />
             </div>
-            {/* Floating card */}
-            <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-lg p-5"
-              style={{ minWidth: "180px" }}>
-              <p style={{ fontSize: "2rem", fontWeight: 700, color: "#111", lineHeight: 1 }}>98%</p>
-              <p style={{ fontSize: "0.8rem", color: "#888", marginTop: "4px" }}>Client satisfaction rate</p>
+            {/* Floating confidential badge */}
+            <div style={{ position: "absolute", top: "40%", left: "-20px", background: "#fff", borderRadius: "16px", padding: "14px 18px", boxShadow: "0 8px 24px rgba(0,0,0,0.12)", display: "flex", alignItems: "center", gap: "10px" }}>
+              <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#f0e6ff", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="14" height="14" fill="#7c3aed" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"/>
+                </svg>
+              </div>
+              <span style={{ fontSize: "0.875rem", fontWeight: 700, color: DARK }}>Fully confidential</span>
+            </div>
+            {/* Floating rating card */}
+            <div style={{ position: "absolute", bottom: "-16px", right: "-16px", background: "#fff", borderRadius: "16px", padding: "14px 20px", boxShadow: "0 8px 24px rgba(0,0,0,0.12)" }}>
+              <p style={{ fontSize: "1.8rem", fontWeight: 900, color: DARK, lineHeight: 1 }}>2,000+</p>
+              <p style={{ fontSize: "0.75rem", color: "#888", marginTop: "2px" }}>Lives transformed</p>
             </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .hero-grid { grid-template-columns: 1fr !important; }
+          .hero-image-col { display: none; }
+        }
+      `}</style>
     </section>
   );
 }
@@ -186,25 +224,28 @@ function Hero() {
 // ─── Stats ────────────────────────────────────────────────────────────────────
 function Stats() {
   const items = [
-    { value: "2,000+", label: "Clients supported" },
-    { value: "15+", label: "Years of experience" },
-    { value: "98%", label: "Satisfaction rate" },
-    { value: "6", label: "Specialist therapists" },
+    { value: "2,000+", label: "Clients Supported" },
+    { value: "15+", label: "Years Experience" },
+    { value: "98%", label: "Satisfaction Rate" },
+    { value: "6", label: "Therapists" },
   ];
   return (
-    <section style={{ background: "#1a1a1a", fontFamily: "'DM Sans', sans-serif" }} className="py-14">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <section style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif", padding: "60px 0", borderBottom: "1px solid #f0f0f0" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px" }} className="stats-grid">
           {items.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
-              <div style={{ borderRight: i < 3 ? "1px solid rgba(255,255,255,0.08)" : "none" }} className="pr-8">
-                <p style={{ fontSize: "2.2rem", fontWeight: 700, color: "#fff", lineHeight: 1 }}>{s.value}</p>
-                <p style={{ fontSize: "0.8rem", color: "#888", marginTop: "6px", textTransform: "uppercase", letterSpacing: "0.05em" }}>{s.label}</p>
+              <div style={{ textAlign: "center", padding: "24px", borderRadius: "20px", background: i % 2 === 0 ? BLUE : DARK, color: "#fff" }}>
+                <p style={{ fontSize: "2.4rem", fontWeight: 900, lineHeight: 1, marginBottom: "6px" }}>{s.value}</p>
+                <p style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "0.06em" }}>{s.label}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2,1fr) !important; } }
+      `}</style>
     </section>
   );
 }
@@ -212,39 +253,53 @@ function Stats() {
 // ─── Services ─────────────────────────────────────────────────────────────────
 function Services() {
   return (
-    <section id="services" style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif" }} className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
+    <section id="services" style={{ background: "#f0f9ff", fontFamily: "'DM Sans', sans-serif", padding: "96px 0" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
         <Reveal>
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "56px", flexWrap: "wrap", gap: "16px" }}>
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#e91e8c" }}>What We Offer</p>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#111", lineHeight: 1.1 }}>
+              <p style={{ fontSize: "0.72rem", fontWeight: 700, color: BLUE, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>What We Offer</p>
+              <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 900, color: DARK, lineHeight: 1.1, letterSpacing: "-0.02em" }}>
                 Our Services
               </h2>
             </div>
             <button onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="self-start md:self-auto px-6 py-3 rounded-full text-sm font-semibold border transition-all hover:bg-slate-50"
-              style={{ color: "#111", borderColor: "#ddd" }}>
-              Book a session →
+              style={{ padding: "12px 24px", borderRadius: "999px", background: BLUE, color: "#fff", border: "none", cursor: "pointer", fontSize: "0.875rem", fontWeight: 700, boxShadow: `0 4px 14px ${BLUE}44` }}>
+              Explore the services →
             </button>
           </div>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-px" style={{ background: "#eee" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }} className="services-grid">
           {SERVICES.map((s, i) => (
-            <Reveal key={s.title} delay={i * 50}>
-              <div className="p-8 group cursor-pointer transition-all" style={{ background: "#fff" }}
-                onMouseEnter={e => (e.currentTarget.style.background = "#f8f6f1")}
-                onMouseLeave={e => (e.currentTarget.style.background = "#fff")}>
-                <p style={{ fontSize: "1.6rem", marginBottom: "1rem" }}>{s.icon}</p>
-                <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "#111", marginBottom: "0.6rem" }}>{s.title}</h3>
-                <p style={{ fontSize: "0.875rem", color: "#777", lineHeight: 1.7 }}>{s.desc}</p>
-                <p style={{ fontSize: "0.8rem", color: "#e91e8c", marginTop: "1.2rem", fontWeight: 600 }}>Learn more →</p>
+            <Reveal key={s.title} delay={i * 60}>
+              <div style={{
+                background: "#fff",
+                borderRadius: "20px",
+                padding: "28px",
+                boxShadow: "0 2px 16px rgba(14,165,233,0.08)",
+                border: "1px solid rgba(14,165,233,0.12)",
+                cursor: "pointer",
+                transition: "all 0.25s",
+                height: "100%",
+              }}
+                onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-4px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = `0 12px 32px ${BLUE}22`; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 16px rgba(14,165,233,0.08)"; }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "14px", background: "#e0f2fe", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.5rem", marginBottom: "16px" }}>
+                  {s.icon}
+                </div>
+                <h3 style={{ fontSize: "1rem", fontWeight: 800, color: DARK, marginBottom: "8px", letterSpacing: "-0.01em" }}>{s.title}</h3>
+                <p style={{ fontSize: "0.85rem", color: "#64748b", lineHeight: 1.7 }}>{s.desc}</p>
+                <p style={{ fontSize: "0.8rem", color: BLUE, fontWeight: 700, marginTop: "16px" }}>Learn more →</p>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) { .services-grid { grid-template-columns: 1fr !important; } }
+        @media (min-width: 640px) and (max-width: 768px) { .services-grid { grid-template-columns: repeat(2,1fr) !important; } }
+      `}</style>
     </section>
   );
 }
@@ -252,48 +307,62 @@ function Services() {
 // ─── About ────────────────────────────────────────────────────────────────────
 function About() {
   return (
-    <section id="about" style={{ background: "#f8f6f1", fontFamily: "'DM Sans', sans-serif" }} className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <Reveal className="relative">
-            <div className="rounded-3xl overflow-hidden" style={{ height: "480px" }}>
-              <img
-                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&auto=format&fit=crop&q=80"
-                alt="Therapy space"
-                className="w-full h-full object-cover"
-              />
+    <section id="about" style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif", padding: "96px 0", overflow: "hidden" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "center" }} className="about-grid">
+          <Reveal>
+            <div style={{ position: "relative" }}>
+              <div style={{ borderRadius: "28px", overflow: "hidden", height: "480px" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=700&auto=format&fit=crop&q=80"
+                  alt="Therapy space"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              {/* Floating card */}
+              <div style={{ position: "absolute", bottom: "-20px", right: "-20px", background: BLUE, borderRadius: "20px", padding: "20px 24px", boxShadow: "0 12px 32px rgba(14,165,233,0.35)" }}>
+                <p style={{ fontSize: "2rem", fontWeight: 900, color: "#fff", lineHeight: 1 }}>98%</p>
+                <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.8)", marginTop: "2px" }}>Client satisfaction</p>
+              </div>
             </div>
           </Reveal>
 
           <Reveal delay={150}>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#e91e8c" }}>About MyndWorks</p>
-            <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#111", lineHeight: 1.15, marginBottom: "1.5rem" }}>
-              Rooted in empathy,<br/>
-              <span style={{ fontStyle: "italic" }}>driven by science.</span>
+            <p style={{ fontSize: "0.72rem", fontWeight: 700, color: BLUE, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "14px" }}>About MyndWorks</p>
+            <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 900, color: DARK, lineHeight: 1.1, letterSpacing: "-0.02em", marginBottom: "20px" }}>
+              Rooted in empathy,<br/>driven by science.
             </h2>
-            <p style={{ color: "#666", lineHeight: 1.8, marginBottom: "1.2rem", fontSize: "0.95rem" }}>
+            <p style={{ color: "#64748b", lineHeight: 1.8, marginBottom: "14px", fontSize: "0.95rem" }}>
               MyndWorks was founded on a simple belief — everyone deserves access to compassionate, high-quality mental health care.
             </p>
-            <p style={{ color: "#666", lineHeight: 1.8, marginBottom: "2rem", fontSize: "0.95rem" }}>
-              We combine CBT, EMDR, and mindfulness approaches with a deeply human style of care. Our goal is not just symptom relief, but lasting transformation.
+            <p style={{ color: "#64748b", lineHeight: 1.8, marginBottom: "32px", fontSize: "0.95rem" }}>
+              We combine CBT, EMDR, and mindfulness with a deeply human style of care. Our goal is not just symptom relief, but lasting transformation.
             </p>
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {["Evidence-Based","Fully Confidential","In-Person & Online","Free Consultation"].map(v => (
-                <div key={v} className="flex items-center gap-2.5 py-3 px-4 rounded-xl"
-                  style={{ background: "#fff", border: "1px solid #eee" }}>
-                  <span style={{ color: "#e91e8c", fontSize: "0.7rem" }}>✦</span>
-                  <span style={{ fontSize: "0.82rem", fontWeight: 600, color: "#333" }}>{v}</span>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "32px" }}>
+              {[
+                { icon: "🔬", label: "Evidence-Based", bg: "#e0f2fe" },
+                { icon: "🔒", label: "Fully Confidential", bg: "#ffe4f0" },
+                { icon: "🌍", label: "In-Person & Online", bg: "#e0fdf4" },
+                { icon: "💬", label: "Free Consultation", bg: "#fef3c7" },
+              ].map(v => (
+                <div key={v.label} style={{ display: "flex", alignItems: "center", gap: "10px", padding: "12px 16px", borderRadius: "14px", background: v.bg }}>
+                  <span style={{ fontSize: "1.1rem" }}>{v.icon}</span>
+                  <span style={{ fontSize: "0.82rem", fontWeight: 700, color: DARK }}>{v.label}</span>
                 </div>
               ))}
             </div>
+
             <button onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
-              className="px-7 py-3.5 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90"
-              style={{ background: "#111" }}>
+              style={{ padding: "14px 32px", borderRadius: "999px", background: DARK, color: "#fff", border: "none", cursor: "pointer", fontSize: "0.9rem", fontWeight: 700, transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.background = BLUE; }}
+              onMouseLeave={e => { e.currentTarget.style.background = DARK; }}>
               Start Your Journey
             </button>
           </Reveal>
         </div>
       </div>
+      <style>{`@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr !important; } }`}</style>
     </section>
   );
 }
@@ -306,52 +375,57 @@ function Testimonials() {
     return () => clearInterval(t);
   }, []);
   return (
-    <section id="testimonials" style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif" }} className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <Reveal className="mb-16">
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#e91e8c" }}>Client Stories</p>
-          <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#111" }}>
-            Real people, <span style={{ fontStyle: "italic" }}>real change.</span>
+    <section id="testimonials" style={{ background: BLUE, fontFamily: "'DM Sans', sans-serif", padding: "96px 0" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <Reveal>
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, color: "rgba(255,255,255,0.7)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>Client Stories</p>
+          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 900, color: "#fff", letterSpacing: "-0.02em", marginBottom: "48px" }}>
+            Real people, real change.
           </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* Featured */}
+        <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: "24px", alignItems: "start" }} className="testimonials-grid">
           <Reveal>
-            <div className="rounded-2xl p-8 h-full flex flex-col justify-between" style={{ background: "#f8f6f1", minHeight: "260px" }}>
-              <p style={{ fontSize: "1.05rem", color: "#333", lineHeight: 1.75, fontStyle: "italic" }}>
+            <div style={{ background: "rgba(255,255,255,0.12)", backdropFilter: "blur(10px)", borderRadius: "24px", padding: "40px", border: "1px solid rgba(255,255,255,0.2)" }}>
+              <div style={{ display: "flex", gap: "4px", marginBottom: "24px" }}>
+                {[...Array(5)].map((_, i) => (
+                  <svg key={i} width="18" height="18" fill="#f59e0b" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                  </svg>
+                ))}
+              </div>
+              <p style={{ fontSize: "1.1rem", color: "#fff", lineHeight: 1.75, fontStyle: "italic", marginBottom: "28px" }}>
                 "{TESTIMONIALS[active].text}"
               </p>
-              <div className="flex items-center gap-3 mt-6">
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                  style={{ background: "#e91e8c" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+                <div style={{ width: "44px", height: "44px", borderRadius: "50%", background: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.8rem", fontWeight: 800, color: BLUE }}>
                   {TESTIMONIALS[active].avatar}
                 </div>
                 <div>
-                  <p style={{ fontSize: "0.875rem", fontWeight: 700, color: "#111" }}>{TESTIMONIALS[active].name}</p>
-                  <p style={{ fontSize: "0.75rem", color: "#999" }}>{TESTIMONIALS[active].role}</p>
+                  <p style={{ fontSize: "0.9rem", fontWeight: 800, color: "#fff" }}>{TESTIMONIALS[active].name}</p>
+                  <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.65)" }}>{TESTIMONIALS[active].role}</p>
                 </div>
               </div>
             </div>
           </Reveal>
 
-          {/* List */}
-          <div className="space-y-3">
+          <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
             {TESTIMONIALS.map((t, i) => (
               <Reveal key={t.name} delay={i * 60}>
-                <button onClick={() => setActive(i)} className="w-full text-left p-5 rounded-2xl border transition-all"
+                <button onClick={() => setActive(i)}
                   style={{
-                    borderColor: active === i ? "#e91e8c" : "#eee",
-                    background: active === i ? "#fff0f7" : "#fff",
-                  }}>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
-                      style={{ background: active === i ? "#e91e8c" : "#f1f1f1", color: active === i ? "#fff" : "#555" }}>
+                    width: "100%", textAlign: "left", padding: "16px 20px", borderRadius: "16px", cursor: "pointer", transition: "all 0.2s", border: "none",
+                    background: active === i ? "#fff" : "rgba(255,255,255,0.1)",
+                  }}
+                  onMouseEnter={e => { if (active !== i) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.18)"; }}
+                  onMouseLeave={e => { if (active !== i) (e.currentTarget as HTMLButtonElement).style.background = "rgba(255,255,255,0.1)"; }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                    <div style={{ width: "36px", height: "36px", borderRadius: "50%", background: active === i ? BLUE : "rgba(255,255,255,0.2)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.72rem", fontWeight: 800, color: "#fff", flexShrink: 0 }}>
                       {t.avatar}
                     </div>
                     <div>
-                      <p style={{ fontSize: "0.82rem", fontWeight: 700, color: "#111" }}>{t.name}</p>
-                      <p style={{ fontSize: "0.72rem", color: "#999" }}>{t.role}</p>
+                      <p style={{ fontSize: "0.85rem", fontWeight: 700, color: active === i ? DARK : "#fff" }}>{t.name}</p>
+                      <p style={{ fontSize: "0.72rem", color: active === i ? "#888" : "rgba(255,255,255,0.6)" }}>{t.role}</p>
                     </div>
                   </div>
                 </button>
@@ -360,6 +434,7 @@ function Testimonials() {
           </div>
         </div>
       </div>
+      <style>{`@media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr !important; } }`}</style>
     </section>
   );
 }
@@ -368,31 +443,39 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
   return (
-    <section id="faq" style={{ background: "#f8f6f1", fontFamily: "'DM Sans', sans-serif" }} className="py-24">
-      <div className="max-w-3xl mx-auto px-6">
-        <Reveal className="mb-14">
-          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: "#e91e8c" }}>FAQ</p>
-          <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 4vw, 3rem)", color: "#111" }}>
+    <section id="faq" style={{ background: "#f0f9ff", fontFamily: "'DM Sans', sans-serif", padding: "96px 0" }}>
+      <div style={{ maxWidth: "760px", margin: "0 auto", padding: "0 24px" }}>
+        <Reveal style={{ marginBottom: "56px" }}>
+          <p style={{ fontSize: "0.72rem", fontWeight: 700, color: BLUE, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "10px" }}>FAQ</p>
+          <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 900, color: DARK, letterSpacing: "-0.02em" }}>
             Got questions?
           </h2>
         </Reveal>
-        <div className="divide-y" style={{ borderColor: "#e5e5e5" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {FAQS.map((f, i) => (
             <Reveal key={i} delay={i * 40}>
-              <div>
+              <div style={{
+                borderRadius: "16px", overflow: "hidden",
+                background: "#fff",
+                boxShadow: open === i ? `0 4px 20px ${BLUE}18` : "0 1px 4px rgba(0,0,0,0.04)",
+                border: `1px solid ${open === i ? BLUE + "44" : "#e5e5e5"}`,
+                transition: "all 0.2s",
+              }}>
                 <button onClick={() => setOpen(open === i ? null : i)}
-                  className="w-full flex items-center justify-between py-5 text-left">
-                  <span style={{ fontSize: "0.95rem", fontWeight: 600, color: open === i ? "#e91e8c" : "#111" }}>
+                  style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 24px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}>
+                  <span style={{ fontSize: "0.95rem", fontWeight: 700, color: open === i ? BLUE : DARK, paddingRight: "16px" }}>
                     {f.q}
                   </span>
-                  <span style={{ color: open === i ? "#e91e8c" : "#999", fontSize: "1.2rem", lineHeight: 1, marginLeft: "1rem" }}>
-                    {open === i ? "−" : "+"}
-                  </span>
+                  <div style={{ width: "28px", height: "28px", borderRadius: "50%", background: open === i ? BLUE : "#f0f9ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, transition: "all 0.2s" }}>
+                    <span style={{ color: open === i ? "#fff" : BLUE, fontSize: "1rem", lineHeight: 1, fontWeight: 700 }}>
+                      {open === i ? "−" : "+"}
+                    </span>
+                  </div>
                 </button>
                 {open === i && (
-                  <p style={{ fontSize: "0.875rem", color: "#666", lineHeight: 1.8, paddingBottom: "1.25rem" }}>
-                    {f.a}
-                  </p>
+                  <div style={{ padding: "0 24px 20px" }}>
+                    <p style={{ fontSize: "0.875rem", color: "#64748b", lineHeight: 1.8 }}>{f.a}</p>
+                  </div>
                 )}
               </div>
             </Reveal>
@@ -421,36 +504,31 @@ function Contact() {
     } catch { setStatus("error"); }
   };
 
-  const inputStyle = {
-    width: "100%", padding: "12px 16px", borderRadius: "12px",
-    border: "1px solid #e5e5e5", background: "#fff",
-    fontSize: "0.875rem", color: "#111", outline: "none",
-  };
+  const inp = { width: "100%", padding: "13px 16px", borderRadius: "12px", border: "1.5px solid #e2e8f0", background: "#fff", fontSize: "0.875rem", color: DARK, outline: "none", boxSizing: "border-box" as const, fontFamily: "'DM Sans', sans-serif" };
 
   return (
-    <section id="contact" style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif" }} className="py-24">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Left */}
+    <section id="contact" style={{ background: "#fff", fontFamily: "'DM Sans', sans-serif", padding: "96px 0" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "64px", alignItems: "start" }} className="contact-grid">
           <Reveal>
-            <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#e91e8c" }}>Get in Touch</p>
-            <h2 style={{ fontFamily: "'DM Serif Display', serif", fontSize: "clamp(2rem, 3.5vw, 2.8rem)", color: "#111", lineHeight: 1.15, marginBottom: "1.5rem" }}>
-              Take the<br/><span style={{ fontStyle: "italic" }}>first step.</span>
+            <p style={{ fontSize: "0.72rem", fontWeight: 700, color: BLUE, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "14px" }}>Get in Touch</p>
+            <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 900, color: DARK, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: "20px" }}>
+              Take the<br/>first step.
             </h2>
-            <p style={{ color: "#666", lineHeight: 1.8, marginBottom: "2.5rem", fontSize: "0.95rem" }}>
-              Book a free 15-minute consultation. No commitment, no pressure — just a conversation.
+            <p style={{ color: "#64748b", lineHeight: 1.8, marginBottom: "40px", fontSize: "0.95rem" }}>
+              Book a free 15-minute consultation. No commitment, no pressure.
             </p>
-            <div className="space-y-4">
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
               {[
                 { label: "Phone", value: "(076) 122-8682", href: "tel:+27761228682" },
                 { label: "Email", value: "myndworkspractice@gmail.com", href: "mailto:myndworkspractice@gmail.com" },
                 { label: "Instagram", value: "@myndworkspsychology", href: "https://instagram.com/myndworkspsychology" },
               ].map(c => (
                 <div key={c.label}>
-                  <p style={{ fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "2px" }}>{c.label}</p>
-                  <a href={c.href} style={{ fontSize: "0.95rem", color: "#111", fontWeight: 500, textDecoration: "none" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#e91e8c")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#111")}>
+                  <p style={{ fontSize: "0.68rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "3px" }}>{c.label}</p>
+                  <a href={c.href} style={{ fontSize: "0.95rem", color: DARK, fontWeight: 600, textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
+                    onMouseLeave={e => (e.currentTarget.style.color = DARK)}>
                     {c.value}
                   </a>
                 </div>
@@ -458,78 +536,77 @@ function Contact() {
             </div>
           </Reveal>
 
-          {/* Form */}
           <Reveal delay={150}>
-            {status === "success" ? (
-              <div className="flex flex-col items-center justify-center h-full text-center py-16">
-                <p style={{ fontSize: "3rem", marginBottom: "1rem" }}>🌿</p>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#111", marginBottom: "0.5rem" }}>
-                  Thank you, {form.name.split(" ")[0]}!
-                </h3>
-                <p style={{ color: "#888", fontSize: "0.9rem" }}>We'll be in touch within 24 hours.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Full Name *</label>
-                    <input required type="text" placeholder="Jane Smith" value={form.name}
-                      onChange={e => setForm({ ...form, name: e.target.value })}
-                      style={inputStyle}
-                      onFocus={e => (e.target.style.borderColor = "#e91e8c")}
-                      onBlur={e => (e.target.style.borderColor = "#e5e5e5")}/>
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Email *</label>
-                    <input required type="email" placeholder="jane@example.com" value={form.email}
-                      onChange={e => setForm({ ...form, email: e.target.value })}
-                      style={inputStyle}
-                      onFocus={e => (e.target.style.borderColor = "#e91e8c")}
-                      onBlur={e => (e.target.style.borderColor = "#e5e5e5")}/>
-                  </div>
+            <div style={{ background: "#f0f9ff", borderRadius: "28px", padding: "40px", border: "1px solid #bae6fd" }}>
+              {status === "success" ? (
+                <div style={{ textAlign: "center", padding: "48px 0" }}>
+                  <p style={{ fontSize: "3rem", marginBottom: "16px" }}>🌿</p>
+                  <h3 style={{ fontSize: "1.4rem", fontWeight: 800, color: DARK, marginBottom: "8px" }}>Thank you, {form.name.split(" ")[0]}!</h3>
+                  <p style={{ color: "#64748b", fontSize: "0.9rem" }}>We'll be in touch within 24 hours.</p>
                 </div>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Phone</label>
-                    <input type="tel" placeholder="076 122 8682" value={form.phone}
-                      onChange={e => setForm({ ...form, phone: e.target.value })}
-                      style={inputStyle}
-                      onFocus={e => (e.target.style.borderColor = "#e91e8c")}
-                      onBlur={e => (e.target.style.borderColor = "#e5e5e5")}/>
-                  </div>
-                  <div>
-                    <label style={{ display: "block", fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Service</label>
-                    <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}
-                      style={{ ...inputStyle, appearance: "none" as const }}>
-                      <option value="">Select…</option>
-                      {SERVICES.map(s => <option key={s.title} value={s.title}>{s.title}</option>)}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label style={{ display: "block", fontSize: "0.7rem", color: "#aaa", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Message</label>
-                  <textarea rows={4} placeholder="Tell us what brings you here…" value={form.message}
-                    onChange={e => setForm({ ...form, message: e.target.value })}
-                    style={{ ...inputStyle, resize: "none" as const }}
-                    onFocus={e => (e.target.style.borderColor = "#e91e8c")}
-                    onBlur={e => (e.target.style.borderColor = "#e5e5e5")}/>
-                </div>
-                {status === "error" && (
-                  <p style={{ color: "#e91e8c", fontSize: "0.82rem", textAlign: "center" }}>Something went wrong. Please try again.</p>
-                )}
-                <button type="submit" disabled={status === "sending"}
-                  className="w-full py-4 rounded-full text-white text-sm font-semibold transition-all hover:opacity-90 disabled:opacity-50"
-                  style={{ background: "#111" }}>
-                  {status === "sending" ? "Sending…" : "Book Free Consultation"}
-                </button>
-                <p style={{ fontSize: "0.72rem", color: "#bbb", textAlign: "center" }}>
-                  Strictly confidential. We never share your information.
-                </p>
-              </form>
-            )}
+              ) : (
+                <>
+                  <h3 style={{ fontSize: "1.1rem", fontWeight: 800, color: DARK, marginBottom: "24px" }}>Book a Free Consultation</h3>
+                  <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.68rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Full Name *</label>
+                        <input required type="text" placeholder="Jane Smith" value={form.name}
+                          onChange={e => setForm({ ...form, name: e.target.value })} style={inp}
+                          onFocus={e => (e.target.style.borderColor = BLUE)}
+                          onBlur={e => (e.target.style.borderColor = "#e2e8f0")}/>
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.68rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Email *</label>
+                        <input required type="email" placeholder="jane@example.com" value={form.email}
+                          onChange={e => setForm({ ...form, email: e.target.value })} style={inp}
+                          onFocus={e => (e.target.style.borderColor = BLUE)}
+                          onBlur={e => (e.target.style.borderColor = "#e2e8f0")}/>
+                      </div>
+                    </div>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.68rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Phone</label>
+                        <input type="tel" placeholder="076 122 8682" value={form.phone}
+                          onChange={e => setForm({ ...form, phone: e.target.value })} style={inp}
+                          onFocus={e => (e.target.style.borderColor = BLUE)}
+                          onBlur={e => (e.target.style.borderColor = "#e2e8f0")}/>
+                      </div>
+                      <div>
+                        <label style={{ display: "block", fontSize: "0.68rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Service</label>
+                        <select value={form.service} onChange={e => setForm({ ...form, service: e.target.value })}
+                          style={{ ...inp, appearance: "none" as const }}
+                          onFocus={e => (e.target.style.borderColor = BLUE)}
+                          onBlur={e => (e.target.style.borderColor = "#e2e8f0")}>
+                          <option value="">Select…</option>
+                          {SERVICES.map(s => <option key={s.title} value={s.title}>{s.title}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label style={{ display: "block", fontSize: "0.68rem", color: "#94a3b8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "6px" }}>Message</label>
+                      <textarea rows={4} placeholder="Tell us what brings you here…" value={form.message}
+                        onChange={e => setForm({ ...form, message: e.target.value })}
+                        style={{ ...inp, resize: "none" as const }}
+                        onFocus={e => (e.target.style.borderColor = BLUE)}
+                        onBlur={e => (e.target.style.borderColor = "#e2e8f0")}/>
+                    </div>
+                    {status === "error" && <p style={{ color: "#ef4444", fontSize: "0.82rem", textAlign: "center" }}>Something went wrong. Please try again.</p>}
+                    <button type="submit" disabled={status === "sending"}
+                      style={{ padding: "15px", borderRadius: "999px", background: BLUE, color: "#fff", border: "none", cursor: "pointer", fontSize: "0.95rem", fontWeight: 800, boxShadow: `0 6px 20px ${BLUE}44`, transition: "all 0.2s", opacity: status === "sending" ? 0.6 : 1 }}
+                      onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.02)"; }}
+                      onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; }}>
+                      {status === "sending" ? "Sending…" : "Book Free Consultation"}
+                    </button>
+                    <p style={{ fontSize: "0.72rem", color: "#94a3b8", textAlign: "center" }}>Strictly confidential. We never share your information.</p>
+                  </form>
+                </>
+              )}
+            </div>
           </Reveal>
         </div>
       </div>
+      <style>{`@media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr !important; } }`}</style>
     </section>
   );
 }
@@ -537,65 +614,58 @@ function Contact() {
 // ─── Footer ───────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    <footer style={{ background: "#111", fontFamily: "'DM Sans', sans-serif", color: "#666" }} className="py-14">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row items-start justify-between gap-10 mb-12">
-          <div style={{ maxWidth: "280px" }}>
-            <p className="text-lg font-bold mb-3" style={{ color: "#fff" }}>
-              <span style={{ color: "#e91e8c" }}>Mynd</span>Works
+    <footer style={{ background: DARK, fontFamily: "'DM Sans', sans-serif", color: "#64748b", padding: "64px 0 32px" }}>
+      <div style={{ maxWidth: "1100px", margin: "0 auto", padding: "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr 1fr", gap: "48px", marginBottom: "48px" }} className="footer-grid">
+          <div>
+            <p style={{ fontSize: "1.3rem", fontWeight: 900, color: "#fff", marginBottom: "14px", letterSpacing: "-0.02em" }}>
+              <span style={{ color: PINK }}>Mynd</span>Works
             </p>
-            <p style={{ fontSize: "0.85rem", lineHeight: 1.7 }}>
+            <p style={{ fontSize: "0.85rem", lineHeight: 1.75, maxWidth: "260px" }}>
               Professional mental wellbeing support. Compassionate, evidence-based care for every stage of life.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-10">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#555" }}>Services</p>
-              <ul className="space-y-2">
-                {SERVICES.map(s => (
-                  <li key={s.title}>
-                    <a href="#services" style={{ fontSize: "0.82rem", color: "#666", textDecoration: "none" }}
-                      onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-                      onMouseLeave={e => (e.currentTarget.style.color = "#666")}>
-                      {s.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#555" }}>Contact</p>
-              <ul className="space-y-2">
-                <li style={{ fontSize: "0.82rem" }}>(076) 122-8682</li>
-                <li>
-                  <a href="mailto:myndworkspractice@gmail.com" style={{ fontSize: "0.82rem", color: "#666", textDecoration: "none" }}
+          <div>
+            <p style={{ fontSize: "0.68rem", fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px" }}>Services</p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+              {SERVICES.map(s => (
+                <li key={s.title}>
+                  <a href="#services" style={{ fontSize: "0.83rem", color: "#64748b", textDecoration: "none", transition: "color 0.2s" }}
                     onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#666")}>
-                    myndworkspractice@gmail.com
+                    onMouseLeave={e => (e.currentTarget.style.color = "#64748b")}>
+                    {s.title}
                   </a>
                 </li>
-                <li>
-                  <a href="https://instagram.com/myndworkspsychology" style={{ fontSize: "0.82rem", color: "#666", textDecoration: "none" }}
-                    onMouseEnter={e => (e.currentTarget.style.color = "#e91e8c")}
-                    onMouseLeave={e => (e.currentTarget.style.color = "#666")}>
-                    @myndworkspsychology
-                  </a>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p style={{ fontSize: "0.68rem", fontWeight: 700, color: "#475569", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px" }}>Contact</p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
+              <li style={{ fontSize: "0.83rem" }}>(076) 122-8682</li>
+              <li><a href="mailto:myndworkspractice@gmail.com" style={{ fontSize: "0.83rem", color: "#64748b", textDecoration: "none" }}
+                onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
+                onMouseLeave={e => (e.currentTarget.style.color = "#64748b")}>
+                myndworkspractice@gmail.com
+              </a></li>
+              <li><a href="https://instagram.com/myndworkspsychology" style={{ fontSize: "0.83rem", color: "#64748b", textDecoration: "none" }}
+                onMouseEnter={e => (e.currentTarget.style.color = BLUE)}
+                onMouseLeave={e => (e.currentTarget.style.color = "#64748b")}>
+                @myndworkspsychology
+              </a></li>
+            </ul>
           </div>
         </div>
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ borderTop: "1px solid #222", fontSize: "0.75rem" }}>
-          <p>© {new Date().getFullYear()} MyndWorks. All rights reserved.</p>
-          <p style={{ color: "#444" }}>Designed with care for mental wellbeing.</p>
+        <div style={{ borderTop: "1px solid #1e293b", paddingTop: "28px", display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "12px" }}>
+          <p style={{ fontSize: "0.75rem" }}>© {new Date().getFullYear()} MyndWorks. All rights reserved.</p>
+          <p style={{ fontSize: "0.75rem", color: "#334155" }}>Designed with care for mental wellbeing.</p>
         </div>
       </div>
+      <style>{`@media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr !important; } }`}</style>
     </footer>
   );
 }
 
-// ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
   return (
     <div style={{ fontFamily: "'DM Sans', sans-serif" }}>
