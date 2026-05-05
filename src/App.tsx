@@ -1,32 +1,22 @@
 import { useState, useEffect, useRef } from "react";
 
-// ─── Design Tokens — MyndWorks Brand ─────────────────────────────────────────
+// ─── MyndWorks Brand Tokens ───────────────────────────────────────────────────
 const G = {
-  // Primary brand
-  darkGreen:   "#e91e8c",   // pink — CTAs, nav accent, dark cards
-  forest:      "#c9186f",   // deeper pink
-  olive:       "#f97316",   // orange — secondary accent
-  sage:        "#fb923c",   // lighter orange
-  lightSage:   "#fda4af",   // soft pink for dark bg text
-  // Backgrounds
-  cream:       "#ffffff",   // main page bg — pure white
-  softCream:   "#f8fafc",   // section alt bg
-  paleGreen:   "#fdf2f8",   // pill bg / card accent (soft pink)
-  white:       "#ffffff",
-  // Dark section
-  darkBg:      "#0f172a",   // very dark navy for banner/footer
-  // Text
-  ink:         "#0f172a",   // primary text
-  body:        "#475569",   // body text
-  muted:       "#94a3b8",   // muted text
-  // Borders
-  border:      "#e8edf5",
-  borderDark:  "#cbd5e1",
-  // Blue tones for variety
-  blue:        "#3b82f6",
-  blueSoft:    "#eff6ff",
-  teal:        "#0891b2",
-  tealSoft:    "#f0f9ff",
+  darkGreen:  "#e91e8c",      // pink — primary CTAs, logo accent
+  forest:     "#c9186f",      // deeper pink — hover states, italic accents
+  olive:      "#f97316",      // orange — secondary accent, stars
+  sage:       "#fb923c",      // lighter orange
+  lightSage:  "#fda4af",      // soft pink — dark bg text accents
+  cream:      "#ffffff",      // main bg — clean white
+  softCream:  "#fafafa",      // section alt bg
+  paleGreen:  "#fdf2f8",      // soft pink tint — card bg, pills
+  white:      "#ffffff",
+  darkBg:     "#0f172a",      // dark navy — banner, footer
+  ink:        "#0f172a",      // primary text
+  body:       "#475569",      // body text
+  muted:      "#94a3b8",      // muted text
+  border:     "#e8edf5",      // borders
+  borderDark: "#cbd5e1",
 };
 
 interface Service     { icon: string; title: string; desc: string; }
@@ -83,7 +73,7 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 // ─── Global Styles ────────────────────────────────────────────────────────────
 const GS = () => (
   <style>{`
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;0,9..40,900;1,9..40,400;1,9..40,600&display=swap');
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -93,21 +83,18 @@ const GS = () => (
       color: ${G.ink};
       -webkit-font-smoothing: antialiased;
     }
-    ::selection { background: ${G.paleGreen}; color: ${G.forest}; }
+    ::selection { background: ${G.paleGreen}; color: ${G.darkGreen}; }
     input, textarea, select { font-family: 'DM Sans', sans-serif; }
 
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
-    .wrap-sm { max-width: 780px; margin: 0 auto; padding: 0 32px; }
+    .wrap    { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+    .wrap-sm { max-width: 780px;  margin: 0 auto; padding: 0 32px; }
 
-    .serif { font-family: 'DM Serif Display', Georgia, serif; }
-    .serif-it { font-family: 'DM Serif Display', Georgia, serif; font-style: italic; }
-
-    /* Buttons — flat solid */
+    /* Buttons — flat solid, rounded pill */
     .btn-dark {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 22px; border-radius: 999px;
       background: ${G.ink}; color: #fff; border: none; cursor: pointer;
-      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
+      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 700;
       letter-spacing: 0.01em; transition: all 0.22s;
     }
     .btn-dark:hover { background: ${G.darkGreen}; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,140,0.2); }
@@ -126,26 +113,15 @@ const GS = () => (
       display: inline-flex; align-items: center; gap: 8px;
       padding: 10px 22px; border-radius: 999px;
       background: transparent; color: #fff;
-      border: 1.5px solid rgba(255,255,255,0.45); cursor: pointer;
+      border: 1.5px solid rgba(255,255,255,0.5); cursor: pointer;
       font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
       transition: all 0.22s;
     }
-    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
-
-    .btn-pink {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 11px 22px; border-radius: 999px;
-      background: ${G.darkGreen}; color: #fff; border: none; cursor: pointer;
-      font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600;
-      transition: all 0.22s;
-    }
-    .btn-pink:hover { background: ${G.forest}; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(233,30,140,0.25); }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
 
     /* Cards */
-    .card-soft { background: ${G.softCream}; border-radius: 16px; border: 1px solid ${G.border}; transition: all 0.25s; }
-    .card-white { background: ${G.white}; border-radius: 16px; border: 1px solid ${G.border}; transition: all 0.25s; }
-    .card-dark { background: ${G.darkBg}; border-radius: 16px; color: #fff; }
-    .card-pink { background: ${G.darkGreen}; border-radius: 16px; color: #fff; }
+    .card-cream { background: ${G.softCream}; border-radius: 16px; border: 1px solid ${G.border}; transition: all 0.25s; }
+    .card-white { background: ${G.white};     border-radius: 16px; border: 1px solid ${G.border}; transition: all 0.25s; }
 
     /* Label pill */
     .label-pill {
@@ -173,17 +149,18 @@ const GS = () => (
       content: ''; flex: 1; height: 1px; background: ${G.border};
     }
 
-    /* Typography */
-    .h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1.06; letter-spacing: -0.02em; }
-    .h2 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(1.8rem, 3.2vw, 2.8rem); line-height: 1.15; letter-spacing: -0.02em; }
-    .h3 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; }
+    /* Typography — DM Sans only, bold weights for headings */
+    .h1     { font-family: 'DM Sans', sans-serif; font-weight: 900; font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1.06; letter-spacing: -0.03em; }
+    .h1-it  { font-family: 'DM Sans', sans-serif; font-weight: 800; font-style: italic; font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1.06; letter-spacing: -0.03em; }
+    .h2     { font-family: 'DM Sans', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.2vw, 2.8rem); line-height: 1.15; letter-spacing: -0.025em; }
+    .h3     { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; }
     .body-t { font-size: 0.95rem; color: ${G.body}; line-height: 1.8; }
-    .small-t { font-size: 0.84rem; color: ${G.body}; line-height: 1.75; }
-    .muted-t { font-size: 0.82rem; color: ${G.muted}; }
+    .small-t{ font-size: 0.84rem; color: ${G.body}; line-height: 1.75; }
+    .muted-t{ font-size: 0.82rem; color: ${G.muted}; }
 
     /* Service card hover */
     .service-card { cursor: pointer; transition: all 0.25s; }
-    .service-card:hover { background: ${G.paleGreen} !important; border-color: ${G.darkGreen}33 !important; }
+    .service-card:hover { background: ${G.paleGreen} !important; border-color: ${G.darkGreen}44 !important; }
     .service-card:hover .svc-icon { background: ${G.darkGreen} !important; color: #fff !important; }
 
     @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
@@ -197,17 +174,15 @@ const GS = () => (
       .hide-m { display:none!important; }
       .g2,.g3,.g4,.gc { grid-template-columns:1fr!important; gap:14px!important; }
       .wrap { padding: 0 18px; }
-      .section { padding: 60px 0!important; }
-      .h1 { font-size: 2.2rem!important; }
+      .section { padding: 64px 0!important; }
+      .h1,.h1-it { font-size: 2.2rem!important; }
       .h2 { font-size: 1.7rem!important; }
     }
     @media(min-width:640px) and (max-width:960px){
       .g3 { grid-template-columns:repeat(2,1fr)!important; }
       .g4 { grid-template-columns:repeat(2,1fr)!important; }
     }
-    @media(max-width:480px){
-      .wrap { padding: 0 14px; }
-    }
+    @media(max-width:480px){ .wrap { padding: 0 14px; } }
   `}</style>
 );
 
@@ -242,12 +217,12 @@ function Navbar() {
                 <circle cx="15" cy="10" r="1.2" fill="white" stroke="none"/>
               </svg>
             </div>
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem", fontWeight: 800, letterSpacing: "-0.02em", color: G.ink }}>
+            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem", fontWeight: 800, letterSpacing: "-0.025em", color: G.ink }}>
               <span style={{ color: G.darkGreen }}>Mynd</span>Works
             </span>
           </button>
 
-          {/* Desktop links */}
+          {/* Desktop */}
           <div className="hide-m" style={{ display: "flex", alignItems: "center", gap: "4px" }}>
             {[["About","#about"],["Services","#services"],["FAQ","#faq"],["Contact","#contact"]].map(([l,h]) => (
               <button key={l} onClick={() => go(h)}
@@ -270,7 +245,7 @@ function Navbar() {
             </button>
           </div>
 
-          {/* Mobile toggle */}
+          {/* Mobile */}
           <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", cursor: "pointer", display: "none", padding: "4px" }} className="show-m">
             <svg width="22" height="22" fill="none" stroke={G.ink} viewBox="0 0 24 24">
               {open ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12"/> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16"/>}
@@ -296,21 +271,20 @@ function Navbar() {
 function Hero() {
   return (
     <section style={{ minHeight: "100vh", background: G.cream, display: "flex", flexDirection: "column", justifyContent: "flex-end", position: "relative", overflow: "hidden", paddingTop: "66px" }}>
-      {/* Full-bleed bg */}
       <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
         <img
           src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&auto=format&fit=crop&q=80"
           alt="Therapy"
           style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}
         />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.0) 30%, rgba(255,255,255,0.82) 72%, rgba(255,255,255,1) 100%)" }}/>
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, rgba(15,23,42,0.3) 0%, transparent 55%)" }}/>
+        <div style={{ position: "absolute", inset: 0, background: `linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.0) 30%, rgba(255,255,255,0.82) 72%, ${G.cream} 100%)` }}/>
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(120deg, rgba(15,23,42,0.28) 0%, transparent 55%)" }}/>
       </div>
 
-      {/* Floating badge */}
+      {/* Floating stat */}
       <div className="hide-m" style={{ position: "absolute", top: "110px", right: "40px", zIndex: 10 }}>
         <div style={{ background: "rgba(255,255,255,0.94)", backdropFilter: "blur(12px)", borderRadius: "14px", padding: "14px 18px", border: `1px solid ${G.border}`, textAlign: "center" }} className="float">
-          <p style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "1.6rem", color: G.darkGreen, lineHeight: 1 }}>2,000+</p>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "1.6rem", color: G.darkGreen, lineHeight: 1 }}>2,000+</p>
           <p style={{ fontSize: "0.68rem", color: G.muted, marginTop: "3px", fontWeight: 500 }}>Lives Transformed</p>
         </div>
       </div>
@@ -325,7 +299,6 @@ function Hero() {
         </div>
       </div>
 
-      {/* Content */}
       <div className="wrap" style={{ position: "relative", zIndex: 2, paddingBottom: "80px" }}>
         <div style={{ maxWidth: "620px" }}>
           <Reveal>
@@ -334,10 +307,11 @@ function Hero() {
             </div>
           </Reveal>
           <Reveal delay={60}>
-            <h1 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "clamp(2.8rem, 6vw, 5rem)", lineHeight: 1.05, letterSpacing: "-0.02em", color: G.ink, marginBottom: "8px" }}>
-              Feel better. <em style={{ fontStyle: "italic", color: G.darkGreen }}>Think</em>
+            <h1 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "clamp(2.8rem, 6vw, 5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: G.ink, marginBottom: "8px" }}>
+              Feel better.{" "}
+              <em style={{ fontStyle: "italic", fontWeight: 800, color: G.darkGreen }}>Think</em>
             </h1>
-            <h1 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "clamp(2.8rem, 6vw, 5rem)", lineHeight: 1.05, letterSpacing: "-0.02em", color: G.ink, marginBottom: "22px" }}>
+            <h1 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "clamp(2.8rem, 6vw, 5rem)", lineHeight: 1.05, letterSpacing: "-0.03em", color: G.ink, marginBottom: "22px" }}>
               clearer.
             </h1>
           </Reveal>
@@ -365,9 +339,9 @@ function Hero() {
 // ─── Stats ────────────────────────────────────────────────────────────────────
 function Stats() {
   const items = [
-    { v: "2,000+", l: "Clients Supported",    color: G.darkGreen },
-    { v: "15+",    l: "Years Experience",      color: G.olive },
-    { v: "98%",    l: "Satisfaction Rate",     color: G.blue },
+    { v: "2,000+", l: "Happy Clients",       color: G.darkGreen },
+    { v: "15+",    l: "Years Experience",     color: G.olive },
+    { v: "98%",    l: "Satisfaction Rate",    color: G.ink },
   ];
   return (
     <section style={{ background: G.softCream, borderTop: `1px solid ${G.border}`, borderBottom: `1px solid ${G.border}`, padding: "48px 0" }}>
@@ -376,7 +350,7 @@ function Stats() {
           {items.map((s, i) => (
             <Reveal key={s.l} delay={i * 70}>
               <div style={{ background: G.softCream, padding: "32px 40px", display: "flex", alignItems: "center", gap: "20px" }}>
-                <p style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "2.4rem", color: s.color, lineHeight: 1 }}>{s.v}</p>
+                <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "2.4rem", color: s.color, lineHeight: 1 }}>{s.v}</p>
                 <p style={{ fontSize: "0.78rem", color: G.body, maxWidth: "80px", lineHeight: 1.4, fontWeight: 500 }}>{s.l}</p>
               </div>
             </Reveal>
@@ -438,12 +412,11 @@ function Services() {
 // ─── Why Choose Us ────────────────────────────────────────────────────────────
 function WhyUs() {
   const reasons = [
-    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`, title: "Flexible Scheduling", desc: "We offer flexible scheduling options to fit your busy lifestyle — mornings, evenings or weekends." },
-    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>`, title: "Personalised Programs", desc: "Every wellness journey is unique. Our programmes are tailored specifically to your individual needs and goals." },
-    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>`, title: "Accredited Therapists", desc: "Our team of certified and experienced therapists is dedicated to helping you reach your wellness goals." },
-    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`, title: "Holistic Wellness", desc: "We go beyond talk therapy — offering mindfulness, corporate wellness, workshops and holistic care." },
+    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>`, title: "Flexible Scheduling", desc: "We offer flexible scheduling options to fit your busy lifestyle. Morning, lunch-time or evening — your choice." },
+    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>`, title: "Personalised Programs", desc: "We understand that everyone's wellness journey is unique. Our personalised programs are tailored to your individual needs." },
+    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>`, title: "Accredited Therapists", desc: "Our team of certified and experienced therapists is dedicated to helping you achieve your wellness goals." },
+    { icon: `<svg width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>`, title: "Holistic Wellness Approach", desc: "Our services go beyond therapy. We offer mindfulness, corporate wellness, workshops and holistic care." },
   ];
-
   return (
     <section style={{ background: G.softCream, padding: "88px 0", borderTop: `1px solid ${G.border}` }}>
       <div className="wrap">
@@ -454,10 +427,10 @@ function WhyUs() {
               <h2 className="h2" style={{ color: G.ink }}>Why Choose Us?</h2>
             </div>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: "8px" }}>
-              <p className="small-t" style={{ maxWidth: "300px", textAlign: "right" }}>
+              <p className="small-t" style={{ maxWidth: "320px", textAlign: "right" }}>
                 Our commitment to your wellness goes beyond just sessions.
               </p>
-              <button className="btn-pink" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>
+              <button className="btn-dark" onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}>
                 Book Now
               </button>
             </div>
@@ -471,8 +444,7 @@ function WhyUs() {
                 background: i === 0 ? G.darkGreen : G.white,
                 borderRadius: "16px",
                 border: `1px solid ${i === 0 ? "transparent" : G.border}`,
-                padding: "28px 24px",
-                height: "100%",
+                padding: "28px 24px", height: "100%",
                 display: "flex", flexDirection: "column", gap: "14px",
                 transition: "all 0.25s",
               }}
@@ -484,8 +456,8 @@ function WhyUs() {
                 <p style={{ fontSize: "0.8rem", color: i === 0 ? "rgba(255,255,255,0.72)" : G.body, lineHeight: 1.7, flex: 1 }}>{r.desc}</p>
                 <button onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
                   style={{ alignSelf: "flex-start", background: i === 0 ? "rgba(255,255,255,0.15)" : G.paleGreen, border: "none", borderRadius: "999px", padding: "8px 16px", fontSize: "0.76rem", fontWeight: 600, color: i === 0 ? "#fff" : G.darkGreen, cursor: "pointer", transition: "all 0.2s", fontFamily: "'DM Sans', sans-serif" }}
-                  onMouseEnter={e => { (e.currentTarget).style.background = i === 0 ? "rgba(255,255,255,0.25)" : G.darkGreen; if (i !== 0) (e.currentTarget).style.color = "#fff"; }}
-                  onMouseLeave={e => { (e.currentTarget).style.background = i === 0 ? "rgba(255,255,255,0.15)" : G.paleGreen; if (i !== 0) (e.currentTarget).style.color = G.darkGreen; }}>
+                  onMouseEnter={e => { e.currentTarget.style.background = i === 0 ? "rgba(255,255,255,0.25)" : G.darkGreen; if (i !== 0) e.currentTarget.style.color = "#fff"; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = i === 0 ? "rgba(255,255,255,0.15)" : G.paleGreen; if (i !== 0) e.currentTarget.style.color = G.darkGreen; }}>
                   Book Now
                 </button>
               </div>
@@ -503,12 +475,12 @@ function PromoBanner() {
     <section style={{ background: G.cream, padding: "72px 0" }}>
       <div className="wrap">
         <Reveal>
-          <div style={{ borderRadius: "22px", overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", background: G.darkBg, position: "relative" }} className="g2">
+          <div style={{ borderRadius: "22px", overflow: "hidden", display: "grid", gridTemplateColumns: "1fr 1fr", background: G.darkBg }} className="g2">
             <div style={{ padding: "56px 52px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <div className="label-pill-dark">Our Offer</div>
-              <h2 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#fff", lineHeight: 1.2, marginBottom: "18px" }}>
+              <div className="label-pill-dark">Free Offer</div>
+              <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 900, fontSize: "clamp(1.6rem, 3vw, 2.4rem)", color: "#fff", lineHeight: 1.15, marginBottom: "18px", letterSpacing: "-0.02em" }}>
                 Free consultation<br/>
-                <em style={{ fontStyle: "italic", color: G.lightSage }}>for new clients</em><br/>
+                <em style={{ fontStyle: "italic", fontWeight: 800, color: G.lightSage }}>for new clients</em><br/>
                 this month
               </h2>
               <p style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.6)", lineHeight: 1.75, marginBottom: "32px", maxWidth: "320px" }}>
@@ -524,7 +496,7 @@ function PromoBanner() {
                 alt="Wellness session"
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(15,23,42,0.35) 0%, transparent 45%)" }}/>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(15,23,42,0.4) 0%, transparent 45%)" }}/>
             </div>
           </div>
         </Reveal>
@@ -552,15 +524,15 @@ function About() {
         </Reveal>
 
         <div style={{ display: "grid", gridTemplateColumns: "1.3fr 1fr 1fr", gap: "14px" }} className="g3">
-          {/* Featured dark card */}
+          {/* Dark card */}
           <Reveal delay={0}>
             <div style={{ background: G.darkBg, borderRadius: "18px", padding: "36px 32px", height: "380px", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
-              <div style={{ position: "absolute", top: "-40px", right: "-40px", width: "160px", height: "160px", borderRadius: "50%", background: "rgba(233,30,140,0.08)" }}/>
+              <div style={{ position: "absolute", top: "-40px", right: "-40px", width: "160px", height: "160px", borderRadius: "50%", background: "rgba(233,30,140,0.07)" }}/>
               <div>
                 <div className="label-pill-dark">Personalised Coaching</div>
-                <h3 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "1.4rem", color: "#fff", lineHeight: 1.3, marginTop: "8px" }}>
+                <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: "1.4rem", color: "#fff", lineHeight: 1.25, marginTop: "8px" }}>
                   Your mental health,<br/>
-                  <em style={{ fontStyle: "italic", color: G.lightSage }}>our core focus.</em>
+                  <em style={{ fontStyle: "italic", fontWeight: 700, color: G.lightSage }}>our core focus.</em>
                 </h3>
               </div>
               <div>
@@ -577,12 +549,8 @@ function About() {
           {/* Team 1 */}
           <Reveal delay={80}>
             <div style={{ borderRadius: "18px", overflow: "hidden", height: "380px", position: "relative", cursor: "pointer" }}>
-              <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80"
-                alt="Dr. M. Patel"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
-              />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.72) 0%, transparent 55%)" }}/>
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80" alt="Dr. M. Patel" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}/>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.75) 0%, transparent 55%)" }}/>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px" }}>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.92rem", color: "#fff" }}>Dr. M. Patel</p>
                 <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.65)" }}>Clinical Psychologist · Founder</p>
@@ -596,12 +564,8 @@ function About() {
           {/* Team 2 */}
           <Reveal delay={160}>
             <div style={{ borderRadius: "18px", overflow: "hidden", height: "380px", position: "relative", cursor: "pointer" }}>
-              <img
-                src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=80"
-                alt="J. Okoro"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
-              />
-              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.72) 0%, transparent 55%)" }}/>
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=500&auto=format&fit=crop&q=80" alt="J. Okoro" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}/>
+              <div style={{ position: "absolute", inset: 0, background: "linear-gradient(0deg, rgba(15,23,42,0.75) 0%, transparent 55%)" }}/>
               <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px" }}>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: "0.92rem", color: "#fff" }}>J. Okoro</p>
                 <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.65)" }}>Psychotherapist</p>
@@ -628,7 +592,10 @@ function Testimonials() {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "52px", flexWrap: "wrap", gap: "20px" }}>
             <div>
               <div className="label-pill">Client Stories</div>
-              <h2 className="h2" style={{ color: G.ink }}>Real people, <em style={{ fontStyle: "italic", color: G.darkGreen }}>real change.</em></h2>
+              <h2 className="h2" style={{ color: G.ink }}>
+                Real people,{" "}
+                <em style={{ fontStyle: "italic", color: G.darkGreen }}>real change.</em>
+              </h2>
             </div>
             <div style={{ display: "flex", gap: "6px" }}>
               {TESTIMONIALS.map((_,i) => (
@@ -645,7 +612,7 @@ function Testimonials() {
               <div style={{ display: "flex", gap: "3px", marginBottom: "24px" }}>
                 {[...Array(5)].map((_,i) => <span key={i} style={{ color: G.olive, fontSize: "1rem" }}>★</span>)}
               </div>
-              <p style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", fontSize: "1.15rem", color: "rgba(255,255,255,0.9)", lineHeight: 1.75, marginBottom: "32px" }}>
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400, fontStyle: "italic", fontSize: "1.15rem", color: "rgba(255,255,255,0.9)", lineHeight: 1.75, marginBottom: "32px" }}>
                 "{TESTIMONIALS[active].text}"
               </p>
               <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
@@ -737,7 +704,8 @@ function Contact() {
           <Reveal>
             <div className="label-pill">Book a Session</div>
             <h2 className="h2" style={{ color: G.ink, marginBottom: "14px" }}>
-              Take the<br/><em style={{ fontStyle: "italic", color: G.darkGreen }}>first step.</em>
+              Take the<br/>
+              <em style={{ fontStyle: "italic", color: G.darkGreen }}>first step.</em>
             </h2>
             <p className="body-t" style={{ marginBottom: "36px", maxWidth: "320px" }}>
               Book a free 15-minute consultation. No commitment, no pressure — just a conversation.
@@ -776,12 +744,12 @@ function Contact() {
               {status === "success" ? (
                 <div style={{ textAlign: "center", padding: "48px 0" }}>
                   <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: G.paleGreen, display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px", fontSize: "1.8rem" }}>🌿</div>
-                  <h3 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "1.4rem", color: G.ink, marginBottom: "10px" }}>Thank you, {form.name.split(" ")[0]}!</h3>
+                  <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: "1.4rem", color: G.ink, marginBottom: "10px" }}>Thank you, {form.name.split(" ")[0]}!</h3>
                   <p style={{ color: G.body, fontSize: "0.875rem", lineHeight: 1.75 }}>We'll be in touch within 24 hours.<br/>You've taken a brave step.</p>
                 </div>
               ) : (
                 <>
-                  <h3 style={{ fontFamily: "'DM Serif Display', serif", fontWeight: 400, fontSize: "1.2rem", color: G.ink, marginBottom: "6px" }}>Appointment Booking</h3>
+                  <h3 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 800, fontSize: "1.2rem", color: G.ink, marginBottom: "6px" }}>Appointment Booking</h3>
                   <p style={{ fontSize: "0.82rem", color: G.muted, marginBottom: "28px" }}>Fill in the form and we'll reach out within 24 hours.</p>
                   <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                     <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
@@ -853,7 +821,7 @@ function Footer() {
                   <circle cx="15" cy="10" r="1.2" fill="white" stroke="none"/>
                 </svg>
               </div>
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem", fontWeight: 700, color: "#fff", letterSpacing: "-0.02em" }}>
+              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: "1.1rem", fontWeight: 800, color: "#fff", letterSpacing: "-0.02em" }}>
                 <span style={{ color: G.darkGreen }}>Mynd</span>Works
               </span>
             </div>
