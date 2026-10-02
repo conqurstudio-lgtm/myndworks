@@ -2141,3 +2141,279 @@ button:focus-visible {
     transition: none;
   }
 }
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+.stories-section {
+  width: 100%;
+  background: #fff;
+  padding:
+    88px
+    var(--page-gutter)
+    104px;
+}
+
+.stories-grid {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+
+.stories-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stories-heading {
+  margin: 0;
+  max-width: 620px;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.3vw, 70px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  color: var(--color-ink);
+}
+
+.stories-heading span {
+  display: block;
+  color: #aaa9a4;
+}
+
+.stories-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stories-controls-desktop {
+  display: none;
+}
+
+.story-arrow {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #eeeeec;
+  color: var(--color-ink);
+  font-size: 17px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.story-arrow:hover {
+  background: var(--color-accent-soft);
+  transform: translateY(-1px);
+}
+
+.story-arrow-next {
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.story-arrow-next:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.story-card {
+  min-height: 410px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+  border-radius: 28px;
+  background: #f5f4f1;
+}
+
+.story-quote-mark {
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 76px;
+  font-weight: 300;
+  line-height: 0.72;
+}
+
+.story-quote {
+  margin: 30px 0 0;
+  max-width: 850px;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2.5vw, 32px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+.story-change {
+  animation: storyFadeUp 0.55s ease;
+}
+
+.story-footer {
+  margin-top: auto;
+  padding-top: 28px;
+  border-top: 1px solid rgba(17, 18, 17, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.story-person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.story-avatar {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-accent-soft);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.story-person div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.story-person strong {
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.story-person div span {
+  color: var(--color-muted);
+  font-size: 11px;
+}
+
+.story-progress {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.story-dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(17, 18, 17, 0.2);
+  cursor: pointer;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
+}
+
+.story-dot.is-active {
+  width: 25px;
+  background: var(--color-ink);
+}
+
+.stories-controls-mobile {
+  margin-top: 16px;
+}
+
+
+/* Desktop */
+
+@media (min-width: 900px) {
+  .stories-section {
+    padding-top: 112px;
+    padding-bottom: 128px;
+  }
+
+  .stories-grid {
+    grid-template-columns:
+      minmax(0, 0.7fr)
+      minmax(0, 1.3fr);
+    gap: 72px;
+  }
+
+  .stories-controls-desktop {
+    display: flex;
+    margin-top: 80px;
+  }
+
+  .stories-controls-mobile {
+    display: none;
+  }
+
+  .story-card {
+    min-height: 450px;
+    padding: 44px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 639px) {
+  .stories-section {
+    padding-top: 78px;
+    padding-bottom: 90px;
+  }
+
+  .stories-grid {
+    margin-top: 30px;
+    gap: 34px;
+  }
+
+  .stories-heading {
+    font-size: 42px;
+  }
+
+  .story-card {
+    min-height: 430px;
+    padding: 24px;
+    border-radius: 24px;
+  }
+
+  .story-footer {
+    align-items: flex-end;
+  }
+}
+
+
+@keyframes storyFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .story-arrow,
+  .story-dot {
+    transition: none;
+  }
+
+  .story-change {
+    animation: none;
+  }
+}
