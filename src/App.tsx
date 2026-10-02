@@ -6,6 +6,7 @@ import { Services } from "./components/Services";
 import { Process } from "./components/Process";
 import { HolisticCare } from "./components/HolisticCare";
 import { Stories } from "./components/Stories";
+import { Faq } from "./components/Faq";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Process />
         <HolisticCare />
         <Stories />
+        <Faq />
       </main>
     </>
   );
