@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import myndworksMark from "../assets/myndworks-mark.svg";
 import { cn } from "./ui";
 
 const NAV_LINKS = [
@@ -15,20 +16,34 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
+
     onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    window.addEventListener("scroll", onScroll, {
+      passive: true,
+    });
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") {
+        setOpen(false);
+      }
     };
+
     const onResize = () => {
-      if (window.innerWidth >= 768) setOpen(false);
+      if (window.innerWidth >= 768) {
+        setOpen(false);
+      }
     };
+
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
+
     return () => {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
@@ -38,29 +53,58 @@ export function Header() {
   return (
     <header className="site-header">
       <div className={cn("nav-shell", scrolled && "is-scrolled")}>
-        <a className="wordmark" href="#top">
-          MyndWorks
+        <a
+          className="brand"
+          href="#top"
+          aria-label="MyndWorks home"
+        >
+          <img
+            className="brand-mark"
+            src={myndworksMark}
+            alt=""
+            aria-hidden="true"
+          />
+
+          <span className="wordmark">
+            MyndWorks
+          </span>
         </a>
 
-        <nav className="desktop-nav" aria-label="Primary">
+        <nav
+          className="desktop-nav"
+          aria-label="Primary navigation"
+        >
           {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href}>
+            <a
+              key={link.href}
+              href={link.href}
+            >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <a className="btn-lime header-cta" href="#contact">
+        <a
+          className="btn-lime header-cta"
+          href="#contact"
+        >
           Book a session
         </a>
 
         <button
           type="button"
-          className={cn("menu-toggle", open && "is-open")}
-          aria-label={open ? "Close menu" : "Open menu"}
+          className={cn(
+            "menu-toggle",
+            open && "is-open"
+          )}
+          aria-label={
+            open ? "Close menu" : "Open menu"
+          }
           aria-expanded={open}
           aria-controls="mobile-navigation"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() =>
+            setOpen((value) => !value)
+          }
         >
           <span className="menu-toggle-line" />
           <span className="menu-toggle-line" />
@@ -70,8 +114,11 @@ export function Header() {
 
       <nav
         id="mobile-navigation"
-        className={cn("mobile-menu", open && "is-open")}
-        aria-label="Mobile"
+        className={cn(
+          "mobile-menu",
+          open && "is-open"
+        )}
+        aria-label="Mobile navigation"
         aria-hidden={!open}
       >
         {NAV_LINKS.map((link) => (
@@ -84,7 +131,12 @@ export function Header() {
             {link.label}
           </a>
         ))}
-        <a className="btn-lime" href="#contact" onClick={() => setOpen(false)}>
+
+        <a
+          className="btn-lime"
+          href="#contact"
+          onClick={() => setOpen(false)}
+        >
           Book a session
         </a>
       </nav>
