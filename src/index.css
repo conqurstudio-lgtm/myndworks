@@ -2663,3 +2663,255 @@ button:focus-visible {
     transition: none;
   }
 }
+
+
+
+/* =========================================================
+   CONTACT / FINAL CONVERSION
+   ========================================================= */
+
+.contact-section {
+  width: 100%;
+  background: #fff;
+  padding:
+    88px
+    var(--page-gutter)
+    104px;
+}
+
+.contact-panel {
+  margin-top: 42px;
+  display: grid;
+  grid-template-columns: 1fr;
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--color-ink);
+  color: #fff;
+}
+
+.contact-main {
+  padding: 36px 28px 44px;
+}
+
+.contact-small {
+  display: block;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.contact-heading {
+  margin: 0;
+  max-width: 800px;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.7vw, 78px);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.contact-heading span {
+  display: block;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.contact-copy {
+  margin: 28px 0 0;
+  max-width: 520px;
+  color: rgba(255, 255, 255, 0.57);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.contact-actions {
+  margin-top: 34px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-primary,
+.contact-secondary {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 19px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.contact-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.contact-primary:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.contact-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+}
+
+.contact-secondary:hover {
+  background: #fff;
+  color: var(--color-ink);
+  transform: translateY(-1px);
+}
+
+.contact-details {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.contact-detail {
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.contact-detail-label {
+  color: rgba(255, 255, 255, 0.36);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-detail a,
+.contact-detail-value {
+  width: fit-content;
+  color: rgba(255, 255, 255, 0.82);
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.contact-detail a {
+  transition: color 0.2s ease;
+}
+
+.contact-detail a:hover {
+  color: var(--color-accent);
+}
+
+@media (min-width: 700px) {
+  .contact-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-detail:nth-child(odd) {
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+@media (min-width: 1000px) {
+  .contact-section {
+    padding-top: 112px;
+    padding-bottom: 128px;
+  }
+
+  .contact-panel {
+    grid-template-columns:
+      minmax(0, 1.45fr)
+      minmax(320px, 0.55fr);
+    min-height: 610px;
+  }
+
+  .contact-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 58px 56px;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .contact-detail {
+    flex: 1;
+    min-height: 0;
+    padding: 24px 30px;
+  }
+
+  .contact-detail:nth-child(odd) {
+    border-right: 0;
+  }
+
+  .contact-detail-last {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 639px) {
+  .contact-section {
+    padding-top: 78px;
+    padding-bottom: 90px;
+  }
+
+  .contact-panel {
+    margin-top: 30px;
+    border-radius: 25px;
+  }
+
+  .contact-main {
+    padding: 32px 22px 38px;
+  }
+
+  .contact-heading {
+    font-size: 43px;
+  }
+
+  .contact-copy {
+    margin-top: 22px;
+  }
+
+  .contact-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contact-primary,
+  .contact-secondary {
+    width: 100%;
+  }
+
+  .contact-detail {
+    padding: 19px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-primary,
+  .contact-secondary,
+  .contact-detail a {
+    transition: none;
+  }
+}

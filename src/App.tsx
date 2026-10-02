@@ -7,6 +7,7 @@ import { Process } from "./components/Process";
 import { HolisticCare } from "./components/HolisticCare";
 import { Stories } from "./components/Stories";
 import { Faq } from "./components/Faq";
+import { Contact } from "./components/Contact";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
         <HolisticCare />
         <Stories />
         <Faq />
+        <Contact />
       </main>
     </>
   );
