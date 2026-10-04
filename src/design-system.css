@@ -681,3 +681,262 @@ button:focus-visible {
       88px;
   }
 }
+
+
+/* =========================================================
+   MYNDWORKS — RESPONSIVE SAFETY LAYER
+   Phase 4B
+
+   Non-card sections only.
+   No Services / First Visit / Holistic / Stories card rules.
+   ========================================================= */
+
+
+/* Prevent media/content from forcing horizontal overflow */
+
+#about img,
+#contact img,
+.site-footer img {
+  max-width: 100%;
+}
+
+
+/* Long contact values such as email addresses
+   must be allowed to wrap cleanly. */
+
+#contact .contact-grey-value,
+#contact .contact-grey-value a,
+#contact .contact-grey-value span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 700px) and (max-width: 1023px) {
+
+  /* About should become a calm single-column composition
+     before the content becomes cramped. */
+
+  #about.about-clean .about-clean-grid {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  #about.about-clean .about-clean-copy {
+    max-width:
+      650px !important;
+  }
+
+
+  #about.about-clean .about-clean-description {
+    max-width:
+      580px !important;
+  }
+
+
+  #about.about-clean .about-clean-visual {
+    width:
+      100% !important;
+  }
+
+
+  /* FAQ also stacks before its columns become too narrow. */
+
+  #faq .source-faq-grid {
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      44px !important;
+  }
+
+
+  #faq .source-faq-copy {
+    max-width:
+      560px !important;
+  }
+
+
+  /* Contact left/right areas stack on tablet.
+     Internal contact detail grid remains intact. */
+
+  #contact .contact-grey-card {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  #contact .contact-grey-main {
+    padding:
+      42px !important;
+  }
+
+
+  #contact .contact-grey-details {
+    border-left:
+      0 !important;
+
+    border-top:
+      1px solid rgba(255,255,255,.10) !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  /* ABOUT */
+
+  #about.about-clean .about-clean-grid {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  #about.about-clean .about-clean-copy,
+  #about.about-clean .about-clean-description,
+  #about.about-clean .about-clean-visual {
+    width:
+      100% !important;
+
+    max-width:
+      none !important;
+  }
+
+
+  #about.about-clean .about-clean-image {
+    width:
+      100% !important;
+
+    height:
+      300px !important;
+
+    object-fit:
+      cover !important;
+  }
+
+
+  /* FAQ */
+
+  #faq .source-faq-grid {
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      34px !important;
+  }
+
+
+  #faq .source-faq-list {
+    width:
+      100% !important;
+
+    min-width:
+      0 !important;
+  }
+
+
+  #faq .source-faq-question {
+    width:
+      100% !important;
+  }
+
+
+  /* CONTACT */
+
+  #contact .contact-grey-card {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  #contact .contact-grey-main {
+    padding:
+      32px 24px !important;
+  }
+
+
+  #contact .contact-grey-actions {
+    width:
+      100% !important;
+  }
+
+
+  #contact .contact-grey-primary,
+  #contact .contact-grey-secondary {
+    width:
+      100% !important;
+  }
+
+
+  #contact .contact-grey-details {
+    grid-template-columns:
+      1fr !important;
+
+    border-left:
+      0 !important;
+
+    border-top:
+      1px solid rgba(255,255,255,.10) !important;
+  }
+
+
+  #contact .contact-grey-row {
+    border-right:
+      0 !important;
+  }
+
+
+  /* FOOTER */
+
+  .site-footer .footer-top {
+    grid-template-columns:
+      1fr !important;
+  }
+
+
+  .site-footer .footer-meta {
+    align-items:
+      flex-start !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE HERO — STABLE VERTICAL COMPOSITION
+
+   Keep the approved 92vh behaviour, but do not allow
+   wider/shorter mobile previews to collapse the Hero.
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .hero-canvas {
+    min-height:
+      740px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE HERO — STABLE VERTICAL COMPOSITION
+
+   Keep the approved 92vh behaviour, but do not allow
+   wider/shorter mobile previews to collapse the Hero.
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .hero-canvas {
+    min-height:
+      740px !important;
+  }
+}

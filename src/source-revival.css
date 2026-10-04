@@ -12756,7 +12756,7 @@
 
 @media (hover: hover) and (pointer: fine) {
 
-  .site-.site-footer a:hover {
+  .site-footer a:hover {
     color: #00b9f3 !important;
   }
 }
