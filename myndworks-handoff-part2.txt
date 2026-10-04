@@ -1,0 +1,1543 @@
+
+========================================
+PACKAGE.JSON
+========================================
+{
+  "homepage": "https://YOUR_GITHUB_USERNAME.github.io/myndworks",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.13",
+    "tailwindcss": "^4.2.4",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "gh-pages": "^6.0.0"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
+========================================
+MAIN.TSX
+========================================
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import "./index.css";
+import "./source-revival.css";
+import "./design-system.css";
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+
+========================================
+APP.TSX
+========================================
+import { ScrollToTop } from "./components/ScrollToTop";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { About } from "./components/About";
+import { Services } from "./components/Services";
+import { Process } from "./components/Process";
+import { HolisticCare } from "./components/HolisticCare";
+import { Stories } from "./components/Stories";
+import { Faq } from "./components/Faq";
+import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
+
+export default function App() {
+  return (
+    <div className="mw-page-shell">
+      <ScrollToTop />
+      <Header />
+
+      <div className="mw-page-frame">
+        <main id="top">
+          <Hero />
+          <About />
+          <Services />
+          <Process />
+          <HolisticCare />
+          <Stories />
+          <Faq />
+          <Contact />
+        </main>
+
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+========================================
+HEADER
+========================================
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+
+import myndworksMark from "../assets/myndworks-mark.svg";
+
+
+const NAV_ITEMS = [
+  {
+    label: "About",
+    href: "#about",
+  },
+  {
+    label: "Services",
+    href: "#services",
+  },
+  {
+    label: "Your first visit",
+    href: "#first-visit",
+  },
+  {
+    label: "Stories",
+    href: "#stories",
+  },
+  {
+    label: "FAQ",
+    href: "#faq",
+  },
+];
+
+
+export function Header() {
+  const [menuOpen, setMenuOpen] =
+    useState(false);
+
+  const [scrolled, setScrolled] =
+    useState(false);
+
+  const [hidden, setHidden] =
+    useState(false);
+
+
+  const headerRef =
+    useRef<HTMLElement | null>(null);
+
+  const lastScrollY =
+    useRef(0);
+
+  const ticking =
+    useRef(false);
+
+
+  /* =========================================================
+     SMART SCROLL HEADER
+     ========================================================= */
+
+  useEffect(() => {
+    lastScrollY.current =
+      window.scrollY;
+
+
+    const handleScroll = () => {
+      if (ticking.current) {
+        return;
+      }
+
+
+      ticking.current = true;
+
+
+      window.requestAnimationFrame(() => {
+        const currentY = Math.max(
+          window.scrollY,
+          0
+        );
+
+
+        const difference =
+          currentY -
+          lastScrollY.current;
+
+
+        setScrolled(
+          currentY > 40
+        );
+
+
+        /*
+         * Always show navigation near
+         * the top of the page.
+         */
+        if (currentY < 100) {
+          setHidden(false);
+        }
+
+
+        /*
+         * Never hide while the mobile
+         * navigation is open.
+         */
+        else if (menuOpen) {
+          setHidden(false);
+        }
+
+
+        /*
+         * Meaningful downward movement.
+         */
+        else if (difference > 7) {
+          setHidden(true);
+        }
+
+
+        /*
+         * Meaningful upward movement.
+         */
+        else if (difference < -7) {
+          setHidden(false);
+        }
+
+
+        lastScrollY.current =
+          currentY;
+
+        ticking.current =
+          false;
+      });
+    };
+
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
+
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+    };
+  }, [menuOpen]);
+
+
+  /* =========================================================
+     CLOSE MOBILE MENU WHEN TAPPING OUTSIDE
+     OR PRESSING ESCAPE
+     ========================================================= */
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+
+    const handlePointerDown = (
+      event: PointerEvent
+    ) => {
+      const header =
+        headerRef.current;
+
+
+      if (!header) {
+        return;
+      }
+
+
+      const target =
+        event.target;
+
+
+      if (
+        target instanceof Node &&
+        !header.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown
+    );
+
+    document.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handlePointerDown
+      );
+
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [menuOpen]);
+
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
+
+
+  return (
+    <header
+      ref={headerRef}
+      className={
+        hidden
+          ? "site-header is-hidden"
+          : "site-header"
+      }
+    >
+      <div
+        className={
+          scrolled
+            ? "nav-shell is-scrolled"
+            : "nav-shell"
+        }
+      >
+        <a
+          className="header-brand"
+          href="#top"
+          onClick={closeMenu}
+          aria-label="MyndWorks home"
+        >
+          <img
+            className="header-brand-mark"
+            src={myndworksMark}
+            alt=""
+          />
+
+
+          <span className="wordmark">
+            MyndWorks
+          </span>
+        </a>
+
+
+        <nav
+          className="desktop-nav"
+          aria-label="Main navigation"
+        >
+          {NAV_ITEMS.map(
+            (item) => (
+              <a
+                href={item.href}
+                key={item.href}
+              >
+                {item.label}
+              </a>
+            )
+          )}
+        </nav>
+
+
+        <a
+          className="btn-lime header-cta"
+          href="#contact"
+        >
+          Book a session
+        </a>
+
+
+        <button
+          type="button"
+          className={
+            menuOpen
+              ? "menu-toggle is-open"
+              : "menu-toggle"
+          }
+          aria-expanded={
+            menuOpen
+          }
+          aria-controls="mobile-navigation"
+          aria-label={
+            menuOpen
+              ? "Close navigation"
+              : "Open navigation"
+          }
+          onClick={() =>
+            setMenuOpen(
+              (current) =>
+                !current
+            )
+          }
+        >
+          <span className="menu-toggle-line" />
+          <span className="menu-toggle-line" />
+          <span className="menu-toggle-line" />
+        </button>
+      </div>
+
+
+      <div
+        id="mobile-navigation"
+        className={
+          menuOpen
+            ? "mobile-menu is-open"
+            : "mobile-menu"
+        }
+      >
+        {NAV_ITEMS.map(
+          (item) => (
+            <a
+              className="mobile-link"
+              href={item.href}
+              key={item.href}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </a>
+          )
+        )}
+
+
+        <a
+          className="btn-lime"
+          href="#contact"
+          onClick={closeMenu}
+        >
+          Book a session
+        </a>
+      </div>
+    </header>
+  );
+}
+
+========================================
+HERO
+========================================
+import myndworksHero from "../assets/myndworks-hero.png";
+import { Reveal } from "./ui";
+
+export function Hero() {
+  return (
+    <section
+      className="hero-outer"
+      aria-label="Introduction"
+    >
+      <div className="hero-canvas">
+        <img
+          className="hero-image"
+          src={myndworksHero}
+          alt="A therapist speaking with a client in a calm wellness setting"
+        />
+
+        <div
+          className="hero-overlay"
+          aria-hidden="true"
+        />
+
+        <div className="hero-copy">
+          <Reveal>
+            <div className="hero-copy-left">
+              <div className="hero-kicker">
+                <span className="hero-kicker-star" aria-hidden="true">✳</span>
+                <span>Mental wellbeing company</span>
+              </div>
+
+              <h1 className="hero-heading">
+                Feel better. Think clearer.
+              </h1>
+
+              <p className="hero-subheading">
+                Mental wellness support that fits your life.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal
+            className="hero-copy-right"
+            delay={120}
+          >
+            <p className="hero-lede">
+              Individual, family and couples therapy,
+              assessments and medico-legal assessments,
+              in-person and virtual.
+            </p>
+
+            <a
+              className="btn-white"
+              href="#contact"
+            >
+              Start your journey →
+            </a>
+          </Reveal>
+        </div>
+
+        <div className="hero-meta">
+          <span>In-person &amp; virtual</span>
+          <span>Established 2022</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+========================================
+ABOUT
+========================================
+import aboutOffice from "../assets/about-office.png";
+import { Reveal } from "./ui";
+
+export function About() {
+  return (
+    <section
+      id="about"
+      className="source-about-section about-clean"
+    >
+      <div className="about-clean-inner">
+
+        <Reveal>
+          <div className="section-eyebrow">
+            Who we are
+          </div>
+        </Reveal>
+
+
+        <div className="about-clean-grid">
+
+          {/* =================================================
+              LEFT — ABOUT INFORMATION
+              ================================================= */}
+
+          <Reveal className="about-clean-copy">
+
+            <h2 className="about-clean-heading">
+              A calmer way to
+              <span> care for your mind</span>
+            </h2>
+
+
+            <p className="about-clean-description">
+              MyndWorks is a mental wellbeing
+              company that seeks to offer a
+              multifaceted approach to dealing
+              with mental health.{" "}
+
+              <span>
+                Established in 2022 to increase
+                awareness of mental illnesses
+                and promote mental health, we
+                offer individual, family and
+                couples therapy, in-person and
+                virtual, as well as assessments
+                and medico-legal assessments.
+              </span>
+            </p>
+
+
+            <a
+              href="#services"
+              className="about-clean-cta"
+            >
+              <span>
+                Explore our services
+              </span>
+
+              <span aria-hidden="true">
+                →
+              </span>
+            </a>
+
+          </Reveal>
+
+
+          {/* =================================================
+              RIGHT — MYNDWORKS OFFICE
+              ================================================= */}
+
+          <Reveal
+            className="about-clean-visual"
+            delay={120}
+          >
+            <img
+              src={aboutOffice}
+              alt="A calm MyndWorks therapy environment"
+              className="about-clean-image"
+            />
+          </Reveal>
+
+        </div>
+
+      </div>
+    </section>
+  );
+}
+
+========================================
+SERVICES
+========================================
+import healthIcon from "../assets/health-icon.svg";
+import { Reveal } from "./ui";
+
+
+const SERVICES = [
+  {
+    tag: "therapy",
+    title: "Therapeutic Services",
+    intro:
+      "Support for emotional, psychological and relationship challenges.",
+    details: [
+      "Depression",
+      "Anxiety",
+      "Grief / bereavement",
+      "Bipolar mood disorder",
+      "Borderline personality disorder",
+      "Couples counselling",
+    ],
+  },
+  {
+    tag: "corporate",
+    title: "Corporate Wellness",
+    intro:
+      "Wellbeing support created for teams, organisations and communities.",
+    details: [
+      "Workshops and training",
+      "Speaking engagements",
+      "Wellness programs",
+      "Intimacy events",
+    ],
+  },
+  {
+    tag: "1 : 1",
+    title: "Individual Therapy",
+    intro:
+      "A private space to work through what you are carrying.",
+    details: [
+      "In-person sessions",
+      "Virtual sessions",
+      "Personalised support",
+    ],
+  },
+  {
+    tag: "assessment",
+    title: "Assessments",
+    intro:
+      "Professional psychological assessments that provide clarity and direction.",
+    details: [
+      "Psychological assessments",
+      "Clinical insight",
+      "Professional reporting",
+    ],
+  },
+  {
+    tag: "medico-legal",
+    title: "Medico-legal Assessments",
+    intro:
+      "Comprehensive professional assessments for medico-legal matters.",
+    details: [
+      "Clinical assessment",
+      "Professional reports",
+      "Medico-legal support",
+    ],
+  },
+] as const;
+
+
+export function Services() {
+  return (
+    <section
+      id="services"
+      className="services-section"
+    >
+      <Reveal>
+        <div className="section-eyebrow">
+          Services
+        </div>
+      </Reveal>
+
+
+      <div className="services-heading-row">
+        <Reveal>
+          <h2 className="services-heading">
+            Support that meets you
+            <span>
+              {" "}
+              exactly where you are
+            </span>
+          </h2>
+        </Reveal>
+
+
+        <Reveal delay={100}>
+          <a
+            className="services-book-link"
+            href="#contact"
+          >
+            <span>
+              Book a session
+            </span>
+
+            <span
+              className="services-book-icon"
+              aria-hidden="true"
+            >
+              ↗
+            </span>
+          </a>
+        </Reveal>
+      </div>
+
+
+      <div className="services-grid">
+        {SERVICES.map(
+          (service, index) => (
+            <Reveal
+              key={service.title}
+              delay={index * 70}
+            >
+              <article
+                className={`service-card ${
+                  index < 2
+                    ? "service-card-priority"
+                    : ""
+                }`}
+              >
+                <div className="service-card-top">
+
+                  <div
+                    className="service-thumb"
+                    aria-hidden="true"
+                  >
+                    <img
+                      className="service-thumb-icon"
+                      src={healthIcon}
+                      alt=""
+                    />
+                  </div>
+
+
+                  <span
+                    className={`service-tag ${
+                      index === 0
+                        ? "service-tag-therapy"
+                        : index === 1
+                          ? "service-tag-corporate"
+                          : ""
+                    }`}
+                  >
+                    {service.tag}
+                  </span>
+
+                </div>
+
+
+                <div className="service-card-content">
+
+                  <h3>
+                    {service.title}
+                  </h3>
+
+
+                  <div className="service-reveal">
+                    <div className="service-reveal-inner">
+
+                      <p className="service-intro">
+                        {service.intro}
+                      </p>
+
+
+                      <div className="service-detail-list">
+                        {service.details.map(
+                          (detail) => (
+                            <span
+                              key={detail}
+                            >
+                              {detail}
+                            </span>
+                          )
+                        )}
+                      </div>
+
+
+                      <a
+                        className="service-card-link"
+                        href="#contact"
+                      >
+                        Learn more →
+                      </a>
+
+                    </div>
+                  </div>
+
+                </div>
+              </article>
+            </Reveal>
+          )
+        )}
+      </div>
+    </section>
+  );
+}
+
+========================================
+FIRST VISIT / PROCESS
+========================================
+import firstVisitBanner from "../assets/first-visit-sky.png";
+import { Reveal } from "./ui";
+
+
+const STEPS = [
+  {
+    number: "01",
+    label: "Reach out",
+    title: "Take the first step when you're ready",
+    text:
+      "Choose a convenient way to connect with MyndWorks and book your first session. If you're not sure which service is right for you, we'll help guide you in the right direction.",
+  },
+  {
+    number: "02",
+    label: "First session",
+    title: "Tell us what brings you here",
+    text:
+      "Your first session is a chance to talk through what you're experiencing, how you've been feeling and what you'd like support with. You don't need to prepare or have all the answers.",
+  },
+  {
+    number: "03",
+    label: "Tailored therapy",
+    title: "Therapy shaped around your needs",
+    text:
+      "There is no one-size-fits-all approach. Your therapist will shape the therapeutic process around your circumstances, goals and what feels most helpful for you.",
+  },
+  {
+    number: "04",
+    label: "Ongoing progress",
+    title: "Move forward one session at a time",
+    text:
+      "Meaningful change takes time. Each session creates space to build understanding, develop practical tools and work towards healthier ways of thinking, feeling and relating.",
+  },
+] as const;
+
+
+export function Process() {
+  return (
+    <section
+      id="first-visit"
+      className="process-section visit-cards-section"
+    >
+
+      {/* ===================================================
+          IMAGE BANNER
+          =================================================== */}
+
+      <Reveal>
+        <div className="visit-banner">
+
+          <img
+            className="visit-banner-image"
+            src={firstVisitBanner}
+            alt=""
+          />
+
+          <div
+            className="visit-banner-overlay"
+            aria-hidden="true"
+          />
+
+          <div className="visit-banner-content">
+
+            <div className="visit-banner-eyebrow">
+              <span
+                className="visit-banner-eyebrow-star"
+                aria-hidden="true"
+              >
+                ✳
+              </span>
+
+              <span>
+                Your first visit
+              </span>
+            </div>
+
+
+            <h2 className="visit-banner-heading">
+              Your journey,
+              <span>
+                one step at a time.
+              </span>
+            </h2>
+
+
+            <p className="visit-banner-copy">
+              Taking the first step towards better
+              mental wellbeing can feel big. We're
+              here to make it simple, supportive
+              and comfortable.
+            </p>
+
+          </div>
+
+        </div>
+      </Reveal>
+
+
+      {/* ===================================================
+          JOURNEY CARDS
+          =================================================== */}
+
+      <div className="visit-cards">
+
+        {STEPS.map((step, index) => (
+          <Reveal
+            key={step.label}
+            delay={index * 60}
+          >
+            <article className="visit-card">
+
+              <div className="visit-card-top">
+
+                <div className="visit-step-number">
+                  {step.number}
+                </div>
+
+
+                <span className="visit-card-tag">
+                  {step.label}
+                </span>
+
+              </div>
+
+
+              <div className="visit-card-content">
+
+                <h3>
+                  {step.title}
+                </h3>
+
+
+                <div className="visit-card-reveal">
+
+                  <div className="visit-card-reveal-inner">
+
+                    <p>
+                      {step.text}
+                    </p>
+
+
+                    <a
+                      href="#contact"
+                      className="visit-card-link"
+                    >
+                      Book a session →
+                    </a>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </article>
+          </Reveal>
+        ))}
+
+      </div>
+
+    </section>
+  );
+}
+
+========================================
+HOLISTIC — FULL FILE
+========================================
+import healthIcon from "../assets/health-icon.svg";
+import { Reveal } from "./ui";
+
+const CARE_ROLES = [
+  {
+    title: "Occupational Therapists & Social Workers",
+    text:
+      "Supporting daily functioning, relationships and the social environments that can influence wellbeing.",
+  },
+  {
+    title: "Speech Therapists & Audiologists",
+    text:
+      "Supporting communication, hearing and expression where these form part of a person's wider wellbeing.",
+  },
+  {
+    title: "Dietitians & Physiotherapists",
+    text:
+      "Supporting the physical side of wellbeing through nutrition, movement and healthy daily functioning.",
+  },
+  {
+    title: "Medical Doctors",
+    text:
+      "Helping assess and manage medical factors that may influence how someone thinks, feels and functions.",
+  },
+] as const;
+
+export function HolisticCare() {
+  return (
+    <section id="holistic-care" className="holistic-section">
+      <Reveal>
+        <div className="section-eyebrow">
+          Holistic care
+        </div>
+      </Reveal>
+
+      <div className="holistic-grid">
+        <Reveal className="holistic-intro">
+          <div>
+            <h2 className="holistic-heading">
+              Care that sees
+              <span> the whole person</span>
+            </h2>
+
+            <p className="holistic-lede">
+              Mental wellbeing can be influenced by psychological,
+              social and physical factors. In some situations,
+              support from more than one health discipline may form
+              part of a person's broader care journey.
+            </p>
+          </div>
+
+          <a className="holistic-link" href="#faq">
+            <span>Read the FAQ</span>
+            <span className="holistic-link-icon" aria-hidden="true">
+              ↗
+            </span>
+          </a>
+        </Reveal>
+
+        <div className="holistic-list">
+          {CARE_ROLES.map((role, index) => (
+            <Reveal key={role.title} delay={index * 80}>
+              <article className="holistic-card">
+                <div className="holistic-card-copy">
+                  <h3>{role.title}</h3>
+                  <p>{role.text}</p>
+                </div>
+
+                <div className="holistic-service-icon" aria-hidden="true">
+                  <span
+                    className="holistic-service-glyph"
+                    style={{
+                      WebkitMaskImage: `url(${healthIcon})`,
+                      maskImage: `url(${healthIcon})`,
+                    }}
+                  />
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+========================================
+FINAL DESIGN SYSTEM TAIL
+========================================
+
+  .site-header.is-hidden {
+    transform:
+      translateY(0) !important;
+
+    opacity:
+      1 !important;
+  }
+
+
+  .nav-shell,
+  .nav-shell.is-scrolled,
+  .site-header.is-hidden .nav-shell {
+    min-height:
+      48px !important;
+
+    padding:
+      4px
+      14px !important;
+
+    background:
+      rgba(248,250,251,.84) !important;
+
+    border-color:
+      rgba(255,255,255,.78) !important;
+
+    box-shadow:
+      0 10px 30px rgba(20,22,20,.055),
+      inset 0 1px 0 rgba(255,255,255,.62) !important;
+
+    backdrop-filter:
+      blur(26px)
+      saturate(135%) !important;
+
+    -webkit-backdrop-filter:
+      blur(26px)
+      saturate(135%) !important;
+  }
+
+
+  .header-brand {
+    gap:
+      8px !important;
+  }
+
+
+  .header-brand-mark {
+    width:
+      24px !important;
+
+    height:
+      24px !important;
+  }
+
+
+  .header-brand .wordmark {
+    font-size:
+      20px !important;
+
+    line-height:
+      1 !important;
+  }
+
+
+  .menu-toggle,
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  .menu-toggle:active,
+  .menu-toggle.is-open {
+    width:
+      38px !important;
+
+    height:
+      38px !important;
+
+    flex:
+      0 0 38px !important;
+
+    gap:
+      5px !important;
+  }
+
+
+  .menu-toggle-line {
+    width:
+      23px !important;
+
+    height:
+      2px !important;
+  }
+}
+
+
+/* =========================================================
+   DESKTOP — RIGHT-SIDE CONTENT ALIGNMENT
+
+   Holistic Care is the visual reference:
+   keep Stories and FAQ content contained on the right
+   instead of allowing them to stretch too far left.
+
+   Mobile/tablet layouts remain unchanged.
+   ========================================================= */
+
+:root {
+  --mw-side-content-width:
+    820px;
+}
+
+
+@media (min-width: 1024px) {
+
+  /* =======================================================
+     STORIES
+     ======================================================= */
+
+  #stories .story-card {
+    width:
+      100% !important;
+
+    max-width:
+      var(--mw-side-content-width) !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  /* =======================================================
+     FAQ
+     ======================================================= */
+
+  #faq .source-faq-list {
+    width:
+      100% !important;
+
+    max-width:
+      var(--mw-side-content-width) !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+}
+
+
+/* =========================================================
+   HOLISTIC CARE — FINAL DESKTOP CARD ALIGNMENT
+
+   Match the same right-side visual width used by
+   Stories and FAQ, but stack the Holistic cards
+   vertically so longer titles have proper breathing room.
+
+   Tablet and mobile remain unchanged.
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /* ---------------------------------------------------------
+     RIGHT CARD COLUMN
+
+     Target the actual container whose direct children
+     are the Holistic cards, regardless of its class name.
+     --------------------------------------------------------- */
+
+  #holistic-care :has(> .holistic-card) {
+    width:
+      100% !important;
+
+    max-width:
+      var(--mw-side-content-width) !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+
+    display:
+      grid !important;
+
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      14px !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     INDIVIDUAL CARDS
+
+     Wide horizontal cards rather than two narrow columns.
+     --------------------------------------------------------- */
+
+  #holistic-care .holistic-card {
+    width:
+      100% !important;
+
+    min-height:
+      132px !important;
+
+    height:
+      auto !important;
+
+    padding:
+      24px
+      28px !important;
+
+    box-sizing:
+      border-box !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     CARD TITLES
+
+     Give longer profession names enough width before
+     they approach the lotus icon.
+     --------------------------------------------------------- */
+
+  #holistic-care .holistic-card h3 {
+    max-width:
+      calc(100% - 72px) !important;
+
+    margin:
+      0 !important;
+
+    line-height:
+      1.08 !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     SUPPORTING COPY
+     --------------------------------------------------------- */
+
+  #holistic-care .holistic-card p {
+    max-width:
+      650px !important;
+
+    margin-top:
+      12px !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     LOTUS ICON
+
+     Keep it clearly separated from longer headings.
+     --------------------------------------------------------- */
+
+  #holistic-care .holistic-service-glyph {
+    flex:
+      0 0 auto !important;
+  }
+}
+
+
+/* =========================================================
+   STORIES + FAQ — FINAL HOLISTIC RIGHT-EDGE ALIGNMENT
+   ---------------------------------------------------------
+   Holistic Care remains untouched.
+
+   The right edge stays exactly where it is.
+   Stories and FAQ are inset slightly from the left so their
+   right-side content begins on the same visual line as the
+   Holistic Care cards.
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  :root {
+    --mw-holistic-right-inset:
+      clamp(76px, 7.5vw, 154px);
+  }
+
+
+  /* =======================================================
+     STORIES
+     ======================================================= */
+
+  #stories .story-card {
+    width:
+      calc(
+        100% - var(--mw-holistic-right-inset)
+      ) !important;
+
+    max-width:
+      none !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  /* =======================================================
+     FAQ
+     ======================================================= */
+
+  #faq .source-faq-list {
+    width:
+      calc(
+        100% - var(--mw-holistic-right-inset)
+      ) !important;
+
+    max-width:
+      none !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  #faq .source-faq-item,
+  #faq .source-faq-trigger {
+    width:
+      100% !important;
+
+    max-width:
+      none !important;
+  }
+
+}
+
+
+/* =========================================================
+   FINAL SIDE ALIGNMENT — FAQ IS THE REFERENCE
+   ---------------------------------------------------------
+   FAQ stays exactly as it is.
+
+   Holistic cards + Story testimonial move inward from
+   the LEFT only, while preserving their current right edge.
+
+   No typography, colours, card styling or section spacing
+   are changed.
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  :root {
+    --mw-match-faq-inset:
+      clamp(82px, 6.6vw, 108px);
+  }
+
+
+  /* =======================================================
+     HOLISTIC CARE
+     -------------------------------------------------------
+     Keep:
+     - existing 2 x 2 grid
+     - existing cards
+     - existing spacing
+     - existing icons
+
+     Only narrow the full card area from the left.
+     ======================================================= */
+
+  .holistic-section .holistic-list,
+  #holistic-care .holistic-list {
+    width:
+      calc(
+        100% - var(--mw-match-faq-inset)
+      ) !important;
+
+    max-width:
+      none !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  /* =======================================================
+     STORIES
+     -------------------------------------------------------
+     Same visual starting edge as FAQ.
+     Right edge remains unchanged.
+     ======================================================= */
+
+  #stories .story-card {
+    width:
+      calc(
+        100% - var(--mw-match-faq-inset)
+      ) !important;
+
+    max-width:
+      none !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+}
+
+
+
+/* =========================================================
+   STORIES — MATCH HOLISTIC RIGHT-SIDE CONTENT
+   ---------------------------------------------------------
+   FINAL DESKTOP ALIGNMENT
+
+   Do not touch:
+   - Holistic Care
+   - FAQ
+   - Story typography
+   - Story padding
+   - Story height
+   - Story right edge
+
+   Only narrow the Story card from the LEFT so its
+   starting edge matches the Holistic card group.
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  #stories .story-card {
+    width:
+      calc(
+        100% - clamp(190px, 14vw, 230px)
+      ) !important;
+
+    max-width:
+      none !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      0 !important;
+  }
+
+}
+
+
+========================================
+VITE CONFIG
+========================================
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [react()],
+  base: "/myndworks/",
+});
+========================================
+PUBLIC FILES
+========================================
+
+========================================
+SOURCE ASSETS
+========================================
+src/assets/about-hands.png
+src/assets/about-office.png
+src/assets/first-visit-banner.png
+src/assets/first-visit-sky.png
+src/assets/first-visit.png
+src/assets/health-icon.svg
+src/assets/myndworks-hero.png
+src/assets/myndworks-mark.svg
+src/assets/myndworksds-hero.png
+
+========================================
+ROOT DEPLOYMENT / CONFIG FILES
+========================================
