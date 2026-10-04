@@ -21,7 +21,7 @@ const FAQS = [
 
 export function Faq() {
   const [open, setOpen] =
-    useState<number | null>(0);
+    useState<number | null>(null);
 
   return (
     <section
@@ -105,7 +105,7 @@ export function Faq() {
                     className="source-faq-plus"
                     aria-hidden="true"
                   >
-                    +
+                    {isOpen ? "×" : "+"}
                   </span>
                 </button>
 

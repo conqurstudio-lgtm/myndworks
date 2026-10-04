@@ -2855,38 +2855,49 @@ button:focus-visible {
 /* === MYNDWORKS PREMIUM TEXT SYSTEM START === */
 
 /* =========================================================
-   MYNDWORKS — CHARCOAL TYPOGRAPHY SYSTEM
+   MYNDWORKS — FINAL PREMIUM CHARCOAL TEXT SYSTEM
    ---------------------------------------------------------
-   No pure black.
-   No washed-out pale grey.
+   Preserve:
+   - existing font families
+   - font sizes
+   - layouts
+   - cards
+   - spacing
+   - backgrounds
+   - responsive structure
 
-   Keep the existing font families and typography sizes.
-   Refine only colour hierarchy and readability.
+   Refine only text colour hierarchy and readability.
    ========================================================= */
 
 :root {
+  /* Main editorial headings */
   --mw-text-heading:
-    #242825;
+    #252925;
 
+  /* Grey/charcoal second line in large headings */
   --mw-text-heading-soft:
-    #4f554f;
+    #7a7f7a;
 
+  /* Main paragraphs */
   --mw-text-body:
-    #4e544f;
+    #4f5550;
 
+  /* Card descriptions / FAQ answers */
   --mw-text-support:
-    #585e59;
+    #585f5a;
 
+  /* Eyebrows, pills, small supporting labels */
   --mw-text-label:
-    #777d78;
+    #6f756f;
 
+  /* True metadata only */
   --mw-text-meta:
-    #858a86;
+    #828782;
 }
 
 
 /* =========================================================
-   PRIMARY EDITORIAL HEADINGS
+   LARGE EDITORIAL HEADINGS
    ========================================================= */
 
 #about h2,
@@ -2894,29 +2905,23 @@ button:focus-visible {
 #first-visit h2,
 #holistic-care h2,
 #stories h2,
-#faq h2,
-#contact h2,
-
-#services .service-card h3,
-#first-visit h3,
-#holistic-care .holistic-card h3,
-#faq .source-faq-trigger {
+#faq h2 {
   color:
     var(--mw-text-heading) !important;
 }
 
 
 /* =========================================================
-   SOFT SECOND LINE IN LARGE HEADINGS
-
-   Still visibly secondary, but much closer to the main
-   charcoal than the previous pale grey.
+   MUTED SECOND LINE OF LARGE HEADINGS
+   ---------------------------------------------------------
+   Still creates the site's two-tone editorial look,
+   but no longer feels faded.
    ========================================================= */
 
 #about .about-clean-heading span,
 #about .about-heading span,
 
-#services .serces-heading span,
+#services .services-heading span,
 
 #first-visit .process-heading span,
 #first-visit .visit-heading span,
@@ -2934,6 +2939,9 @@ button:focus-visible {
 
 /* =========================================================
    ABOUT
+   ---------------------------------------------------------
+   This copy explains who MyndWorks is, so it should be
+   very comfortable to read.
    ========================================================= */
 
 #about .about-clean-copy p,
@@ -2946,12 +2954,23 @@ button:focus-visible {
     400 !important;
 
   line-height:
-    1.64 !important;
+    1.66 !important;
 }
 
 
 /* =========================================================
-   SERVICES
+   SERVICES — CARD HEADINGS
+   ========================================================= */
+
+#services .service-card h3,
+#services .service-card-title {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+/* =========================================================
+   SERVICES — DESCRIPTIONS + BULLETS
    ========================================================= */
 
 #services .service-card p,
@@ -2965,20 +2984,45 @@ button:focus-visible {
     400 !important;
 
   line-height:
-    1.55 !important;
+    1.58 !important;
 }
 
+
+/* Service pills / small category labels */
 
 #services .service-card-label,
 #services .service-tag,
 #services .service-pill {
   color:
     var(--mw-text-label) !important;
+
+  font-weight:
+    500 !important;
+}
+
+
+/* Keep list bullets slightly more defined */
+
+#services .service-card li::marker {
+  color:
+    #4d5f57 !important;
 }
 
 
 /* =========================================================
-   YOUR FIRST VISIT
+   YOUR FIRST VISIT — CARD TITLES
+   ========================================================= */
+
+#first-visit .visit-card h3,
+#first-visit .process-card h3,
+#first-visit .visit-card-title {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+/* =========================================================
+   YOUR FIRST VISIT — EXPLANATORY COPY
    ========================================================= */
 
 #first-visit .visit-card p,
@@ -2993,45 +3037,75 @@ button:focus-visible {
     400 !important;
 
   line-height:
-    1.58 !important;
+    1.6 !important;
 }
 
+
+/* Step/category labels */
 
 #first-visit .visit-card-label,
 #first-visit .visit-step-label,
 #first-visit .process-card-label {
   color:
     var(--mw-text-label) !important;
+
+  font-weight:
+    500 !important;
 }
 
 
 /* =========================================================
-   HOLISTIC CARE
+   HOLISTIC CARE — INTRO
    ========================================================= */
 
 #holistic-care .holistic-lede {
   color:
     var(--mw-text-body) !important;
 
+  font-weight:
+    400 !important;
+
   line-height:
-    1.64 !important;
+    1.66 !important;
 }
 
+
+/* =========================================================
+   HOLISTIC CARE — CARD TITLES
+   ========================================================= */
+
+#holistic-care .holistic-card h3 {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+/* =========================================================
+   HOLISTIC CARE — CARD COPY
+   ========================================================= */
 
 #holistic-care .holistic-card p {
   color:
     var(--mw-text-support) !important;
 
+  font-weight:
+    400 !important;
+
   line-height:
-    1.55 !important;
+    1.58 !important;
 }
 
 
 /* =========================================================
    STORIES
+   ---------------------------------------------------------
+   Testimonial itself should feel strong and readable.
+   Only author metadata remains quiet.
    ========================================================= */
 
-#stories .story-card {
+#stories .story-card,
+#stories .story-card p,
+#stories .story-quote {
   color:
     var(--mw-text-heading) !important;
 }
@@ -3053,7 +3127,7 @@ button:focus-visible {
 
 
 /* =========================================================
-   FAQ
+   FAQ — INTRO
    ========================================================= */
 
 #faq .source-faq-copy,
@@ -3061,10 +3135,30 @@ button:focus-visible {
   color:
     var(--mw-text-body) !important;
 
+  font-weight:
+    400 !important;
+
   line-height:
-    1.62 !important;
+    1.64 !important;
 }
 
+
+/* =========================================================
+   FAQ — QUESTIONS
+   ========================================================= */
+
+#faq .source-faq-trigger,
+#faq .faq-trigger {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+/* =========================================================
+   FAQ — ANSWERS
+   ---------------------------------------------------------
+   Long answers should be effortless to read.
+   ========================================================= */
 
 #faq .source-faq-answer,
 #faq .source-faq-answer p,
@@ -3073,40 +3167,27 @@ button:focus-visible {
   color:
     var(--mw-text-support) !important;
 
+  font-weight:
+    400 !important;
+
   line-height:
     1.68 !important;
 }
 
 
 /* =========================================================
-   SECTION LABELS / EYEBROWS
+   SECTION EYEBROWS
+   ---------------------------------------------------------
+   Still restrained, but no longer barely visible.
    ========================================================= */
 
 .section-eyebrow,
-#faq .source-faq-eyebrow,
-#contact .mw-contact-image-eyebrow {
+#faq .source-faq-eyebrow {
   color:
     var(--mw-text-label) !important;
 
   font-weight:
     500 !important;
-}
-
-
-/* =========================================================
-   BUTTON / LINK TEXT
-
-   Avoid true black here too.
-   ========================================================= */
-
-#about a,
-#services a,
-#first-visit a,
-#holistic-care a,
-#stories button,
-#faq button {
-  color:
-    var(--mw-text-heading) !important;
 }
 
 
@@ -3130,6 +3211,9 @@ button:focus-visible {
 
 /* =========================================================
    MOBILE
+   ---------------------------------------------------------
+   Preserve the same colour hierarchy.
+   Give body copy a little extra breathing room.
    ========================================================= */
 
 @media (max-width: 699px) {
@@ -3140,6 +3224,7 @@ button:focus-visible {
   #services .service-card li,
 
   #first-visit .visit-card p,
+  #first-visit .process-card p,
 
   #holistic-care .holistic-lede,
   #holistic-care .holistic-card p,
@@ -3148,9 +3233,1322 @@ button:focus-visible {
   #faq .source-faq-answer,
   #faq .source-faq-answer p {
     line-height:
-      1.64 !important;
+      1.65 !important;
   }
 
 }
 
 /* === MYNDWORKS PREMIUM TEXT SYSTEM END === */
+
+/* === MYNDWORKS TYPOGRAPHY SPECIFICITY FIX START === */
+
+/* =========================================================
+   FINAL TYPOGRAPHY SPECIFICITY LAYER
+   ---------------------------------------------------------
+   Purpose:
+   Make the approved charcoal typography system actually
+   override older component-specific !important rules.
+
+   NO changes to:
+   - font family
+   - font sizes
+   - layout
+   - spacing
+   - card design
+   - images
+   - section backgrounds
+   - hero typography
+   - contact dark-card typography
+   ========================================================= */
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+#about[id="about"].about-clean .about-clean-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#about[id="about"].about-clean .about-clean-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#about[id="about"].about-clean .about-clean-description,
+#about[id="about"].about-clean .about-clean-copy p {
+  color:
+    var(--mw-text-body) !important;
+}
+
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+#services[id="services"] .services-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#services[id="services"] .services-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#services[id="services"] .service-card h3 {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#services[id="services"] .service-card p,
+#services[id="services"] .service-card li,
+#services[id="services"] .service-card-copy,
+#services[id="services"] .service-card-description {
+  color:
+    var(--mw-text-support) !important;
+}
+
+
+/* =========================================================
+   YOUR FIRST VISIT
+   ========================================================= */
+
+#first-visit[id="first-visit"] .process-heading,
+#first-visit[id="first-visit"] .visit-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#first-visit[id="first-visit"] .process-heading span,
+#first-visit[id="first-visit"] .visit-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#first-visit[id="first-visit"] .visit-card h3,
+#first-visit[id="first-visit"] .process-card h3 {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#first-visit[id="first-visit"] .visit-card p,
+#first-visit[id="first-visit"] .process-card p,
+#first-visit[id="first-visit"] .visit-card-copy,
+#first-visit[id="first-visit"] .visit-step-copy,
+#first-visit[id="first-visit"] .process-card-copy {
+  color:
+    var(--mw-text-support) !important;
+}
+
+
+/* =========================================================
+   HOLISTIC CARE
+   ========================================================= */
+
+#holistic-care[id="holistic-care"].holistic-section
+.holistic-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#holistic-care[id="holistic-care"].holistic-section
+.holistic-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#holistic-care[id="holistic-care"].holistic-section
+.holistic-lede {
+  color:
+    var(--mw-text-body) !important;
+}
+
+
+#holistic-care[id="holistic-care"].holistic-section
+.holistic-card h3 {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#holistic-care[id="holistic-care"].holistic-section
+.holistic-card p {
+  color:
+    var(--mw-text-support) !important;
+}
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+#stories[id="stories"] .stories-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#stories[id="stories"] .stories-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#stories[id="stories"] .story-card,
+#stories[id="stories"] .story-card p,
+#stories[id="stories"] .story-quote {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+#faq[id="faq"].source-faq-section
+.source-faq-heading {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#faq[id="faq"].source-faq-section
+.source-faq-heading span {
+  color:
+    var(--mw-text-heading-soft) !important;
+}
+
+
+#faq[id="faq"].source-faq-section
+.source-faq-copy {
+  color:
+    var(--mw-text-body) !important;
+}
+
+
+#faq[id="faq"].source-faq-section
+.source-faq-trigger {
+  color:
+    var(--mw-text-heading) !important;
+}
+
+
+#faq[id="faq"].source-faq-section
+.source-faq-answer,
+#faq[id="faq"].source-faq-section
+.source-faq-answer p {
+  color:
+    var(--mw-text-support) !important;
+}
+
+
+/* =========================================================
+   EYEBROWS / SMALL SECTION LABELS
+   ========================================================= */
+
+body .section-eyebrow {
+  color:
+    var(--mw-text-label) !important;
+}
+
+/* === MYNDWORKS TYPOGRAPHY SPECIFICITY FIX END === */
+
+/* === MYNDWORKS 390 MOBILE RHYTHM START === */
+
+/* =========================================================
+   MYNDWORKS — MOBILE RHYTHM PASS
+   ---------------------------------------------------------
+   Target:
+   phones / mobile layout only
+
+   Preserve:
+   - desktop
+   - tablet
+   - hero design
+   - header design
+   - approved typography colours
+   - card visual language
+   - First Visit swipe carousel
+   - FAQ typography
+   - Contact photography
+
+   Goals:
+   - consistent section breathing room
+   - remove accidental double spacing
+   - slightly tighter cards
+   - shorter Stories section
+   - cleaner Contact / Footer ending
+   ========================================================= */
+
+
+@media (max-width: 699px) {
+
+  :root {
+    --mw-mobile-section-y:
+      68px;
+
+    --mw-mobile-label-gap:
+      30px;
+
+    --mw-mobile-card-gap:
+      16px;
+  }
+
+
+  /* =======================================================
+     1. MASTER SECTION RHYTHM
+
+     Every major editorial section now starts and ends
+     with the same 68px breathing room.
+
+     Hero is deliberately excluded.
+     Footer is handled independently below.
+     ======================================================= */
+
+  #about.about-clean,
+  #services.services-section,
+  #first-visit.visit-cards-section,
+  #holistic-care.holistic-section,
+  #stories.stories-section,
+  #faq.source-faq-section {
+    padding-top:
+      var(--mw-mobile-section-y) !important;
+
+    padding-bottom:
+      var(--mw-mobile-section-y) !important;
+  }
+
+
+  /*
+     Contact owns some styles inside Contact.tsx,
+     therefore this selector is intentionally stronger.
+  */
+
+  body
+  #contact.mw-contact-image-section {
+    padding-top:
+      var(--mw-mobile-section-y) !important;
+
+    padding-bottom:
+      var(--mw-mobile-section-y) !important;
+  }
+
+
+  /* =======================================================
+     2. SECTION LABEL RHYTHM
+
+     Some sections had both:
+     - margin beneath eyebrow
+     AND
+     - margin above content
+
+     That created oversized mobile gaps.
+
+     Use the content margin as the single source of truth.
+     ======================================================= */
+
+  #about .section-eyebrow,
+  #services .section-eyebrow,
+  #holistic-care .section-eyebrow,
+  #stories .section-eyebrow,
+  #faq .source-faq-eyebrow {
+    margin-bottom:
+      0 !important;
+  }
+
+
+  #about .about-clean-grid,
+  #services .services-heading-row,
+  #holistic-care .holistic-grid,
+  #stories .stories-grid,
+  #faq .source-faq-grid {
+    margin-top:
+      var(--mw-mobile-label-gap) !important;
+  }
+
+
+  /* =======================================================
+     3. ABOUT
+
+     Keep:
+     - heading
+     - paragraph typography
+     - CTA
+     - image crop
+
+     Only improve relationships between them.
+     ======================================================= */
+
+  #about.about-clean
+  .about-clean-grid {
+    gap:
+      36px !important;
+  }
+
+
+  #about.about-clean
+  .about-clean-description {
+    margin-top:
+      28px !important;
+  }
+
+
+  #about.about-clean
+  .about-clean-cta {
+    margin-top:
+      24px !important;
+  }
+
+
+  /* =======================================================
+     4. SERVICES
+
+     Cards remain full-width vertical cards.
+
+     Remove old forced mobile card height and let the
+     content determine height naturally.
+     ======================================================= */
+
+  #services
+  .services-grid {
+    margin-top:
+      34px !important;
+
+    gap:
+      var(--mw-mobile-card-gap) !important;
+  }
+
+
+  #services
+  .service-card {
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+
+    padding:
+      22px
+      20px
+      22px !important;
+  }
+
+
+  /* =======================================================
+     5. YOUR FIRST VISIT
+
+     IMPORTANT:
+     Preserve the horizontal carousel.
+
+     We only:
+     - normalise section padding
+     - bring cards slightly closer to banner
+     - reduce excessive internal blank space
+     ======================================================= */
+
+  #first-visit.visit-cards-section {
+    padding-left:
+      20px !important;
+
+    padding-right:
+      20px !important;
+  }
+
+
+  #first-visit
+  .visit-cards {
+    margin-top:
+      34px !important;
+
+    gap:
+      14px !important;
+  }
+
+
+  #first-visit
+  .visit-card-content {
+    margin-top:
+      32px !important;
+  }
+
+
+  /*
+     Explicitly preserve the approved mobile carousel
+     width / preview behaviour.
+  */
+
+  #first-visit
+  .visit-cards > * {
+    flex:
+      0 0 86% !important;
+
+    width:
+      86% !important;
+
+    min-width:
+      86% !important;
+
+    scroll-snap-align:
+      start !important;
+  }
+
+
+  /* =======================================================
+     6. HOLISTIC CARE
+
+     This section already works very well on mobile.
+
+     Only tighten:
+     - heading/copy/CTA relationships
+     - intro → cards
+     - card → card
+     ======================================================= */
+
+  #holistic-care
+  .holistic-grid {
+    gap:
+      32px !important;
+  }
+
+
+  #holistic-care
+  .holistic-lede {
+    margin-top:
+      26px !important;
+  }
+
+
+  #holistic-care
+  .holistic-link {
+    margin-top:
+      24px !important;
+  }
+
+
+  #holistic-care
+  .holistic-list {
+    gap:
+      14px !important;
+  }
+
+
+  #holistic-care
+  .holistic-card {
+    min-height:
+      0 !important;
+
+    padding:
+      22px
+      20px !important;
+  }
+
+
+  /* =======================================================
+     7. STORIES
+
+     This is the biggest mobile refinement.
+
+     The testimonial remains important, but should not
+     consume nearly an entire phone screen by itself.
+     ======================================================= */
+
+  #stories
+  .stories-grid {
+    gap:
+      28px !important;
+  }
+
+
+  #stories
+  .story-card {
+    min-height:
+      0 !important;
+
+    height:
+      auto !important;
+
+    padding:
+      22px
+      24px
+      24px !important;
+  }
+
+
+  #stories
+  .story-quote {
+    font-size:
+      21px !important;
+
+    line-height:
+      1.32 !important;
+
+    letter-spacing:
+      -0.026em !important;
+  }
+
+
+  #stories
+  .story-footer {
+    margin-top:
+      24px !important;
+  }
+
+
+  #stories
+  .stories-controls-mobile {
+    margin-top:
+      18px !important;
+  }
+
+
+  /* =======================================================
+     8. FAQ
+
+     FAQ already reads very well at 390.
+
+     Preserve typography and accordion dimensions.
+     Only normalise the section rhythm.
+     ======================================================= */
+
+  #faq
+  .source-faq-grid {
+    margin-top:
+      var(--mw-mobile-label-gap) !important;
+  }
+
+
+  /* =======================================================
+     9. BOOK A SESSION
+
+     Keep:
+     - large dark card
+     - photo
+     - full-width buttons
+     - contact rows
+
+     Slightly reduce vertical excess only.
+     ======================================================= */
+
+  body
+  #contact
+  .mw-contact-image-eyebrow {
+    margin-bottom:
+      30px !important;
+  }
+
+
+  body
+  #contact
+  .mw-contact-image-copy-side {
+    padding:
+      32px
+      24px
+      34px !important;
+  }
+
+
+  body
+  #contact
+  .mw-contact-image-actions {
+    margin-top:
+      24px !important;
+  }
+
+
+  body
+  #contact
+  .mw-contact-image-details {
+    margin-top:
+      20px !important;
+  }
+
+
+  /*
+     Keep enough height for the therapy photo to breathe.
+  */
+
+  body
+  #contact
+  .mw-contact-image-photo-side {
+    min-height:
+      285px !important;
+  }
+
+
+  /* =======================================================
+     10. FOOTER
+
+     Keep the current single-column mobile architecture.
+
+     Reduce only the oversized gaps between groups.
+     ======================================================= */
+
+  body
+  .site-footer {
+    padding:
+      44px
+      20px
+      24px !important;
+  }
+
+
+  body
+  .site-footer
+  .footer-top {
+    grid-template-columns:
+      1fr !important;
+
+    gap:
+      34px !important;
+
+    padding-bottom:
+      28px !important;
+  }
+
+
+  body
+  .site-footer
+  .footer-intro {
+    margin-top:
+      20px !important;
+  }
+
+
+  body
+  .site-footer
+  .footer-label {
+    display:
+      block !important;
+
+    margin-bottom:
+      14px !important;
+  }
+
+
+  body
+  .site-footer
+  .footer-links {
+    gap:
+      12px !important;
+  }
+
+
+  body
+  .site-footer
+  .footer-meta {
+    margin-top:
+      18px !important;
+
+    padding-top:
+      18px !important;
+
+    gap:
+      10px !important;
+  }
+
+}
+
+
+/* =========================================================
+   VERY NARROW PHONES
+
+   Only tiny refinements.
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+  #stories
+  .story-quote {
+    font-size:
+      20px !important;
+  }
+
+
+  #holistic-care
+  .holistic-card {
+    padding:
+      21px
+      20px !important;
+  }
+
+
+  body
+  #contact
+  .mw-contact-image-copy-side {
+    padding:
+      30px
+      24px
+      32px !important;
+  }
+
+}
+
+/* === MYNDWORKS 390 MOBILE RHYTHM END === */
+
+/* === MYNDWORKS MOBILE SECTION BOUNDARIES START === */
+
+/* =========================================================
+   MYNDWORKS — MOBILE SECTION BOUNDARY RHYTHM
+   ---------------------------------------------------------
+   This adjusts ONLY the space between major sections.
+
+   It does NOT change:
+   - typography
+   - card spacing
+   - card sizes
+   - headings
+   - buttons
+   - images
+   - carousel behaviour
+   - FAQ layout
+   - desktop
+   - tablet
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  /* =======================================================
+     HERO → ABOUT
+
+     Keep a little more breathing room after the hero.
+     ======================================================= */
+
+  #about.about-clean {
+    padding-top:
+      60px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     ABOUT → SERVICES
+     ======================================================= */
+
+  #services.services-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     SERVICES → FIRST VISIT
+     ======================================================= */
+
+  #first-visit.visit-cards-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     FIRST VISIT → HOLISTIC
+     ======================================================= */
+
+  #holistic-care.holistic-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     HOLISTIC → STORIES
+     ======================================================= */
+
+  #stories.stories-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     STORIES → FAQ
+     ======================================================= */
+
+  #faq.source-faq-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* =======================================================
+     FAQ → BOOK A SESSION
+     ======================================================= */
+
+  body
+  #contact.mw-contact-image-section {
+    padding-top:
+      44px !important;
+
+    padding-bottom:
+      52px !important;
+  }
+
+}
+
+/* === MYNDWORKS MOBILE SECTION BOUNDARIES END === */
+
+/* === FIRST VISIT MOBILE BOTTOM GAP FIX START === */
+
+@media (max-width: 699px) {
+
+  /*
+     The visible cards are around 310px high,
+     but older carousel/reveal rules can leave a taller
+     reserved wrapper beneath them.
+
+     Collapse only that unused vertical space.
+  */
+
+  #first-visit.visit-cards-section {
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+
+    max-height:
+      none !important;
+
+    padding-bottom:
+      0 !important;
+  }
+
+
+  #first-visit .visit-cards {
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+
+    max-height:
+      none !important;
+
+    margin-bottom:
+      0 !important;
+
+    padding-bottom:
+      0 !important;
+
+    align-items:
+      flex-start !important;
+  }
+
+
+  /*
+     Keep slide wrapper and visible card at the same height.
+     This prevents an invisible taller Reveal wrapper from
+     creating blank space below the carousel.
+  */
+
+  #first-visit .visit-cards > * {
+    height:
+      310px !important;
+
+    min-height:
+      310px !important;
+
+    max-height:
+      310px !important;
+
+    margin-bottom:
+      0 !important;
+  }
+
+
+  #first-visit .visit-card,
+  #first-visit .visit-card.is-active {
+    height:
+      310px !important;
+
+    min-height:
+      310px !important;
+
+    max-height:
+      310px !important;
+
+    margin-bottom:
+      0 !important;
+  }
+
+}
+
+/* === FIRST VISIT MOBILE BOTTOM GAP FIX END === */
+
+/* === ABOUT TO SERVICES MOBILE GAP FIX START === */
+
+@media (max-width: 699px) {
+
+  /*
+     Match the successful First Visit → Holistic rhythm.
+
+     About owns no extra bottom gap.
+     Services owns the transition space.
+  */
+
+  #about.about-clean {
+    padding-bottom:
+      0 !important;
+  }
+
+
+  #services.services-section {
+    padding-top:
+      44px !important;
+  }
+
+}
+
+/* === ABOUT TO SERVICES MOBILE GAP FIX END === */
+
+/* === MYNDWORKS MOBILE LOWER SECTION RHYTHM START === */
+
+/* =========================================================
+   MOBILE — LOWER PAGE SECTION BOUNDARIES
+   ---------------------------------------------------------
+   Match the approved:
+   FIRST VISIT → HOLISTIC
+   spacing rhythm.
+
+   Only section-to-section spacing changes.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  /* =======================================================
+     HOLISTIC → STORIES
+     ======================================================= */
+
+  #holistic-care.holistic-section {
+    padding-bottom:
+      0 !important;
+  }
+
+  #stories.stories-section {
+    padding-top:
+      44px !important;
+  }
+
+
+  /* =======================================================
+     STORIES → FAQ
+     ======================================================= */
+
+  #stories.stories-section {
+    padding-bottom:
+      0 !important;
+  }
+
+  #faq.source-faq-section {
+    padding-top:
+      44px !important;
+  }
+
+}
+
+/* === MYNDWORKS MOBILE LOWER SECTION RHYTHM END === */
+
+/* === MYNDWORKS FAQ MINIMAL CONTROLS START === */
+
+/* =========================================================
+   FAQ — MINIMAL + / × CONTROL
+   ---------------------------------------------------------
+   No circle.
+   No pill.
+   No filled background.
+
+   Closed:
+   +
+
+   Open:
+   rotated + = ×
+   ========================================================= */
+
+#faq .source-faq-plus {
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  flex:
+    0 0 auto !important;
+
+  width:
+    auto !important;
+
+  min-width:
+    24px !important;
+
+  height:
+    auto !important;
+
+  min-height:
+    24px !important;
+
+  padding:
+    0 !important;
+
+  margin:
+    0 !important;
+
+  border:
+    0 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  box-shadow:
+    none !important;
+
+  color:
+    var(--mw-text-heading, #252925) !important;
+
+  font-size:
+    26px !important;
+
+  font-weight:
+    400 !important;
+
+  line-height:
+    1 !important;
+
+  transform:
+    rotate(0deg) !important;
+
+  transition:
+    transform .22s ease,
+    color .22s ease !important;
+}
+
+
+/* Open item — same plus rotates into an × */
+
+#faq .source-faq-item.is-open
+.source-faq-plus {
+  transform:
+    rotate(45deg) !important;
+
+  color:
+    #00b9f3 !important;
+}
+
+
+/* Keep the question row balanced now that
+   the control no longer has a large circle */
+
+#faq .source-faq-trigger {
+  gap:
+    24px !important;
+}
+
+
+/* Mobile */
+
+@media (max-width: 699px) {
+
+  #faq .source-faq-plus {
+    min-width:
+      22px !important;
+
+    font-size:
+      25px !important;
+  }
+
+  #faq .source-faq-trigger {
+    gap:
+      18px !important;
+  }
+
+}
+
+/* === MYNDWORKS FAQ MINIMAL CONTROLS END === */
+
+/* === MYNDWORKS FAQ PLAIN ICON FINAL START === */
+
+/* =========================================================
+   FAQ — FINAL PLAIN + / × CONTROL
+
+   Closed = +
+   Open   = ×
+
+   No:
+   - blue
+   - circle
+   - square
+   - diamond
+   - background
+   - rotation
+   ========================================================= */
+
+#faq .source-faq-plus,
+#faq .source-faq-item.is-open .source-faq-plus {
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  flex:
+    0 0 auto !important;
+
+  width:
+    28px !important;
+
+  min-width:
+    28px !important;
+
+  height:
+    28px !important;
+
+  min-height:
+    28px !important;
+
+  padding:
+    0 !important;
+
+  margin:
+    0 !important;
+
+  border:
+    0 !important;
+
+  outline:
+    0 !important;
+
+  border-radius:
+    0 !important;
+
+  background:
+    transparent !important;
+
+  background-color:
+    transparent !important;
+
+  background-image:
+    none !important;
+
+  box-shadow:
+    none !important;
+
+  color:
+    #252925 !important;
+
+  font-size:
+    30px !important;
+
+  font-weight:
+    300 !important;
+
+  line-height:
+    1 !important;
+
+  transform:
+    none !important;
+
+  rotate:
+    none !important;
+
+  transition:
+    none !important;
+}
+
+
+/* Kill any older decorative shapes */
+
+#faq .source-faq-plus::before,
+#faq .source-faq-plus::after,
+#faq .source-faq-item.is-open
+.source-faq-plus::before,
+#faq .source-faq-item.is-open
+.source-faq-plus::after {
+  content:
+    none !important;
+
+  display:
+    none !important;
+
+  background:
+    transparent !important;
+
+  border:
+    0 !important;
+}
+
+
+/* =========================================================
+   MOBILE — FAQ BACKGROUND TRANSITION
+
+   The FAQ changes to a different section background,
+   so give it a little more entrance breathing room than
+   the normal 44px boundary.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #faq.source-faq-section {
+    padding-top:
+      56px !important;
+  }
+
+
+  #faq .source-faq-plus,
+  #faq .source-faq-item.is-open .source-faq-plus {
+    width:
+      26px !important;
+
+    min-width:
+      26px !important;
+
+    height:
+      26px !important;
+
+    min-height:
+      26px !important;
+
+    font-size:
+      28px !important;
+  }
+
+}
+
+/* === MYNDWORKS FAQ PLAIN ICON FINAL END === */

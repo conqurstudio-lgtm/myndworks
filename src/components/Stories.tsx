@@ -4,23 +4,28 @@ import { Reveal } from "./ui";
 const STORIES = [
   {
     name: "Thandiwe M",
-    text: "MyndWorks has been a beacon of support on my mental health journey. The individual therapy sessions provided a safe space for self-reflection, and the virtual option made it incredibly convenient. The holistic approach, including family and couples therapy, truly sets them apart.",
+    text:
+      "MyndWorks has been a steady source of support on my mental health journey. The sessions created a safe space for reflection, while the virtual option made support easy to access. Their holistic approach truly sets them apart.",
   },
   {
     name: "Jabulani S",
-    text: "As someone who values both traditional and virtual options, MyndWorks exceeded my expectations. The in-person sessions felt warm and comforting, while virtual assessments provided a flexible solution for my busy schedule.",
+    text:
+      "MyndWorks exceeded my expectations. The in-person sessions felt warm and comfortable, while the virtual option gave me the flexibility I needed. Having both choices made support much easier around my schedule.",
   },
   {
     name: "Kira Brooks",
-    text: "The comprehensive approach, including medico-legal assessments, shows their commitment to addressing mental health from all angles. The therapists are not only highly skilled but also compassionate.",
+    text:
+      "The comprehensive approach, including medico-legal assessments, showed me that MyndWorks considers mental health from different angles. The therapists were highly skilled and compassionate throughout.",
   },
   {
     name: "John D",
-    text: "MyndWorks has been instrumental in fostering positive change in my life. The availability of both in-person and virtual sessions made it easy to prioritise my wellbeing.",
+    text:
+      "MyndWorks has helped me make positive changes in my life. Having both in-person and virtual sessions made it much easier to prioritise my wellbeing and keep support accessible.",
   },
   {
     name: "Lerato M",
-    text: "The family and couples therapy sessions have strengthened my relationships, and the convenience of virtual sessions has made therapy accessible.",
+    text:
+      "Family and couples therapy helped strengthen my relationships, while the convenience of virtual sessions made therapy much more accessible.",
   },
 ] as const;
 
@@ -31,18 +36,25 @@ export function Stories() {
 
   const previous = () => {
     setActive((current) =>
-      current === 0 ? STORIES.length - 1 : current - 1
+      current === 0
+        ? STORIES.length - 1
+        : current - 1
     );
   };
 
   const next = () => {
     setActive((current) =>
-      current === STORIES.length - 1 ? 0 : current + 1
+      current === STORIES.length - 1
+        ? 0
+        : current + 1
     );
   };
 
   return (
-    <section id="stories" className="stories-section">
+    <section
+      id="stories"
+      className="stories-section"
+    >
       <Reveal>
         <div className="section-eyebrow">
           Stories
@@ -100,8 +112,13 @@ export function Stories() {
                 </span>
 
                 <div>
-                  <strong>{story.name}</strong>
-                  <span>MyndWorks client</span>
+                  <strong>
+                    {story.name}
+                  </strong>
+
+                  <span>
+                    MyndWorks client
+                  </span>
                 </div>
               </div>
 
@@ -109,19 +126,23 @@ export function Stories() {
                 className="story-progress"
                 aria-label="Story navigation"
               >
-                {STORIES.map((item, index) => (
-                  <button
-                    key={item.name}
-                    type="button"
-                    className={
-                      index === active
-                        ? "story-dot is-active"
-                        : "story-dot"
-                    }
-                    onClick={() => setActive(index)}
-                    aria-label={`View story ${index + 1}`}
-                  />
-                ))}
+                {STORIES.map(
+                  (item, index) => (
+                    <button
+                      key={item.name}
+                      type="button"
+                      className={
+                        index === active
+                          ? "story-dot is-active"
+                          : "story-dot"
+                      }
+                      onClick={() =>
+                        setActive(index)
+                      }
+                      aria-label={`View story ${index + 1}`}
+                    />
+                  )
+                )}
               </div>
             </div>
           </article>

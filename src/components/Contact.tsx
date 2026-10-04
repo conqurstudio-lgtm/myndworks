@@ -1466,15 +1466,6 @@ export function Contact() {
                 </button>
 
 
-                <a
-                  className="mw-contact-image-secondary"
-                  href={PRIMARY_EMAIL_URL}
-                >
-                  Email MyndWorks
-                  <span aria-hidden="true">
-                    ↗
-                  </span>
-                </a>
 
               </div>
 
