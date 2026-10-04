@@ -1,0 +1,683 @@
+/* =========================================================
+   MYNDWORKS DESIGN SYSTEM
+
+   Approved shared rules:
+   - section rhythm
+   - content rails
+   - editorial typography
+   - primary CTA sizing
+
+   Card internals intentionally remain in legacy CSS
+   until the final cleanup phase.
+   ========================================================= */
+
+/* =========================================================
+   MYNDWORKS — SHARED PAGE RHYTHM
+   Phase 2A
+
+   One consistent outer section rhythm.
+   Internal component layouts remain untouched.
+   ========================================================= */
+
+:root {
+  --mw-section-y: 72px;
+  --mw-section-y-tablet: 64px;
+  --mw-section-y-mobile: 52px;
+
+  --mw-content-gap: 38px;
+  --mw-content-gap-tablet: 34px;
+  --mw-content-gap-mobile: 28px;
+}
+
+
+/* =========================================================
+   DESKTOP — EQUAL OUTER SECTION SPACING
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  #about.about-clean,
+  #services.services-section,
+  #first-visit.visit-cards-section,
+  #holistic-care.holistic-section,
+  #stories.stories-section,
+  #faq.source-faq-section,
+  #contact.contact-section {
+    padding-top:
+      var(--mw-section-y) !important;
+
+    padding-bottom:
+      var(--mw-section-y) !important;
+  }
+
+
+  /* Who we are → About content */
+
+  #about.about-clean .about-clean-grid {
+    margin-top:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* Services label → heading */
+
+  #services .services-heading-row {
+    margin-top:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* Services heading → cards */
+
+  #services .services-grid {
+    margin-top:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* Holistic label → content */
+
+  #holistic-care .section-eyebrow {
+    margin-bottom:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* Stories label → content */
+
+  #stories .stories-grid {
+    margin-top:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* FAQ label → content */
+
+  #faq .source-faq-grid {
+    margin-top:
+      var(--mw-content-gap) !important;
+  }
+
+
+  /* Book a session label → dark contact card */
+
+  #contact .section-eyebrow {
+    margin-bottom:
+      var(--mw-content-gap) !important;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 700px) and (max-width: 1023px) {
+
+  #about.about-clean,
+  #services.services-section,
+  #first-visit.visit-cards-section,
+  #holistic-care.holistic-section,
+  #stories.stories-section,
+  #faq.source-faq-section,
+  #contact.contact-section {
+    padding-top:
+      var(--mw-section-y-tablet) !important;
+
+    padding-bottom:
+      var(--mw-section-y-tablet) !important;
+  }
+
+
+  #about.about-clean .about-clean-grid,
+  #services .services-heading-row,
+  #services .services-grid,
+  #stories .stories-grid,
+  #faq .source-faq-grid {
+    margin-top:
+      var(--mw-content-gap-tablet) !important;
+  }
+
+
+  #holistic-care .section-eyebrow,
+  #contact .section-eyebrow {
+    margin-bottom:
+      var(--mw-content-gap-tablet) !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #about.about-clean,
+  #services.services-section,
+  #first-visit.visit-cards-section,
+  #holistic-care.holistic-section,
+  #stories.stories-section,
+  #faq.source-faq-section,
+  #contact.contact-section {
+    padding-top:
+      var(--mw-section-y-mobile) !important;
+
+    padding-bottom:
+      var(--mw-section-y-mobile) !important;
+  }
+
+
+  #about.about-clean .about-clean-grid,
+  #services .services-heading-row,
+  #services .services-grid,
+  #stories .stories-grid,
+  #faq .source-faq-grid {
+    margin-top:
+      var(--mw-content-gap-mobile) !important;
+  }
+
+
+  #holistic-care .section-eyebrow,
+  #contact .section-eyebrow {
+    margin-bottom:
+      var(--mw-content-gap-mobile) !important;
+  }
+}
+
+
+/* =========================================================
+   MYNDWORKS — SHARED CONTENT RAIL
+   Phase 2B
+
+   About is the alignment source of truth.
+
+   Desktop:
+   section padding 40px
+   + internal rail 52px
+   = 92px visual page edge
+
+   Tablet:
+   section padding 32px
+   + internal rail 32px
+   = 64px visual page edge
+
+   Mobile:
+   section padding itself becomes the rail
+   ========================================================= */
+
+:root {
+  --mw-rail-cut-desktop: 104px;
+  --mw-rail-cut-tablet: 64px;
+}
+
+
+/* =========================================================
+   DESKTOP
+   ========================================================= */
+
+@media (min-width: 1024px) {
+
+  /* ABOUT */
+
+  #about.about-clean .about-clean-inner,
+
+
+  /* SERVICES */
+
+  #services .section-eyebrow,
+  #services .services-heading-row,
+  #services .services-grid,
+
+
+  /* FIRST VISIT
+     Keep the photographic banner wide.
+     Only the step cards join the master rail. */
+
+  #first-visit .visit-cards,
+
+
+  /* HOLISTIC CARE */
+
+  #holistic-care .section-eyebrow,
+  #holistic-care .holistic-grid,
+
+
+  /* STORIES */
+
+  #stories .section-eyebrow,
+  #stories .stories-grid,
+
+
+  /* FAQ */
+
+  #faq .source-faq-eyebrow,
+  #faq .source-faq-grid,
+
+
+  /* CONTACT */
+
+  #contact .section-eyebrow,
+  #contact .contact-grey-card {
+    width:
+      calc(100% - var(--mw-rail-cut-desktop)) !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      auto !important;
+  }
+
+
+  /* Contact gap is now controlled by the shared
+     eyebrow spacing — remove the old extra gap */
+
+  #contact .contact-grey-card {
+    margin-top:
+      0 !important;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 700px) and (max-width: 1023px) {
+
+  #about.about-clean .about-clean-inner,
+
+  #services .section-eyebrow,
+  #services .services-heading-row,
+  #services .services-grid,
+
+  #first-visit .visit-cards,
+
+  #holistic-care .section-eyebrow,
+  #holistic-care .holistic-grid,
+
+  #stories .section-eyebrow,
+  #stories .stories-grid,
+
+  #faq .source-faq-eyebrow,
+  #faq .source-faq-grid,
+
+  #contact .section-eyebrow,
+  #contact .contact-grey-card {
+    width:
+      calc(100% - var(--mw-rail-cut-tablet)) !important;
+
+    margin-left:
+      auto !important;
+
+    margin-right:
+      auto !important;
+  }
+
+
+  #contact .contact-grey-card {
+    margin-top:
+      0 !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   The section's 20px padding becomes the page rail.
+   No extra inset.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #about.about-clean .about-clean-inner,
+
+  #services .section-eyebrow,
+  #services .services-heading-row,
+  #services .services-grid,
+
+  #first-visit .visit-cards,
+
+  #holistic-care .section-eyebrow,
+  #holistic-care .holistic-grid,
+
+  #stories .section-eyebrow,
+  #stories .stories-grid,
+
+  #faq .source-faq-eyebrow,
+  #faq .source-faq-grid,
+
+  #contact .section-eyebrow,
+  #contact .contact-grey-card {
+    width:
+      100% !important;
+
+    margin-left:
+      0 !important;
+
+    margin-right:
+      0 !important;
+  }
+
+
+  #contact .contact-grey-card {
+    margin-top:
+      0 !important;
+  }
+}
+
+
+/* =========================================================
+   MYNDWORKS — SHARED TYPOGRAPHY + CTA SYSTEM
+   Phase 2C
+
+   Editorial headings share one scale.
+   Special feature typography remains untouched.
+   ========================================================= */
+
+:root {
+  --mw-heading-size: 44px;
+  --mw-heading-size-tablet: 40px;
+  --mw-heading-size-mobile: 36px;
+
+  --mw-heading-line: 1.06;
+  --mw-heading-track: -0.038em;
+
+  --mw-body-size: 14px;
+  --mw-body-line: 1.62;
+
+  --mw-eyebrow-size: 10px;
+  --mw-eyebrow-track: 0.16em;
+
+  --mw-button-height: 48px;
+}
+
+
+/* =========================================================
+   EDITORIAL SECTION HEADINGS
+   ========================================================= */
+
+#about .about-clean-heading,
+#services .services-heading,
+#holistic-care .holistic-heading,
+#stories .stories-heading,
+#faq .source-faq-heading {
+  font-size:
+    var(--mw-heading-size) !important;
+
+  font-weight:
+    400 !important;
+
+  line-height:
+    var(--mw-heading-line) !important;
+
+  letter-spacing:
+    var(--mw-heading-track) !important;
+
+  color:
+    #111211 !important;
+}
+
+
+/* Muted second phrase */
+
+#about .about-clean-heading span,
+#services .services-heading span,
+#holistic-care .holistic-heading span,
+#stories .stories-heading span,
+#faq .source-faq-heading span {
+  color:
+    #9a9a97 !important;
+
+  font-weight:
+    inherit !important;
+}
+
+
+/* =========================================================
+   SUPPORTING BODY COPY
+   ========================================================= */
+
+#about .about-clean-description,
+#holistic-care .holistic-lede,
+#faq .source-faq-copy {
+  font-size:
+    var(--mw-body-size) !important;
+
+  font-weight:
+    400 !important;
+
+  line-height:
+    var(--mw-body-line) !important;
+
+  letter-spacing:
+    0 !important;
+
+  color:
+    #747772 !important;
+}
+
+
+/* About should remain one continuous tone */
+
+#about .about-clean-description span {
+  color:
+    inherit !important;
+}
+
+
+/* =========================================================
+   SECTION EYEBROWS
+   Standardise labels without changing line structure
+   ========================================================= */
+
+#about .section-eyebrow,
+#services .section-eyebrow,
+#holistic-care .section-eyebrow,
+#stories .section-eyebrow,
+#contact .section-eyebrow,
+#faq .source-faq-eyebrow {
+  font-size:
+    var(--mw-eyebrow-size) !important;
+
+  font-weight:
+    500 !important;
+
+  line-height:
+    1 !important;
+
+  letter-spacing:
+    var(--mw-eyebrow-track) !important;
+
+  text-transform:
+    uppercase !important;
+}
+
+
+/* =========================================================
+   PRIMARY PILL HEIGHT
+   Same physical button presence throughout the page
+   ========================================================= */
+
+#about .about-clean-cta,
+#services .services-book-link,
+#contact .contact-grey-primary,
+#contact .contact-grey-secondary {
+  min-height:
+    var(--mw-button-height) !important;
+
+  display:
+    inline-flex !important;
+
+  align-items:
+    center !important;
+
+  justify-content:
+    center !important;
+
+  box-sizing:
+    border-box !important;
+}
+
+
+/* ABOUT — quiet outlined CTA stays quiet */
+
+#about .about-clean-cta {
+  padding:
+    0 22px !important;
+}
+
+
+/* SERVICES — make top CTA substantial but restrained */
+
+#services .services-book-link {
+  padding:
+    0 20px !important;
+
+  border:
+    1px solid rgba(17,18,17,.15) !important;
+
+  border-radius:
+    999px !important;
+
+  background:
+    transparent !important;
+
+  color:
+    #111211 !important;
+
+  gap:
+    12px !important;
+
+  text-decoration:
+    none !important;
+
+  transition:
+    border-color .24s ease,
+    color .24s ease,
+    transform .24s ease !important;
+}
+
+
+@media (hover: hover) and (pointer: fine) {
+
+  #services .services-book-link:hover {
+    border-color:
+      #00b9f3 !important;
+
+    color:
+      #00b9f3 !important;
+
+    transform:
+      translateY(-2px) !important;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 700px) and (max-width: 1023px) {
+
+  #about .about-clean-heading,
+  #services .services-heading,
+  #holistic-care .holistic-heading,
+  #stories .stories-heading,
+  #faq .source-faq-heading {
+    font-size:
+      var(--mw-heading-size-tablet) !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #about .about-clean-heading,
+  #services .services-heading,
+  #holistic-care .holistic-heading,
+  #stories .stories-heading,
+  #faq .source-faq-heading {
+    font-size:
+      var(--mw-heading-size-mobile) !important;
+
+    line-height:
+      1.08 !important;
+  }
+
+
+  #about .about-clean-description,
+  #holistic-care .holistic-lede,
+  #faq .source-faq-copy {
+    font-size:
+      14px !important;
+
+    line-height:
+      1.65 !important;
+  }
+
+
+  #about .about-clean-cta,
+  #services .services-book-link,
+  #contact .contact-grey-primary,
+  #contact .contact-grey-secondary {
+    min-height:
+      48px !important;
+  }
+}
+
+
+/* =========================================================
+   MYNDWORKS — NAVIGATION + ACCESSIBILITY RHYTHM
+   Phase 3B
+   ========================================================= */
+
+
+/* Prevent the floating header from covering
+   section headings after anchor navigation. */
+
+#about,
+#services,
+#first-visit,
+#holistic-care,
+#stories,
+#faq,
+#contact {
+  scroll-margin-top:
+    110px;
+}
+
+
+/* Keyboard focus should remain clearly visible
+   without affecting normal mouse interaction. */
+
+a:focus-visible,
+button:focus-visible {
+  outline:
+    2px solid #00b9f3;
+
+  outline-offset:
+    4px;
+}
+
+
+/* Mobile needs a little less anchor clearance. */
+
+@media (max-width: 699px) {
+
+  #about,
+  #services,
+  #first-visit,
+  #holistic-care,
+  #stories,
+  #faq,
+  #contact {
+    scroll-margin-top:
+      88px;
+  }
+}

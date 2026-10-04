@@ -5,3 +5,5 @@ dist/
 .env.*
 !.env.example
 .vite/
+
+myndworks-current-review.zip

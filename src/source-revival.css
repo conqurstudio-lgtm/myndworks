@@ -1,163 +1,4 @@
 /* =========================================================
-   ABOUT — SIMPLIFIED CLEAN LAYOUT
-   Left: content
-   Right: office image
-   ========================================================= */
-
-   #about.about-refined {
-    background: #ffffff !important;
-    padding: 112px 40px !important;
-  }
-  
-  #about .about-refined-inner {
-    width: calc(100% - 104px);
-    margin: 0 auto;
-  }
-  
-  #about .about-refined-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
-    align-items: start;
-    gap: 72px;
-    margin-top: 44px;
-  }
-  
-  /* =========================================================
-     LEFT COPY
-     ========================================================= */
-  
-  #about .about-refined-copy {
-    align-self: start !important;
-    padding-top: 4px;
-  }
-  
-  #about .about-refined-copy .source-about-heading {
-    max-width: 470px !important;
-    margin: 0 !important;
-    font-size: 44px !important;
-    font-weight: 400 !important;
-    line-height: 1.08 !important;
-    letter-spacing: -0.035em !important;
-  }
-  
-  #about .about-refined-copy .source-about-heading span {
-    display: inline !important;
-    color: #9a9a97 !important;
-  }
-  
-  #about .about-refined-description {
-    max-width: 500px;
-    margin: 42px 0 0;
-    color: #111211;
-    font-size: 21px;
-    font-weight: 400;
-    line-height: 1.42;
-    letter-spacing: -0.02em;
-  }
-  
-  #about .about-refined-description span {
-    color: #8f8f8d;
-  }
-  
-  #about .about-refined-copy .source-about-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin-top: 30px !important;
-    padding: 10px 20px !important;
-  }
-  
-  /* =========================================================
-     RIGHT VISUAL
-     ========================================================= */
-  
-  #about .about-refined-visual {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-  }
-  
-  #about .about-refined-office-image {
-    display: block;
-    width: 100%;
-    max-width: 980px;
-    height: 430px;
-    object-fit: cover;
-    object-position: center center;
-    border-radius: 28px;
-  }
-  
-  /* =========================================================
-     TABLET
-     ========================================================= */
-  
-  @media (max-width: 1023px) {
-    #about.about-refined {
-      padding: 96px 32px !important;
-    }
-  
-    #about .about-refined-inner {
-      width: calc(100% - 64px);
-    }
-  
-    #about .about-refined-grid {
-      grid-template-columns: 1fr;
-      gap: 46px;
-      margin-top: 38px;
-    }
-  
-    #about .about-refined-description {
-      max-width: 680px;
-    }
-  
-    #about .about-refined-office-image {
-      height: 420px;
-    }
-  }
-  
-  /* =========================================================
-     MOBILE
-     ========================================================= */
-  
-  @media (max-width: 699px) {
-    #about.about-refined {
-      padding: 80px 20px !important;
-    }
-  
-    #about .about-refined-inner {
-      width: 100%;
-    }
-  
-    #about .about-refined-grid {
-      gap: 34px;
-      margin-top: 30px;
-    }
-  
-    #about .about-refined-copy .source-about-heading {
-      max-width: 360px !important;
-      font-size: 36px !important;
-      line-height: 1.1 !important;
-    }
-  
-    #about .about-refined-description {
-      max-width: none;
-      margin-top: 28px;
-      font-size: 19px;
-      line-height: 1.46;
-    }
-  
-    #about .about-refined-copy .source-about-cta {
-      margin-top: 24px !important;
-    }
-  
-    #about .about-refined-office-image {
-      height: 300px;
-      border-radius: 24px;
-    }
-  }
-
-/* =========================================================
    ABOUT — FINAL CLEAN LAYOUT
    Source of truth from this point forward.
 
@@ -7873,19 +7714,10 @@
 }
 
 
-.nav-brand {
-  font-size:
-    18px !important;
-}
 
 
-.nav-links a {
-  font-size:
-    13px !important;
 
-  font-weight:
-    500 !important;
-}
+
 
 
 /* =========================================================
@@ -7893,53 +7725,12 @@
    Taller like the reference model
    ========================================================= */
 
-.nav-cta {
-  min-height:
-    42px !important;
 
-  padding:
-    0
-    20px !important;
-
-  display:
-    inline-flex !important;
-
-  align-items:
-    center !important;
-
-  justify-content:
-    center !important;
-
-  border-radius:
-    999px !important;
-
-  background:
-    var(--mw-blue) !important;
-
-  color:
-    #ffffff !important;
-
-  font-size:
-    12px !important;
-
-  font-weight:
-    600 !important;
-
-  transition:
-    background-color 0.25s ease,
-    transform 0.25s ease !important;
-}
 
 
 @media (hover: hover) and (pointer: fine) {
 
-  .nav-cta:hover {
-    background:
-      var(--mw-blue-hover) !important;
 
-    transform:
-      translateY(-1px) !important;
-  }
 }
 
 
@@ -7954,12 +7745,7 @@
 }
 
 
-.hero-content {
-  padding:
-    0
-    34px
-    24px !important;
-}
+
 
 
 /* =========================================================
@@ -8039,35 +7825,7 @@
    ========================================================= */
 
 .hero-cta,
-.hero-primary-cta {
-  min-height:
-    44px !important;
 
-  padding:
-    0
-    20px !important;
-
-  display:
-    inline-flex !important;
-
-  align-items:
-    center !important;
-
-  justify-content:
-    center !important;
-
-  gap:
-    10px !important;
-
-  border-radius:
-    999px !important;
-
-  font-size:
-    12px !important;
-
-  font-weight:
-    600 !important;
-}
 
 
 /* =========================================================
@@ -8134,12 +7892,7 @@
   }
 
 
-  .hero-content {
-    padding:
-      0
-      20px
-      22px !important;
-  }
+
 
 
   .hero-heading {
@@ -12660,7 +12413,7 @@
 
 /* Left side — first direct child */
 
-#contact .contact-grey-card > :first-child {
+#contact .contact-grey-main {
   display: flex !important;
   flex-direction: column !important;
   justify-content: center !important;
@@ -12675,7 +12428,7 @@
    LEFT CONTENT
    ========================================================= */
 
-#contact .contact-grey-card h2 {
+#contact .contact-grey-heading {
   max-width: 560px !important;
 
   margin:
@@ -12690,7 +12443,7 @@
 }
 
 
-#contact .contact-grey-card p {
+#contact .contact-grey-copy {
   max-width: 520px !important;
 
   margin-top: 24px !important;
@@ -12858,13 +12611,13 @@
       1fr !important;
   }
 
-  #contact .contact-grey-card > :first-child {
+  #contact .contact-grey-main {
     padding:
       42px
       36px !important;
   }
 
-  #contact .contact-grey-card h2 {
+  #contact .contact-grey-heading {
     font-size:
       44px !important;
   }
@@ -12896,18 +12649,18 @@
       24px !important;
   }
 
-  #contact .contact-grey-card > :first-child {
+  #contact .contact-grey-main {
     padding:
       34px
       24px !important;
   }
 
-  #contact .contact-grey-card h2 {
+  #contact .contact-grey-heading {
     font-size:
       36px !important;
   }
 
-  #contact .contact-grey-card p {
+  #contact .contact-grey-copy {
     font-size:
       13px !important;
   }
@@ -12964,7 +12717,7 @@
    FOOTER — COMPACT FINAL REFINEMENT
    ========================================================= */
 
-footer {
+.site-footer {
   padding-top: 54px !important;
   padding-bottom: 24px !important;
 }
@@ -12972,7 +12725,7 @@ footer {
 
 /* Slightly tighten main footer content */
 
-footer > div:first-child {
+.site-footer .footer-top {
   padding-top: 0 !important;
   padding-bottom: 34px !important;
 }
@@ -12980,7 +12733,7 @@ footer > div:first-child {
 
 /* Brand description */
 
-footer p {
+.site-footer p {
   max-width: 340px !important;
   line-height: 1.55 !important;
 }
@@ -12988,17 +12741,14 @@ footer p {
 
 /* Small column labels */
 
-footer h3,
-footer h4,
-footer .footer-label,
-footer .footer-heading {
+.site-footer .footer-label {
   color: rgba(255,255,255,.48) !important;
 }
 
 
 /* Link interaction */
 
-footer a {
+.site-footer a {
   transition:
     color .22s ease,
     transform .22s ease !important;
@@ -13006,7 +12756,7 @@ footer a {
 
 @media (hover: hover) and (pointer: fine) {
 
-  footer a:hover {
+  .site-.site-footer a:hover {
     color: #00b9f3 !important;
   }
 }
@@ -13014,7 +12764,7 @@ footer a {
 
 /* Bottom copyright/meta row */
 
-footer > div:last-child {
+.site-footer .footer-meta {
   padding-top: 22px !important;
   margin-top: 22px !important;
 }
@@ -13024,137 +12774,18 @@ footer > div:last-child {
 
 @media (max-width: 699px) {
 
-  footer {
+  .site-footer {
     padding-top: 44px !important;
     padding-bottom: 22px !important;
   }
 
-  footer > div:first-child {
+  .site-footer .footer-top {
     padding-bottom: 28px !important;
   }
 
-  footer > div:last-child {
+  .site-footer .footer-meta {
     padding-top: 18px !important;
     margin-top: 18px !important;
-  }
-}
-
-/* =========================================================
-   ABOUT — MATCH BODY TYPOGRAPHY TO THE REST OF THE SITE
-   Heading stays unchanged
-   ========================================================= */
-
-#about .source-about-copy p {
-  max-width: 520px !important;
-
-  font-size: 15px !important;
-  font-weight: 400 !important;
-
-  line-height: 1.62 !important;
-  letter-spacing: 0 !important;
-
-  color: #747772 !important;
-}
-
-
-/* Remove the older two-tone treatment inside the paragraph */
-
-#about .source-about-copy p span {
-  color: inherit !important;
-}
-
-
-/* Slightly tighten the CTA relationship to the copy */
-
-#about .source-about-cta {
-  margin-top: 26px !important;
-}
-
-
-/* Mobile */
-
-@media (max-width: 699px) {
-  #about .source-about-copy p {
-    font-size: 14px !important;
-    line-height: 1.65 !important;
-  }
-}
-
-/* =========================================================
-   ABOUT — FORCE BODY COPY TO MATCH HOLISTIC CARE
-   ========================================================= */
-
-#about .source-about-copy p,
-#about .source-about-copy p * {
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 1.62 !important;
-  letter-spacing: 0 !important;
-
-  color: #747772 !important;
-}
-
-
-/* Keep copy width controlled like Holistic Care */
-
-#about .source-about-copy p {
-  max-width: 440px !important;
-}
-
-
-/* Maintain comfortable CTA spacing */
-
-#about .source-about-cta {
-  margin-top: 26px !important;
-}
-
-
-/* Mobile */
-
-@media (max-width: 699px) {
-
-  #about .source-about-copy p,
-  #about .source-about-copy p * {
-    font-size: 14px !important;
-    line-height: 1.65 !important;
-  }
-}
-
-/* =========================================================
-   ABOUT — FINAL BODY COPY MATCH
-   Match Holistic Care typography
-   ========================================================= */
-
-#about .source-about-copy p,
-#about .source-about-copy p *,
-#about .about-copy p,
-#about .about-copy p * {
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  line-height: 1.62 !important;
-  letter-spacing: 0 !important;
-
-  color: #747772 !important;
-}
-
-#about .source-about-copy p,
-#about .about-copy p {
-  max-width: 440px !important;
-}
-
-/* Keep CTA spacing clean */
-#about .source-about-cta,
-#about .about-cta {
-  margin-top: 26px !important;
-}
-
-@media (max-width: 699px) {
-  #about .source-about-copy p,
-  #about .source-about-copy p *,
-  #about .about-copy p,
-  #about .about-copy p * {
-    font-size: 14px !important;
-    line-height: 1.65 !important;
   }
 }
 
