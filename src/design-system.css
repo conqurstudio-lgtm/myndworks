@@ -926,17 +926,553 @@ button:focus-visible {
 }
 
 
-/* =========================================================
-   MOBILE HERO — STABLE VERTICAL COMPOSITION
 
-   Keep the approved 92vh behaviour, but do not allow
-   wider/shorter mobile previews to collapse the Hero.
+
+/* =========================================================
+   FIRST VISIT → HOLISTIC CARE
+   MOBILE SECTION TRANSITION
+
+   Reduce the doubled shared section spacing between
+   these two light-background sections only.
+   Cards themselves remain completely untouched.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #first-visit.visit-cards-section {
+    padding-bottom:
+      24px !important;
+  }
+
+
+  #holistic-care.holistic-section {
+    padding-top:
+      36px !important;
+  }
+}
+
+
+/* =========================================================
+   FIRST VISIT → HOLISTIC
+   FINAL MOBILE TRANSITION
+
+   The cards remain unchanged.
+   Force the horizontal carousel wrapper to occupy only
+   its natural card height and remove inherited legacy
+   bottom spacing.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  #first-visit .visit-cards {
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+
+    max-height:
+      none !important;
+
+    margin-bottom:
+      0 !important;
+
+    padding-bottom:
+      0 !important;
+  }
+
+
+  #first-visit .visit-cards > .mw-reveal {
+    margin-bottom:
+      0 !important;
+  }
+
+
+  #first-visit.visit-cards-section {
+    padding-bottom:
+      0 !important;
+  }
+
+
+  #holistic-care.holistic-section {
+    padding-top:
+      28px !important;
+  }
+}
+
+
+/* =========================================================
+   HOLISTIC → STORIES → FAQ
+   MOBILE SECTION TRANSITIONS
+
+   Reduce stacked section padding while preserving
+   the approved Stories card and controls.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  /* Holistic → Stories */
+
+  #holistic-care.holistic-section {
+    padding-bottom:
+      24px !important;
+  }
+
+
+  #stories.stories-section {
+    padding-top:
+      28px !important;
+
+    padding-bottom:
+      20px !important;
+  }
+
+
+  /* Stories → FAQ */
+
+  #faq.source-faq-section {
+    padding-top:
+      36px !important;
+  }
+}
+
+
+/* =========================================================
+   STORIES — MOBILE NAVIGATION FLOW FIX
+
+   Keep the navigation controls inside the Stories section
+   instead of allowing them to visually cross into FAQ.
+   ========================================================= */
+
+@media (max-width: 699px) {
+
+  /* The Reveal containing the story card + arrows
+     must grow naturally around both elements. */
+
+  #stories .stories-grid > .mw-reveal:last-child {
+    display:
+      flex !important;
+
+    flex-direction:
+      column !important;
+
+    height:
+      auto !important;
+
+    min-height:
+      0 !important;
+  }
+
+
+  /* Navigation belongs to Stories, not the FAQ transition. */
+
+  #stories .stories-controls-mobile {
+    position:
+      static !important;
+
+    flex:
+      0 0 auto !important;
+
+    margin-top:
+      16px !important;
+
+    margin-bottom:
+      0 !important;
+  }
+
+
+  /* Enough room beneath the controls without recreating
+     the previous oversized section gap. */
+
+  #stories.stories-section {
+    padding-bottom:
+      34px !important;
+  }
+
+
+  /* FAQ starts with a clean, intentional separation. */
+
+  #faq.source-faq-section {
+    padding-top:
+      38px !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE HEADER — SOLID SCROLL SURFACE
+
+   Prevent page content from showing through the floating
+   navigation while scrolling on mobile.
+   Desktop smart-scroll behaviour remains unchanged.
    ========================================================= */
 
 @media (max-width: 639px) {
 
-  .hero-canvas {
+  .site-header.is-hidden {
+    transform:
+      translateY(0) !important;
+
+    opacity:
+      1 !important;
+  }
+
+
+  .site-header.is-hidden .nav-shell,
+  .nav-shell,
+  .nav-shell.is-scrolled {
+    background:
+      rgba(255,255,255,.96) !important;
+
+    border-color:
+      rgba(255,255,255,.90) !important;
+
+    box-shadow:
+      0 10px 30px
+      rgba(20,22,20,.07) !important;
+
+    backdrop-filter:
+      blur(20px) !important;
+
+    -webkit-backdrop-filter:
+      blur(20px) !important;
+  }
+}
+
+/* =========================================================
+   MYNDWORKS HEADER — REFINED FROSTED GLASS
+
+   The navigation remains visibly connected to the page:
+   background detail can softly pass through the surface,
+   while blur keeps navigation text clean and legible.
+   ========================================================= */
+
+.nav-shell,
+.nav-shell.is-scrolled,
+.site-header.is-hidden .nav-shell {
+  background:
+    rgba(248,250,251,.72) !important;
+
+  border:
+    1px solid rgba(255,255,255,.68) !important;
+
+  box-shadow:
+    0 10px 30px rgba(20,22,20,.045),
+    inset 0 1px 0 rgba(255,255,255,.55) !important;
+
+  backdrop-filter:
+    blur(24px)
+    saturate(135%) !important;
+
+  -webkit-backdrop-filter:
+    blur(24px)
+    saturate(135%) !important;
+}
+
+
+/* Once scrolling, make the glass only slightly stronger. */
+
+.nav-shell.is-scrolled {
+  background:
+    rgba(248,250,251,.80) !important;
+
+  box-shadow:
+    0 12px 34px rgba(20,22,20,.06),
+    inset 0 1px 0 rgba(255,255,255,.62) !important;
+}
+
+
+/* Avoid the old 48% parent opacity making the
+   entire navigation look washed out on desktop. */
+
+.site-header.is-hidden {
+  opacity:
+    .90 !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   Slightly stronger glass because content sits directly
+   beneath a much larger navigation pill.
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .site-header.is-hidden {
+    transform:
+      translateY(0) !important;
+
+    opacity:
+      1 !important;
+  }
+
+
+  .nav-shell,
+  .nav-shell.is-scrolled,
+  .site-header.is-hidden .nav-shell {
+    background:
+      rgba(248,250,251,.84) !important;
+
+    border-color:
+      rgba(255,255,255,.78) !important;
+
+    box-shadow:
+      0 10px 30px rgba(20,22,20,.055),
+      inset 0 1px 0 rgba(255,255,255,.62) !important;
+
+    backdrop-filter:
+      blur(26px)
+      saturate(135%) !important;
+
+    -webkit-backdrop-filter:
+      blur(26px)
+      saturate(135%) !important;
+  }
+}
+
+
+/* =========================================================
+   MYNDWORKS — GLASS MOBILE MENU
+   Remove hamburger disc + match popup to frosted header
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  /* ---------------------------------------------------------
+     HAMBURGER
+     Keep the same clickable area and position,
+     but remove the visible circular container.
+     --------------------------------------------------------- */
+
+  .menu-toggle,
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  .menu-toggle:active,
+  .menu-toggle.is-open {
+    width:
+      46px !important;
+
+    height:
+      46px !important;
+
+    flex:
+      0 0 46px !important;
+
+    padding:
+      0 !important;
+
+    margin:
+      0 !important;
+
+    display:
+      inline-flex !important;
+
+    flex-direction:
+      column !important;
+
+    align-items:
+      center !important;
+
+    justify-content:
+      center !important;
+
+    gap:
+      6px !important;
+
+    background:
+      transparent !important;
+
+    border:
+      0 !important;
+
+    border-radius:
+      0 !important;
+
+    box-shadow:
+      none !important;
+
+    backdrop-filter:
+      none !important;
+
+    -webkit-backdrop-filter:
+      none !important;
+  }
+
+
+  .menu-toggle-line {
+    width:
+      25px !important;
+
+    height:
+      2px !important;
+
+    border-radius:
+      999px !important;
+
+    background:
+      #111211 !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     POPUP MENU
+     Preserve its current layout/animation, change only
+     the surface to the same frosted glass language.
+     --------------------------------------------------------- */
+
+  .mobile-menu {
+    background:
+      rgba(248,250,251,.82) !important;
+
+    border:
+      1px solid rgba(255,255,255,.78) !important;
+
+    border-radius:
+      26px !important;
+
+    box-shadow:
+      0 20px 54px rgba(20,22,20,.10),
+      inset 0 1px 0 rgba(255,255,255,.68) !important;
+
+    backdrop-filter:
+      blur(28px)
+      saturate(140%) !important;
+
+    -webkit-backdrop-filter:
+      blur(28px)
+      saturate(140%) !important;
+  }
+
+
+  .mobile-menu.is-open {
+    background:
+      rgba(248,250,251,.86) !important;
+  }
+
+
+  /* ---------------------------------------------------------
+     MENU LINKS
+     Light dividers help the popup feel structured without
+     turning it into a heavy panel.
+     --------------------------------------------------------- */
+
+  .mobile-menu .mobile-link {
+    color:
+      #111211 !important;
+
+    border-bottom:
+      1px solid rgba(17,18,17,.08) !important;
+
+    background:
+      transparent !important;
+  }
+
+
+  .mobile-menu .mobile-link:hover,
+  .mobile-menu .mobile-link:focus-visible {
+    color:
+      #00b9f3 !important;
+
+    background:
+      rgba(255,255,255,.28) !important;
+  }
+
+
+  /* Last navigation item before the CTA */
+
+  .mobile-menu .mobile-link:last-of-type {
+    border-bottom:
+      0 !important;
+  }
+
+
+  /* Keep Book a session readable but still integrated
+     into the glass panel. */
+
+  .mobile-menu .btn-lime {
+    border-radius:
+      999px !important;
+
+    box-shadow:
+      none !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE HEADER — COMPACT GLASS BAR
+   Keep the approved frosted look, reduce vertical bulk.
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .site-header {
+    padding:
+      14px
+      18px
+      0 !important;
+  }
+
+
+  .nav-shell {
     min-height:
-      740px !important;
+      48px !important;
+
+    padding:
+      4px
+      14px !important;
+  }
+
+
+  .header-brand {
+    gap:
+      8px !important;
+  }
+
+
+  .header-brand-mark {
+    width:
+      24px !important;
+
+    height:
+      24px !important;
+  }
+
+
+  .header-brand .wordmark {
+    font-size:
+      20px !important;
+
+    line-height:
+      1 !important;
+  }
+
+
+  .menu-toggle,
+  .menu-toggle:hover,
+  .menu-toggle:focus,
+  .menu-toggle:active,
+  .menu-toggle.is-open {
+    width:
+      38px !important;
+
+    height:
+      38px !important;
+
+    flex:
+      0 0 38px !important;
+
+    gap:
+      5px !important;
+  }
+
+
+  .menu-toggle-line {
+    width:
+      23px !important;
+
+    height:
+      2px !important;
   }
 }

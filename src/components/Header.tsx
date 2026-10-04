@@ -6,6 +6,7 @@ import {
 
 import myndworksMark from "../assets/myndworks-mark.svg";
 
+
 const NAV_ITEMS = [
   {
     label: "About",
@@ -29,23 +30,45 @@ const NAV_ITEMS = [
   },
 ];
 
-export function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
 
-  const lastScrollY = useRef(0);
-  const ticking = useRef(false);
+export function Header() {
+  const [menuOpen, setMenuOpen] =
+    useState(false);
+
+  const [scrolled, setScrolled] =
+    useState(false);
+
+  const [hidden, setHidden] =
+    useState(false);
+
+
+  const headerRef =
+    useRef<HTMLElement | null>(null);
+
+  const lastScrollY =
+    useRef(0);
+
+  const ticking =
+    useRef(false);
+
+
+  /* =========================================================
+     SMART SCROLL HEADER
+     ========================================================= */
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
+    lastScrollY.current =
+      window.scrollY;
+
 
     const handleScroll = () => {
       if (ticking.current) {
         return;
       }
 
+
       ticking.current = true;
+
 
       window.requestAnimationFrame(() => {
         const currentY = Math.max(
@@ -53,26 +76,34 @@ export function Header() {
           0
         );
 
-        const difference =
-          currentY - lastScrollY.current;
 
-        setScrolled(currentY > 40);
+        const difference =
+          currentY -
+          lastScrollY.current;
+
+
+        setScrolled(
+          currentY > 40
+        );
+
 
         /*
-         * Always show the navigation near
+         * Always show navigation near
          * the top of the page.
          */
         if (currentY < 100) {
           setHidden(false);
         }
 
+
         /*
-         * Never hide it while the mobile
+         * Never hide while the mobile
          * navigation is open.
          */
         else if (menuOpen) {
           setHidden(false);
         }
+
 
         /*
          * Meaningful downward movement.
@@ -81,6 +112,7 @@ export function Header() {
           setHidden(true);
         }
 
+
         /*
          * Meaningful upward movement.
          */
@@ -88,10 +120,15 @@ export function Header() {
           setHidden(false);
         }
 
-        lastScrollY.current = currentY;
-        ticking.current = false;
+
+        lastScrollY.current =
+          currentY;
+
+        ticking.current =
+          false;
       });
     };
+
 
     window.addEventListener(
       "scroll",
@@ -101,6 +138,7 @@ export function Header() {
       }
     );
 
+
     return () => {
       window.removeEventListener(
         "scroll",
@@ -109,12 +147,85 @@ export function Header() {
     };
   }, [menuOpen]);
 
+
+  /* =========================================================
+     CLOSE MOBILE MENU WHEN TAPPING OUTSIDE
+     OR PRESSING ESCAPE
+     ========================================================= */
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+
+    const handlePointerDown = (
+      event: PointerEvent
+    ) => {
+      const header =
+        headerRef.current;
+
+
+      if (!header) {
+        return;
+      }
+
+
+      const target =
+        event.target;
+
+
+      if (
+        target instanceof Node &&
+        !header.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+
+
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+
+
+    document.addEventListener(
+      "pointerdown",
+      handlePointerDown
+    );
+
+    document.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+
+    return () => {
+      document.removeEventListener(
+        "pointerdown",
+        handlePointerDown
+      );
+
+      document.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [menuOpen]);
+
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
 
+
   return (
     <header
+      ref={headerRef}
       className={
         hidden
           ? "site-header is-hidden"
@@ -140,24 +251,29 @@ export function Header() {
             alt=""
           />
 
+
           <span className="wordmark">
             MyndWorks
           </span>
         </a>
 
+
         <nav
           className="desktop-nav"
           aria-label="Main navigation"
         >
-          {NAV_ITEMS.map((item) => (
-            <a
-              href={item.href}
-              key={item.href}
-            >
-              {item.label}
-            </a>
-          ))}
+          {NAV_ITEMS.map(
+            (item) => (
+              <a
+                href={item.href}
+                key={item.href}
+              >
+                {item.label}
+              </a>
+            )
+          )}
         </nav>
+
 
         <a
           className="btn-lime header-cta"
@@ -166,6 +282,7 @@ export function Header() {
           Book a session
         </a>
 
+
         <button
           type="button"
           className={
@@ -173,7 +290,10 @@ export function Header() {
               ? "menu-toggle is-open"
               : "menu-toggle"
           }
-          aria-expanded={menuOpen}
+          aria-expanded={
+            menuOpen
+          }
+          aria-controls="mobile-navigation"
           aria-label={
             menuOpen
               ? "Close navigation"
@@ -181,7 +301,8 @@ export function Header() {
           }
           onClick={() =>
             setMenuOpen(
-              (current) => !current
+              (current) =>
+                !current
             )
           }
         >
@@ -191,23 +312,28 @@ export function Header() {
         </button>
       </div>
 
+
       <div
+        id="mobile-navigation"
         className={
           menuOpen
             ? "mobile-menu is-open"
             : "mobile-menu"
         }
       >
-        {NAV_ITEMS.map((item) => (
-          <a
-            className="mobile-link"
-            href={item.href}
-            key={item.href}
-            onClick={closeMenu}
-          >
-            {item.label}
-          </a>
-        ))}
+        {NAV_ITEMS.map(
+          (item) => (
+            <a
+              className="mobile-link"
+              href={item.href}
+              key={item.href}
+              onClick={closeMenu}
+            >
+              {item.label}
+            </a>
+          )
+        )}
+
 
         <a
           className="btn-lime"
