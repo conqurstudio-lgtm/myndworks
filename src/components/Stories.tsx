@@ -51,12 +51,10 @@ export function Stories() {
 
       <div className="stories-grid">
         <Reveal className="stories-intro">
-          <div>
-            <h2 className="stories-heading">
-              What our
-              <span> clients say</span>
-            </h2>
-          </div>
+          <h2 className="stories-heading">
+            What our
+            <span> clients say</span>
+          </h2>
 
           <div className="stories-controls stories-controls-desktop">
             <button
@@ -102,13 +100,8 @@ export function Stories() {
                 </span>
 
                 <div>
-                  <strong>
-                    {story.name}
-                  </strong>
-
-                  <span>
-                    MyndWorks client
-                  </span>
+                  <strong>{story.name}</strong>
+                  <span>MyndWorks client</span>
                 </div>
               </div>
 

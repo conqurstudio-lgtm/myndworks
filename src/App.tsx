@@ -8,23 +8,28 @@ import { HolisticCare } from "./components/HolisticCare";
 import { Stories } from "./components/Stories";
 import { Faq } from "./components/Faq";
 import { Contact } from "./components/Contact";
+import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
-    <>
+    <div className="mw-page-shell">
       <ScrollToTop />
       <Header />
 
-      <main id="top">
-        <Hero />
-        <About />
-        <Services />
-        <Process />
-        <HolisticCare />
-        <Stories />
-        <Faq />
-        <Contact />
-      </main>
-    </>
+      <div className="mw-page-frame">
+        <main id="top">
+          <Hero />
+          <About />
+          <Services />
+          <Process />
+          <HolisticCare />
+          <Stories />
+          <Faq />
+          <Contact />
+        </main>
+
+        <Footer />
+      </div>
+    </div>
   );
 }

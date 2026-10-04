@@ -1,31 +1,32 @@
+import healthIcon from "../assets/health-icon.svg";
 import { Reveal } from "./ui";
 
 const CARE_ROLES = [
   {
-    number: "01",
     title: "Occupational Therapists & Social Workers",
-    text: "Supporting daily functioning, relationships and the social environments that can influence wellbeing.",
+    text:
+      "Supporting daily functioning, relationships and the social environments that can influence wellbeing.",
   },
   {
-    number: "02",
     title: "Speech Therapists & Audiologists",
-    text: "Supporting communication, hearing and expression where these form part of a person's wider wellbeing.",
+    text:
+      "Supporting communication, hearing and expression where these form part of a person's wider wellbeing.",
   },
   {
-    number: "03",
     title: "Dietitians & Physiotherapists",
-    text: "Supporting the physical side of wellbeing through nutrition, movement and healthy daily functioning.",
+    text:
+      "Supporting the physical side of wellbeing through nutrition, movement and healthy daily functioning.",
   },
   {
-    number: "04",
     title: "Medical Doctors",
-    text: "Helping assess and manage medical factors that may influence how someone thinks, feels and functions.",
+    text:
+      "Helping assess and manage medical factors that may influence how someone thinks, feels and functions.",
   },
 ] as const;
 
 export function HolisticCare() {
   return (
-    <section className="holistic-section">
+    <section id="holistic-care" className="holistic-section">
       <Reveal>
         <div className="section-eyebrow">
           Holistic care
@@ -48,15 +49,9 @@ export function HolisticCare() {
             </p>
           </div>
 
-          <a
-            className="holistic-link"
-            href="#faq"
-          >
+          <a className="holistic-link" href="#faq">
             <span>Read the FAQ</span>
-            <span
-              className="holistic-link-icon"
-              aria-hidden="true"
-            >
+            <span className="holistic-link-icon" aria-hidden="true">
               ↗
             </span>
           </a>
@@ -64,31 +59,22 @@ export function HolisticCare() {
 
         <div className="holistic-list">
           {CARE_ROLES.map((role, index) => (
-            <Reveal
-              key={role.number}
-              delay={index * 80}
-            >
+            <Reveal key={role.title} delay={index * 80}>
               <article className="holistic-card">
                 <div className="holistic-card-copy">
-                  <span className="holistic-card-label">
-                    Allied health
-                  </span>
-
-                  <h3>
-                    {role.title}
-                  </h3>
-
-                  <p>
-                    {role.text}
-                  </p>
+                  <h3>{role.title}</h3>
+                  <p>{role.text}</p>
                 </div>
 
-                <span
-                  className="holistic-number"
-                  aria-hidden="true"
-                >
-                  {role.number}
-                </span>
+                <div className="holistic-service-icon" aria-hidden="true">
+                  <span
+                    className="holistic-service-glyph"
+                    style={{
+                      WebkitMaskImage: `url(${healthIcon})`,
+                      maskImage: `url(${healthIcon})`,
+                    }}
+                  />
+                </div>
               </article>
             </Reveal>
           ))}

@@ -6,32 +6,76 @@ export function ScrollToTop() {
       window.history.scrollRestoration = "manual";
     }
 
-    const resetScroll = () => {
-      // Preserve intentional deep links such as #services or #faq.
-      if (window.location.hash) return;
+    const resetToTop = () => {
+      const html = document.documentElement;
+      const previousBehavior = html.style.scrollBehavior;
+
+      html.style.scrollBehavior = "auto";
 
       window.scrollTo({
         top: 0,
         left: 0,
         behavior: "auto",
       });
+
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+
+      requestAnimationFrame(() => {
+        html.style.scrollBehavior = previousBehavior;
+      });
     };
 
-    resetScroll();
+    /*
+     * Remove a stale section hash on a fresh page load.
+     * Example:
+     * /myndworks/#faq
+     * becomes:
+     * /myndworks/
+     *
+     * Navigation links can still add hashes normally
+     * while the visitor is using the page.
+     */
+    if (window.location.hash) {
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search
+      );
+    }
 
-    const frame = window.requestAnimationFrame(() => {
-      window.requestAnimationFrame(resetScroll);
+    resetToTop();
+
+    const frame1 = requestAnimationFrame(() => {
+      resetToTop();
+
+      requestAnimationFrame(() => {
+        resetToTop();
+      });
     });
 
-    const onPageShow = () => {
-      resetScroll();
+    const timeout1 = window.setTimeout(resetToTop, 50);
+    const timeout2 = window.setTimeout(resetToTop, 200);
+
+    const handlePageShow = () => {
+      if (window.location.hash) {
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + window.location.search
+        );
+      }
+
+      resetToTop();
     };
 
-    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("pageshow", handlePageShow);
 
     return () => {
-      window.cancelAnimationFrame(frame);
-      window.removeEventListener("pageshow", onPageShow);
+      cancelAnimationFrame(frame1);
+      clearTimeout(timeout1);
+      clearTimeout(timeout2);
+      window.removeEventListener("pageshow", handlePageShow);
     };
   }, []);
 

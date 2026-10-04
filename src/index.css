@@ -310,20 +310,15 @@ button:focus-visible {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(15, 27, 38, 0.22) 0%,
-      rgba(15, 27, 38, 0.05) 36%,
-      rgba(15, 27, 38, 0.09) 60%,
-      rgba(15, 27, 38, 0.42) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(15, 27, 38, 0.16) 0%,
-      rgba(15, 27, 38, 0.02) 48%,
-      rgba(15, 27, 38, 0.08) 100%
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(17, 18, 17, 0) 0%,
+    rgba(17, 18, 17, 0) 42%,
+    rgba(17, 18, 17, 0.04) 55%,
+    rgba(17, 18, 17, 0.16) 70%,
+    rgba(17, 18, 17, 0.38) 88%,
+    rgba(17, 18, 17, 0.48) 100%
+  );
   pointer-events: none;
 }
 
@@ -2913,5 +2908,6009 @@ button:focus-visible {
   .contact-secondary,
   .contact-detail a {
     transition: none;
+  }
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  width: 100%;
+  overflow: hidden;
+  background: #0f100f;
+  color: #fff;
+  padding:
+    72px
+    var(--page-gutter)
+    0;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 46px;
+}
+
+.footer-brand-column {
+  max-width: 430px;
+}
+
+.footer-brand {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  text-decoration: none;
+}
+
+.footer-brand-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.footer-brand-mark img {
+  width: 26px;
+  height: 26px;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-intro {
+  margin: 24px 0 0;
+  max-width: 370px;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.footer-links-column {
+  min-width: 0;
+}
+
+.footer-label {
+  display: block;
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.footer-links a {
+  max-width: 100%;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 13px;
+  line-height: 1.45;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent);
+  transform: translateX(2px);
+}
+
+.footer-meta {
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-meta p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.footer-word-wrap {
+  width: 100%;
+  margin-top: 54px;
+  overflow: hidden;
+}
+
+.footer-word {
+  margin: 0 0 -0.08em;
+  color: rgba(255, 255, 255, 0.105);
+  font-family: var(--font-display);
+  font-size: clamp(80px, 17vw, 285px);
+  font-weight: 500;
+  line-height: 0.76;
+  letter-spacing: -0.075em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+
+/* Tablet */
+
+@media (min-width: 700px) {
+  .footer-top {
+    grid-template-columns:
+      minmax(260px, 1.6fr)
+      repeat(3, minmax(120px, 0.7fr));
+    gap: 36px;
+  }
+
+  .footer-meta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+
+/* Desktop */
+
+@media (min-width: 1000px) {
+  .site-footer {
+    padding-top: 88px;
+  }
+
+  .footer-top {
+    grid-template-columns:
+      minmax(320px, 1.75fr)
+      repeat(3, minmax(150px, 0.7fr));
+    gap: 64px;
+  }
+
+  .footer-word-wrap {
+    margin-top: 74px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 699px) {
+  .site-footer {
+    padding-top: 64px;
+  }
+
+  .footer-top {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+    gap:
+      42px
+      24px;
+  }
+
+  .footer-brand-column {
+    grid-column: 1 / -1;
+  }
+
+  .footer-links-column:nth-child(4) {
+    grid-column: 1 / -1;
+  }
+
+  .footer-meta {
+    margin-top: 54px;
+  }
+
+  .footer-word-wrap {
+    margin-top: 46px;
+  }
+
+  .footer-word {
+    font-size: 21vw;
+  }
+}
+
+
+@media (max-width: 420px) {
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-brand-column,
+  .footer-links-column:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-links a {
+    transition: none;
+  }
+}
+
+
+/* =========================================================
+   CONTACT REFINEMENT + BOOKING CHOOSER
+   ========================================================= */
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.contact-primary {
+  border: 0;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.contact-detail {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.contact-detail > div:last-child {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contact-detail-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.contact-detail-icon svg,
+.footer-mini-icon svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.booking-option-icon svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-detail-icon .icon-fill,
+.booking-option-icon .icon-fill,
+.footer-mini-icon .icon-fill {
+  fill: currentColor;
+  stroke: none;
+}
+
+.booking-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(10, 11, 10, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: bookingBackdropIn 0.22s ease;
+}
+
+.booking-modal {
+  width: min(100%, 470px);
+  padding: 27px;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow:
+    0 30px 90px
+    rgba(0, 0, 0, 0.18);
+  animation: bookingModalIn 0.32s ease;
+}
+
+.booking-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.booking-modal-eyebrow {
+  display: block;
+  margin-bottom: 9px;
+  color: #979792;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.booking-modal h3 {
+  margin: 0;
+  max-width: 330px;
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.03;
+  letter-spacing: -0.035em;
+}
+
+.booking-modal-close {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f0f0ed;
+  color: var(--color-ink);
+  font-size: 21px;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.booking-modal-close:hover {
+  background: var(--color-accent-soft);
+  transform: rotate(5deg);
+}
+
+.booking-modal-copy {
+  margin: 14px 0 24px;
+  color: var(--color-muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.booking-options {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.booking-option {
+  display: grid;
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    auto;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 13px;
+  border:
+    1px solid
+    rgba(17, 18, 17, 0.09);
+  border-radius: 15px;
+  color: var(--color-ink);
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.booking-option:hover {
+  border-color:
+    rgba(0, 185, 243, 0.2);
+  background: var(--color-accent-soft);
+  transform: translateX(2px);
+}
+
+.booking-option-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f2f2ef;
+  color: #666762;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.booking-option:hover .booking-option-icon {
+  background: #fff;
+  color: var(--color-accent-dark);
+}
+
+.booking-option-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.booking-option-content strong {
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.booking-option-content small {
+  color: var(--color-muted);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.booking-option-arrow {
+  color: #9b9b96;
+  font-size: 14px;
+}
+
+.booking-modal-note {
+  margin: 19px 0 0;
+  padding-top: 16px;
+  border-top:
+    1px solid
+    rgba(17, 18, 17, 0.09);
+  color: #aaa9a4;
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FOOTER REFINEMENT
+   ========================================================= */
+
+.footer-contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-mini-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.footer-contact-links a:hover .footer-mini-icon {
+  color: var(--color-accent);
+}
+
+
+/* Mobile booking sheet */
+
+@media (max-width: 639px) {
+  .booking-modal-backdrop {
+    align-items: end;
+    padding: 10px;
+  }
+
+  .booking-modal {
+    width: 100%;
+    padding:
+      24px
+      20px
+      calc(22px + env(safe-area-inset-bottom));
+    border-radius:
+      24px
+      24px
+      18px
+      18px;
+  }
+
+  .booking-modal h3 {
+    font-size: 27px;
+  }
+
+  .booking-option {
+    padding:
+      13px
+      12px;
+  }
+}
+
+
+@keyframes bookingBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes bookingModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .booking-modal-backdrop,
+  .booking-modal {
+    animation: none;
+  }
+
+  .booking-modal-close,
+  .booking-option,
+  .booking-option-icon {
+    transition: none;
+  }
+}
+
+
+/* =========================================================
+   SMART SCROLLING HEADER
+   ========================================================= */
+
+.site-header {
+  transform: translateY(0);
+  opacity: 1;
+  transition:
+    transform 0.5s cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    ),
+    opacity 0.32s ease;
+  will-change: transform;
+}
+
+.site-header.is-hidden {
+  transform: translateY(-8px);
+  opacity: 0.48;
+  pointer-events: auto;
+}
+
+.site-header.is-hidden .nav-shell {
+  background: rgba(255, 255, 255, 0.38);
+  border-color: rgba(255, 255, 255, 0.46);
+  box-shadow: 0 8px 24px rgba(17, 18, 17, 0.035);
+}
+
+
+/* MyndWorks lockup */
+
+.header-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.header-brand-mark {
+  width: 28px;
+  height: 28px;
+  display: block;
+  object-fit: contain;
+}
+
+
+/*
+ * Avoid directional animation for people
+ * who prefer reduced motion.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header {
+    transition: none;
+  }
+}
+
+
+/* =========================================================
+   FINAL MOBILE TYPOGRAPHY SCALE
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  /* -----------------------------------------
+     Hero
+     ----------------------------------------- */
+
+  .hero-heading {
+    font-size: clamp(32px, 9vw, 37px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+  }
+
+  .hero-lede {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .hero-kicker {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .hero-meta span {
+    font-size: 8.5px;
+    letter-spacing: 0.11em;
+  }
+
+
+  /* -----------------------------------------
+     Main editorial section headings
+     ----------------------------------------- */
+
+  #about h2,
+  #services h2,
+  #first-visit h2,
+  #stories h2,
+  #faq h2,
+  #contact h2,
+  .about-heading,
+  .services-heading,
+  .process-heading,
+  .holistic-heading,
+  .holistic-care-heading,
+  .stories-heading,
+  .faq-heading,
+  .contact-heading {
+    font-size: clamp(34px, 10vw, 39px);
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+
+  /* Contact remains a little more dramatic,
+     but not oversized on a phone */
+  .contact-heading {
+    font-size: clamp(36px, 10.5vw, 41px);
+    line-height: 0.98;
+  }
+
+
+  /* -----------------------------------------
+     First Visit active-step heading
+     ----------------------------------------- */
+
+  .process-step-title,
+  .process-content h3 {
+    font-size: clamp(27px, 7.5vw, 32px);
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+
+  /* -----------------------------------------
+     Cards / secondary headings
+     ----------------------------------------- */
+
+  .service-card h3,
+  .holistic-card h3,
+  .story-card h3,
+  .contact-detail-value {
+    line-height: 1.15;
+  }
+
+  .service-card h3,
+  .holistic-card h3 {
+    font-size: 19px;
+  }
+
+
+  /* -----------------------------------------
+     Story testimonial text
+     ----------------------------------------- */
+
+  .story-quote {
+    font-size: clamp(20px, 5.8vw, 24px);
+    line-height: 1.28;
+    letter-spacing: -0.022em;
+  }
+
+
+  /* -----------------------------------------
+     FAQ
+     ----------------------------------------- */
+
+  .faq-question > span:first-child {
+    font-size: 17px;
+    line-height: 1.3;
+  }
+
+  .faq-answer-inner p {
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+
+  /* -----------------------------------------
+     General supporting copy
+     ----------------------------------------- */
+
+  .about-copy,
+  .services-intro,
+  .process-copy,
+  .holistic-intro,
+  .faq-lede,
+  .contact-copy {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+
+  /* -----------------------------------------
+     Eyebrows / section labels
+     ----------------------------------------- */
+
+  .section-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+  }
+
+
+  /* -----------------------------------------
+     Contact modal
+     ----------------------------------------- */
+
+  .booking-modal h3 {
+    font-size: 25px;
+    line-height: 1.04;
+  }
+
+  .booking-modal-copy {
+    font-size: 12px;
+  }
+
+  .booking-option-content strong {
+    font-size: 13px;
+  }
+
+  .booking-option-content small {
+    font-size: 11px;
+  }
+}
+
+
+/* Extra-small phones */
+
+@media (max-width: 380px) {
+  .hero-heading {
+    font-size: 30px;
+  }
+
+  #about h2,
+  #services h2,
+  #first-visit h2,
+  #stories h2,
+  #faq h2,
+  #contact h2,
+  .about-heading,
+  .services-heading,
+  .process-heading,
+  .holistic-heading,
+  .holistic-care-heading,
+  .stories-heading,
+  .faq-heading {
+    font-size: 32px;
+  }
+
+  .contact-heading {
+    font-size: 34px;
+  }
+
+  .story-quote {
+    font-size: 19px;
+  }
+}
+
+
+/* =========================================================
+   FINAL MOBILE SERVICES CARD RHYTHM
+   ========================================================= */
+
+@media (max-width: 639px) {
+  .services-grid {
+    gap: 14px;
+  }
+
+  .service-card {
+    min-height: 0;
+    height: auto;
+    padding: 22px 20px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /*
+   * Keep the number / category row aligned
+   * consistently across every card.
+   */
+  .service-card-top {
+    min-height: 34px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .service-thumb,
+  .service-tag {
+    flex-shrink: 0;
+  }
+
+  /*
+   * Main card content uses one predictable
+   * vertical rhythm on phones.
+   */
+  .service-card-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card-content > h3 {
+    margin: 0;
+    line-height: 1.08;
+  }
+
+  /*
+   * Mobile never depends on hover, so the
+   * supporting content is permanently open.
+   */
+  .service-reveal {
+    grid-template-rows: 1fr !important;
+  }
+
+  .service-reveal-inner {
+    overflow: visible;
+    padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .service-intro {
+    margin: 0;
+    min-height: 0;
+    line-height: 1.6;
+  }
+
+  .service-detail-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .service-detail-list li {
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .service-card-link {
+    margin-top: 3px;
+  }
+}
+
+
+/* =========================================================
+   ABOUT — ALIGN CENTER COPY WITH LEFT IMAGE
+   ========================================================= */
+
+@media (min-width: 1100px) {
+  .about-copy {
+    align-self: start;
+    margin-top: 148px;
+  }
+}
+
+
+/* =========================================================
+   MYNDWORKS — CALM CANVAS SYSTEM
+   Final visual refinement
+   ========================================================= */
+
+:root {
+  --color-ink: #1d1f1d;
+  --color-paper: #fbfbfa;
+  --color-sand: #f7f7f4;
+  --color-muted: #767872;
+
+  --mw-white: #ffffff;
+  --mw-canvas: #fbfbfa;
+  --mw-soft: #f8f8f6;
+  --mw-soft-warm: #faf9f7;
+
+  --mw-ink: #1d1f1d;
+  --mw-body: #696b66;
+  --mw-subtle: #9b9c97;
+  --mw-heading-muted: #b6b7b2;
+
+  --mw-line: rgba(29, 31, 29, 0.075);
+  --mw-line-soft: rgba(29, 31, 29, 0.05);
+
+  --mw-shadow:
+    0 10px 34px
+    rgba(20, 22, 20, 0.025);
+}
+
+
+/* ---------------------------------------------------------
+   MAIN CANVAS
+   --------------------------------------------------------- */
+
+html,
+body {
+  background: var(--mw-canvas);
+}
+
+body {
+  color: var(--mw-ink);
+}
+
+
+/* ---------------------------------------------------------
+   SOFT SECTION RHYTHM
+
+   The differences are deliberately tiny.
+   Users feel the section change without seeing
+   large bands of colour.
+   --------------------------------------------------------- */
+
+#about {
+  background: #ffffff !important;
+}
+
+#services {
+  background: #f8f8f6 !important;
+}
+
+#first-visit {
+  background: #fcfcfb !important;
+}
+
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #f9f9f7 !important;
+}
+
+#stories {
+  background: #ffffff !important;
+}
+
+#faq {
+  background: #f8f8f6 !important;
+}
+
+#contact {
+  background: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   NEW SECTION LOCATOR
+
+   Replaces the long line + star system.
+   --------------------------------------------------------- */
+
+.section-eyebrow {
+  width: fit-content !important;
+
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+
+  padding: 8px 12px !important;
+
+  border:
+    1px solid
+    rgba(29, 31, 29, 0.045);
+
+  border-radius: 999px;
+
+  background:
+    rgba(29, 31, 29, 0.028);
+
+  color: #777973 !important;
+
+  font-size: 9.5px !important;
+  font-weight: 600 !important;
+  line-height: 1 !important;
+
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase;
+}
+
+
+/* Remove old long divider */
+
+.section-eyebrow::after {
+  display: none !important;
+  content: none !important;
+}
+
+
+/* Replace old star with quiet locator */
+
+.section-eyebrow::before {
+  content: "" !important;
+
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 185, 243, 0.78);
+
+  box-shadow:
+    0 0 0 4px
+    rgba(0, 185, 243, 0.075);
+}
+
+
+/* ---------------------------------------------------------
+   EDITORIAL HEADINGS
+   --------------------------------------------------------- */
+
+.about-heading,
+.services-heading,
+.process-heading,
+.holistic-heading,
+.holistic-care-heading,
+.stories-heading,
+.faq-heading {
+  color: var(--mw-ink);
+}
+
+
+/* Grey editorial second line */
+
+.about-heading span,
+.services-heading span,
+.process-heading span,
+.holistic-heading span,
+.holistic-care-heading span,
+.stories-heading span,
+.faq-heading span {
+  color: var(--mw-heading-muted) !important;
+}
+
+
+/* ---------------------------------------------------------
+   BODY TEXT
+
+   Slightly softer than before, but still readable.
+   --------------------------------------------------------- */
+
+.about-copy,
+.services-intro,
+.process-copy,
+.holistic-intro,
+.faq-lede {
+  color: var(--mw-body);
+}
+
+
+/* ---------------------------------------------------------
+   SERVICES
+   --------------------------------------------------------- */
+
+.service-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+
+  border:
+    1px solid
+    var(--mw-line-soft) !important;
+
+  box-shadow:
+    var(--mw-shadow) !important;
+}
+
+
+/* Keep priority accents quiet */
+
+.service-card:hover {
+  border-color:
+    rgba(0, 185, 243, 0.13) !important;
+}
+
+
+/* ---------------------------------------------------------
+   HOLISTIC CARE
+   --------------------------------------------------------- */
+
+.holistic-card {
+  background: rgba(255, 255, 255, 0.94) !important;
+
+  border:
+    1px solid
+    var(--mw-line-soft) !important;
+
+  box-shadow:
+    var(--mw-shadow) !important;
+}
+
+
+/* Make number circles quieter */
+
+.holistic-card-number,
+.holistic-number,
+.service-number {
+  background:
+    rgba(0, 185, 243, 0.075) !important;
+
+  color:
+    #5d6260 !important;
+}
+
+
+/* ---------------------------------------------------------
+   STORIES
+   --------------------------------------------------------- */
+
+.story-card {
+  background: #f7f7f5 !important;
+
+  border:
+    1px solid
+    rgba(29, 31, 29, 0.045);
+
+  box-shadow: none !important;
+}
+
+.story-avatar {
+  background:
+    rgba(0, 185, 243, 0.07) !important;
+}
+
+
+/* ---------------------------------------------------------
+   FAQ
+   --------------------------------------------------------- */
+
+.faq-item,
+.faq-item:first-child {
+  border-color:
+    rgba(29, 31, 29, 0.09) !important;
+}
+
+.faq-toggle {
+  background:
+    rgba(29, 31, 29, 0.045) !important;
+
+  color:
+    #5e605c !important;
+}
+
+.faq-item.is-open .faq-toggle {
+  background:
+    var(--color-accent) !important;
+
+  color: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   CONTACT — retain contrast but soften the black
+   --------------------------------------------------------- */
+
+.contact-panel {
+  background:
+    #181a18 !important;
+}
+
+.contact-detail {
+  border-color:
+    rgba(255, 255, 255, 0.085) !important;
+}
+
+.contact-details {
+  border-color:
+    rgba(255, 255, 255, 0.085) !important;
+}
+
+.contact-detail-icon {
+  background:
+    rgba(255, 255, 255, 0.04) !important;
+
+  color:
+    rgba(255, 255, 255, 0.34) !important;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER
+   --------------------------------------------------------- */
+
+.site-footer {
+  background:
+    #151715 !important;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTONS
+
+   Keep brand blue strong only where the visitor
+   needs to make an important decision.
+   --------------------------------------------------------- */
+
+.btn-lime,
+.contact-primary {
+  box-shadow: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   HEADER GLASS — softer while stationary
+   --------------------------------------------------------- */
+
+.nav-shell {
+  border-color:
+    rgba(255, 255, 255, 0.55);
+
+  box-shadow:
+    0 8px 28px
+    rgba(20, 22, 20, 0.035);
+}
+
+.nav-shell.is-scrolled {
+  background:
+    rgba(255, 255, 255, 0.82);
+
+  border-color:
+    rgba(255, 255, 255, 0.7);
+
+  box-shadow:
+    0 10px 30px
+    rgba(20, 22, 20, 0.055);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 639px) {
+
+  .section-eyebrow {
+    padding:
+      7px
+      10px !important;
+
+    gap: 8px;
+
+    font-size:
+      8.5px !important;
+  }
+
+  .section-eyebrow::before {
+    width: 5px;
+    height: 5px;
+    flex-basis: 5px;
+
+    box-shadow:
+      0 0 0 3px
+      rgba(0, 185, 243, 0.07);
+  }
+
+  .service-card,
+  .holistic-card {
+    border-radius: 20px;
+  }
+}
+
+
+/* =========================================================
+   SOURCE-STYLE FINAL TYPOGRAPHY + SECTION RHYTHM
+   ========================================================= */
+
+:root {
+  --mw-ink: #141514;
+  --mw-body: #747670;
+  --mw-muted: #9d9e99;
+  --mw-heading-muted: #aaa9a5;
+
+  --mw-white: #ffffff;
+  --mw-paper: #fbfbfa;
+  --mw-soft: #f7f7f4;
+  --mw-sand: #f1f0ec;
+
+  --mw-line: rgba(20, 21, 20, 0.10);
+  --mw-line-soft: rgba(20, 21, 20, 0.065);
+
+  --color-ink: var(--mw-ink);
+  --color-muted: var(--mw-body);
+
+  /*
+   * Slightly softer version of the brand blue
+   * for passive accents.
+   */
+  --color-accent-soft: #edf9fd;
+}
+
+
+/* =========================================================
+   SECTION BACKGROUNDS
+   ========================================================= */
+
+#about {
+  background: var(--mw-white) !important;
+}
+
+#services {
+  background: var(--mw-soft) !important;
+}
+
+#first-visit {
+  background: var(--mw-sand) !important;
+}
+
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #fafaf8 !important;
+}
+
+#stories {
+  background: var(--mw-white) !important;
+}
+
+#faq {
+  background: #f8f8f6 !important;
+}
+
+#contact {
+  background: var(--mw-white) !important;
+}
+
+
+/* =========================================================
+   SOURCE-STYLE SECTION LABEL
+   Star + hairline divider
+   ========================================================= */
+
+.section-eyebrow {
+  width: 100% !important;
+
+  display: flex !important;
+  align-items: center;
+  gap: 14px;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: #6f716d !important;
+
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+}
+
+
+/* Source-style star */
+
+.section-eyebrow::before {
+  content: "✳" !important;
+
+  width: auto !important;
+  height: auto !important;
+  flex: 0 0 auto !important;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: var(--color-accent);
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+/* Long quiet divider */
+
+.section-eyebrow::after {
+  content: "" !important;
+
+  display: block !important;
+
+  height: 1px;
+  flex: 1;
+
+  background: var(--mw-line);
+
+  margin-left: 2px;
+}
+
+
+/* =========================================================
+   MAIN EDITORIAL HEADINGS
+   ========================================================= */
+
+.about-heading,
+.services-heading,
+.process-heading,
+.holistic-heading,
+.holistic-care-heading,
+.stories-heading,
+.faq-heading {
+  margin-top: 0;
+
+  font-family: var(--font-display);
+
+  font-size: clamp(48px, 4.45vw, 68px) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.98 !important;
+
+  letter-spacing: -0.047em !important;
+
+  color: var(--mw-ink) !important;
+}
+
+
+/* Source-style muted second phrase */
+
+.about-heading span,
+.services-heading span,
+.process-heading span,
+.holistic-heading span,
+.holistic-care-heading span,
+.stories-heading span,
+.faq-heading span {
+  color: var(--mw-heading-muted) !important;
+
+  font-weight: 400 !important;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.about-copy {
+  color: var(--mw-body);
+  font-weight: 400;
+}
+
+.about-copy strong,
+.about-copy b {
+  color: var(--mw-ink);
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+
+.service-card {
+  background: #ffffff !important;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.045) !important;
+
+  box-shadow:
+    0 8px 28px
+    rgba(20, 21, 20, 0.025) !important;
+}
+
+.service-card h3 {
+  font-weight: 400 !important;
+
+  letter-spacing: -0.035em;
+}
+
+.service-tag {
+  color: #6f716d;
+  background: transparent;
+  border-color: rgba(20, 21, 20, 0.13);
+}
+
+
+/* Priority/number accents */
+
+.service-number {
+  background:
+    var(--color-accent-soft) !important;
+
+  color:
+    var(--mw-ink) !important;
+}
+
+
+/* =========================================================
+   FIRST VISIT
+   ========================================================= */
+
+.process-step-title,
+.process-content h3 {
+  font-weight: 400 !important;
+
+  letter-spacing: -0.04em;
+}
+
+.process-copy {
+  color: var(--mw-body);
+}
+
+
+/* Active journey tab stays strong black,
+   like the source */
+.process-tab.is-active,
+.process-tab.active {
+  background: var(--mw-ink) !important;
+  color: #fff !important;
+}
+
+
+/* =========================================================
+   HOLISTIC CARE
+   ========================================================= */
+
+.holistic-card {
+  background: #ffffff !important;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.04) !important;
+
+  box-shadow:
+    0 8px 28px
+    rgba(20, 21, 20, 0.025) !important;
+}
+
+.holistic-card h3 {
+  font-weight: 400 !important;
+  letter-spacing: -0.035em;
+}
+
+.holistic-card-number,
+.holistic-number {
+  background:
+    var(--color-accent-soft) !important;
+
+  color:
+    var(--mw-ink) !important;
+}
+
+
+/* =========================================================
+   STORIES
+   ========================================================= */
+
+.story-card {
+  background: #f5f5f2 !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.story-quote {
+  color: var(--mw-ink);
+
+  font-weight: 400 !important;
+
+  letter-spacing: -0.035em;
+}
+
+.story-quote-mark {
+  color: var(--color-accent) !important;
+}
+
+.story-avatar {
+  background:
+    var(--color-accent-soft) !important;
+
+  color:
+    var(--mw-ink) !important;
+}
+
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.faq-question > span:first-child {
+  font-weight: 400 !important;
+
+  letter-spacing: -0.028em;
+}
+
+.faq-answer-inner p {
+  color: var(--mw-body);
+}
+
+.faq-item,
+.faq-item:first-child {
+  border-color:
+    rgba(20, 21, 20, 0.11) !important;
+}
+
+.faq-toggle {
+  background:
+    rgba(20, 21, 20, 0.045) !important;
+
+  color:
+    var(--mw-ink) !important;
+}
+
+.faq-item.is-open .faq-toggle {
+  background:
+    var(--color-accent) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+/* =========================================================
+   SUPPORTING COPY
+   ========================================================= */
+
+.services-intro,
+.process-copy,
+.holistic-intro,
+.faq-lede {
+  color: var(--mw-body);
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   DESKTOP SPACING
+   Source uses generous air around headings.
+   ========================================================= */
+
+@media (min-width: 900px) {
+
+  #about,
+  #services,
+  #first-visit,
+  #stories,
+  #faq,
+  .holistic-section,
+  .holistic-care-section {
+    padding-top: 108px;
+    padding-bottom: 116px;
+  }
+
+  .section-eyebrow {
+    margin-bottom: 48px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (min-width: 640px) and (max-width: 899px) {
+
+  .about-heading,
+  .services-heading,
+  .process-heading,
+  .holistic-heading,
+  .holistic-care-heading,
+  .stories-heading,
+  .faq-heading {
+    font-size:
+      clamp(44px, 7vw, 56px) !important;
+  }
+
+  .section-eyebrow {
+    margin-bottom: 38px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .about-heading,
+  .services-heading,
+  .process-heading,
+  .holistic-heading,
+  .holistic-care-heading,
+  .stories-heading,
+  .faq-heading {
+    font-size:
+      clamp(34px, 10vw, 39px) !important;
+
+    font-weight: 400 !important;
+
+    line-height: 0.99 !important;
+
+    letter-spacing:
+      -0.045em !important;
+  }
+
+  .section-eyebrow {
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+    font-size:
+      8.5px !important;
+
+    letter-spacing:
+      0.145em !important;
+  }
+
+  .section-eyebrow::before {
+    font-size: 11px;
+  }
+
+  .service-card h3,
+  .holistic-card h3 {
+    font-weight: 400 !important;
+  }
+}
+
+
+/* =========================================================
+   RESTORE LIGHTER MYNDWORKS SECTION PALETTE
+   Keep source-style typography, soften backgrounds
+   ========================================================= */
+
+#about {
+  background: #ffffff !important;
+}
+
+#services {
+  background: #fafaf8 !important;
+}
+
+#first-visit {
+  background: #f8f8f6 !important;
+}
+
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #fbfbfa !important;
+}
+
+#stories {
+  background: #ffffff !important;
+}
+
+#faq {
+  background: #fafaf8 !important;
+}
+
+#contact {
+  background: #ffffff !important;
+}
+
+
+/* Keep cards just slightly separated from their canvas */
+
+.service-card,
+.holistic-card {
+  background: #ffffff !important;
+
+  border-color:
+    rgba(20, 21, 20, 0.045) !important;
+
+  box-shadow:
+    0 8px 28px
+    rgba(20, 21, 20, 0.022) !important;
+}
+
+
+/* Testimonial card can remain slightly more visible */
+
+.story-card {
+  background: #f7f7f5 !important;
+}
+
+
+/* FAQ should still feel almost white */
+
+.faq-item,
+.faq-item:first-child {
+  border-color:
+    rgba(20, 21, 20, 0.085) !important;
+}
+
+
+/* =========================================================
+   MYNDWORKS — PLAIN WHITE SECTION SYSTEM
+   Section hairlines provide the visual separation
+   ========================================================= */
+
+/* All main content sections use one clean canvas */
+
+#about,
+#services,
+#first-visit,
+#stories,
+#faq,
+#contact,
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION DIVIDER / LOCATION LINE
+   --------------------------------------------------------- */
+
+.section-eyebrow {
+  width: 100% !important;
+
+  display: flex !important;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 46px;
+
+  padding: 0 !important;
+
+  border: 0 !important;
+  border-radius: 0 !important;
+
+  background: transparent !important;
+
+  color: #777974 !important;
+
+  font-size: 9.5px !important;
+  font-weight: 500 !important;
+
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+}
+
+
+/* Small MyndWorks blue locator */
+
+.section-eyebrow::before {
+  content: "✳" !important;
+
+  width: auto !important;
+  height: auto !important;
+
+  flex: 0 0 auto !important;
+
+  background: transparent !important;
+  box-shadow: none !important;
+
+  color: var(--color-accent);
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+/* Long quiet section divider */
+
+.section-eyebrow::after {
+  content: "" !important;
+
+  display: block !important;
+
+  height: 1px;
+  flex: 1;
+
+  margin-left: 2px;
+
+  background:
+    rgba(20, 21, 20, 0.09);
+}
+
+
+/* ---------------------------------------------------------
+   CARD SURFACES
+
+   The page stays white, so cards use a tiny tonal shift
+   rather than stronger section colours.
+   --------------------------------------------------------- */
+
+.service-card,
+.holistic-card {
+  background: #fbfbfa !important;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.045) !important;
+
+  box-shadow:
+    0 8px 26px
+    rgba(20, 21, 20, 0.018) !important;
+}
+
+
+.story-card {
+  background: #f8f8f6 !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* Journey bar still needs a soft surface */
+
+.process-tabs,
+.process-nav,
+.journey-tabs {
+  background: #f8f8f6 !important;
+}
+
+
+/* FAQ remains open and light */
+
+.faq-item,
+.faq-item:first-child {
+  border-color:
+    rgba(20, 21, 20, 0.09) !important;
+}
+
+
+/* ---------------------------------------------------------
+   MORE BREATH BETWEEN SECTIONS
+   --------------------------------------------------------- */
+
+@media (min-width: 900px) {
+  #about,
+  #services,
+  #first-visit,
+  #stories,
+  #faq,
+  #contact,
+  .holistic-section,
+  .holistic-care-section {
+    padding-top: 112px;
+    padding-bottom: 120px;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 639px) {
+  .section-eyebrow {
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+    font-size: 8.5px !important;
+
+    letter-spacing: 0.145em !important;
+  }
+
+  .section-eyebrow::before {
+    font-size: 10px;
+  }
+
+  .section-eyebrow::after {
+    background:
+      rgba(20, 21, 20, 0.075);
+  }
+}
+
+
+/* =========================================================
+   RESTORE SOFT SECTION RHYTHM
+   ========================================================= */
+
+#about {
+  background: #ffffff !important;
+}
+
+#services {
+  background: #fafaf8 !important;
+}
+
+#first-visit {
+  background: #f8f8f6 !important;
+}
+
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #fbfbfa !important;
+}
+
+#stories {
+  background: #ffffff !important;
+}
+
+#faq {
+  background: #fafaf8 !important;
+}
+
+#contact {
+  background: #ffffff !important;
+}
+
+
+/* Keep card separation subtle */
+
+.service-card,
+.holistic-card {
+  background: #ffffff !important;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.045) !important;
+
+  box-shadow:
+    0 8px 26px
+    rgba(20, 21, 20, 0.02) !important;
+}
+
+.story-card {
+  background: #f7f7f5 !important;
+}
+
+
+/* Keep the source-style section line */
+
+.section-eyebrow::after {
+  background:
+    rgba(20, 21, 20, 0.09) !important;
+}
+
+
+/* =========================================================
+   MYNDWORKS — FINAL SECTION COLOUR RHYTHM
+   White base + soft grey + restrained pale blue
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   ABOUT
+   Keep clean and photographic
+   --------------------------------------------------------- */
+
+#about {
+  background: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   SERVICES
+   Neutral separator
+   --------------------------------------------------------- */
+
+#services {
+  background: #f5f5f7 !important;
+}
+
+#services .service-card {
+  background: #ffffff !important;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.04) !important;
+
+  box-shadow:
+    0 8px 28px
+    rgba(20, 21, 20, 0.018) !important;
+}
+
+
+/* ---------------------------------------------------------
+   FIRST VISIT
+   Return to white so the journey feels open
+   --------------------------------------------------------- */
+
+#first-visit {
+  background: #ffffff !important;
+}
+
+
+/* Keep the journey navigation subtly separated */
+
+#first-visit .process-tabs,
+#first-visit .process-nav,
+#first-visit .journey-tabs {
+  background: #f5f5f7 !important;
+}
+
+
+/* ---------------------------------------------------------
+   HOLISTIC CARE
+   Soft MyndWorks blue separator
+   --------------------------------------------------------- */
+
+.holistic-section,
+.holistic-care-section,
+#holistic-care {
+  background: #eef4fc !important;
+}
+
+
+/* White cards become particularly clean on pale blue */
+
+.holistic-card {
+  background: #ffffff !important;
+
+  border:
+    1px solid
+    rgba(41, 78, 118, 0.045) !important;
+
+  box-shadow:
+    0 8px 28px
+    rgba(32, 66, 102, 0.025) !important;
+}
+
+
+/* Number detail stays even softer */
+
+.holistic-card-number,
+.holistic-number {
+  background: #f6faff !important;
+}
+
+
+/* ---------------------------------------------------------
+   STORIES
+   Back to pure white
+   --------------------------------------------------------- */
+
+#stories {
+  background: #ffffff !important;
+}
+
+.story-card {
+  background: #f5f5f7 !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* ---------------------------------------------------------
+   FAQ
+   Second neutral separator
+   --------------------------------------------------------- */
+
+#faq {
+  background: #f5f5f7 !important;
+}
+
+
+/* Keep FAQ rows open rather than turning them into cards */
+
+#faq .faq-item,
+#faq .faq-item:first-child {
+  border-color:
+    rgba(20, 21, 20, 0.085) !important;
+}
+
+
+/* ---------------------------------------------------------
+   CONTACT
+   White canvas around the dark conversion panel
+   --------------------------------------------------------- */
+
+#contact {
+  background: #ffffff !important;
+}
+
+
+/* ---------------------------------------------------------
+   SECTION DIVIDERS
+
+   Slightly adapt the hairline depending on the surface.
+   --------------------------------------------------------- */
+
+#about .section-eyebrow::after,
+#first-visit .section-eyebrow::after,
+#stories .section-eyebrow::after,
+#contact .section-eyebrow::after {
+  background:
+    rgba(20, 21, 20, 0.09) !important;
+}
+
+#services .section-eyebrow::after,
+#faq .section-eyebrow::after {
+  background:
+    rgba(20, 21, 20, 0.075) !important;
+}
+
+.holistic-section .section-eyebrow::after,
+.holistic-care-section .section-eyebrow::after,
+#holistic-care .section-eyebrow::after {
+  background:
+    rgba(49, 86, 124, 0.10) !important;
+}
+
+
+/* Keep the blue star restrained */
+
+.section-eyebrow::before {
+  color: #00b9f3 !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+
+   Preserve the same colour rhythm on phones.
+   --------------------------------------------------------- */
+
+@media (max-width: 639px) {
+  #services {
+    background: #f5f5f7 !important;
+  }
+
+  .holistic-section,
+  .holistic-care-section,
+  #holistic-care {
+    background: #eef4fc !important;
+  }
+
+  #faq {
+    background: #f5f5f7 !important;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — FINAL SOFT BLUE VERSION
+   ========================================================= */
+
+body.contact-modal-open {
+  overflow: hidden;
+}
+
+
+/* Section canvas */
+
+#contact,
+.contact-section {
+  background: #ffffff !important;
+}
+
+
+/* Main soft-blue container */
+
+.contact-panel.contact-panel-soft,
+.contact-panel {
+  margin-top: 42px;
+
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.45fr)
+    minmax(340px, 0.55fr);
+
+  min-height: 600px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(62, 97, 135, 0.08) !important;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f8fbff 0%,
+      #eef4fc 65%,
+      #edf5fd 100%
+    ) !important;
+
+  color: #151817 !important;
+
+  box-shadow:
+    0 18px 50px
+    rgba(41, 69, 98, 0.055) !important;
+}
+
+
+/* Left content */
+
+.contact-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 58px 56;
+}
+
+
+.contact-small {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color:
+    rgba(31, 48, 65, 0.48) !important;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+
+/* Heading now follows the lighter source typography */
+
+.contact-heading {
+  margin: 0;
+
+  max-width: 830px;
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(48px, 5.4vw, 76px) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.97 !important;
+
+  letter-spacing:
+    -0.048em !important;
+
+  color: #171a19 !important;
+}
+
+
+.contact-heading span {
+  display: block;
+
+  color:
+    #9ea8b0 !important;
+
+  font-weight:
+    400 !important;
+}
+
+
+/* Copy */
+
+.contact-copy {
+  margin: 28px 0 0;
+
+  max-width: 570px;
+
+  color:
+    #687580 !important;
+
+  font-size: 15px;
+
+  line-height: 1.72;
+}
+
+
+/* Buttons */
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+
+.contact-primary,
+.contact-secondary {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    0
+    19px;
+
+  border-radius: 999px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.contact-primary {
+  border: 0;
+
+  background:
+    #00b9f3 !important;
+
+  color:
+    #ffffff !important;
+
+  box-shadow:
+    0 8px 20px
+    rgba(0, 185, 243, 0.14);
+}
+
+
+.contact-primary:hover {
+  background:
+    #009fcf !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.contact-secondary {
+  border:
+    1px solid
+    rgba(38, 61, 82, 0.13) !important;
+
+  background:
+    rgba(255, 255, 255, 0.68) !important;
+
+  color:
+    #202724 !important;
+}
+
+
+.contact-secondary:hover {
+  border-color:
+    rgba(0, 185, 243, 0.25) !important;
+
+  background:
+    #ffffff !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   CONTACT DETAILS
+   ========================================================= */
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+
+  border-top: 0 !important;
+
+  border-left:
+    1px solid
+    rgba(46, 77, 105, 0.085) !important;
+
+  background:
+    rgba(255, 255, 255, 0.26) !important;
+}
+
+
+.contact-detail {
+  flex: 1;
+
+  min-height: 0;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 15px;
+
+  padding:
+    24px
+    30px;
+
+  border-right: 0 !important;
+
+  border-bottom:
+    1px solid
+    rgba(46, 77, 105, 0.085) !important;
+
+  background:
+    rgba(255, 255, 255, 0.30);
+}
+
+
+.contact-detail-last {
+  border-bottom:
+    0 !important;
+}
+
+
+.contact-detail-icon {
+  width: 38px;
+  height: 38px;
+
+  flex:
+    0
+    0
+    38px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(0, 185, 243, 0.075) !important;
+
+  color:
+    #6d7d89 !important;
+}
+
+
+.contact-detail-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+.contact-detail-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items:
+    flex-start;
+
+  gap: 6px;
+}
+
+
+.contact-detail-label {
+  display: block;
+
+  color:
+    #8c99a2 !important;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-detail a,
+.contact-detail-value {
+  width: fit-content;
+
+  max-width: 100%;
+
+  color:
+    #26323a !important;
+
+  font-family:
+    var(--font-display);
+
+  font-size: 16px;
+
+  font-weight: 400;
+
+  line-height: 1.35;
+
+  letter-spacing:
+    -0.015em;
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+
+  transition:
+    color
+    0.2s ease;
+}
+
+
+.contact-detail a:hover {
+  color:
+    #00a9dd !important;
+}
+
+
+/* =========================================================
+   CONTACT POPUP
+   ========================================================= */
+
+.contact-modal-backdrop {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 1000;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 20px;
+
+  background:
+    rgba(15, 20, 24, 0.44);
+
+  backdrop-filter:
+    blur(9px);
+
+  -webkit-backdrop-filter:
+    blur(9px);
+
+  animation:
+    contactBackdropIn
+    0.22s
+    ease;
+}
+
+
+.contact-modal {
+  width:
+    min(100%, 500px);
+
+  padding:
+    30px;
+
+  border:
+    1px solid
+    rgba(31, 47, 62, 0.06);
+
+  border-radius:
+    28px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 32px 90px
+    rgba(0, 0, 0, 0.18);
+
+  animation:
+    contactModalIn
+    0.32s
+    ease;
+}
+
+
+.contact-modal-top {
+  display: flex;
+
+  align-items:
+    flex-start;
+
+  justify-content:
+    space-between;
+
+  gap: 24px;
+}
+
+
+.contact-modal-eyebrow {
+  display: block;
+
+  margin-bottom:
+    10px;
+
+  color:
+    #909792;
+
+  font-size:
+    9px;
+
+  font-weight:
+    600;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-modal-title {
+  margin: 0;
+
+  max-width:
+    360px;
+
+  color:
+    #151817;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    31px;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.03;
+
+  letter-spacing:
+    -0.04em;
+}
+
+
+.contact-modal-copy {
+  margin:
+    15px
+    0
+    0;
+
+  color:
+    #858b87;
+
+  font-size:
+    13px;
+
+  line-height:
+    1.6;
+}
+
+
+.contact-modal-close {
+  width: 40px;
+  height: 40px;
+
+  flex:
+    0
+    0
+    40px;
+
+  display: grid;
+
+  place-items:
+    center;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius:
+    50%;
+
+  background:
+    #f1f2ef;
+
+  color:
+    #1c201e;
+
+  font-size:
+    23px;
+
+  font-weight:
+    300;
+
+  line-height:
+    1;
+
+  cursor:
+    pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.contact-modal-close:hover {
+  background:
+    #eef4fc;
+
+  transform:
+    rotate(5deg);
+}
+
+
+/* Popup choices */
+
+.contact-modal-options {
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap: 8px;
+
+  margin-top:
+    26px;
+}
+
+
+.contact-modal-option {
+  display: grid;
+
+  grid-template-columns:
+    52px
+    minmax(0, 1fr)
+    auto;
+
+  align-items:
+    center;
+
+  gap:
+    14px;
+
+  padding:
+    13px
+    14px;
+
+  border:
+    1px solid
+    rgba(31, 47, 62, 0.08);
+
+  border-radius:
+    17px;
+
+  background:
+    #ffffff;
+
+  color:
+    #171b19;
+
+  text-decoration:
+    none;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.contact-modal-option:hover {
+  border-color:
+    rgba(0, 185, 243, 0.18);
+
+  background:
+    #f7fbff;
+
+  transform:
+    translateX(2px);
+}
+
+
+.contact-modal-option-icon {
+  width: 52px;
+  height: 52px;
+
+  display: grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #f3f4f2;
+
+  color:
+    #737b76;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+.contact-modal-option-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+
+.contact-modal-option:hover
+.contact-modal-option-icon {
+  background:
+    #eef8fc;
+
+  color:
+    #008fbc;
+}
+
+
+.contact-modal-option-copy {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction:
+    column;
+
+  gap: 4px;
+}
+
+
+.contact-modal-option-copy strong {
+  color:
+    #171b19;
+
+  font-size:
+    14px;
+
+  font-weight:
+    500;
+}
+
+
+.contact-modal-option-copy span {
+  color:
+    #929792;
+
+  font-size:
+    11px;
+
+  line-height:
+    1.45;
+}
+
+
+.contact-modal-option-arrow {
+  width: 25px;
+  height: 25px;
+
+  display: grid;
+
+  place-items:
+    center;
+
+  color:
+    #9ca29d;
+}
+
+
+.contact-modal-option-arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+.contact-modal-footer {
+  margin-top:
+    20px;
+
+  padding-top:
+    17px;
+
+  border-top:
+    1px solid
+    rgba(31, 47, 62, 0.08);
+
+  color:
+    #a0a5a1;
+
+  font-size:
+    10px;
+
+  line-height:
+    1.55;
+}
+
+
+.contact-modal-footer a {
+  color:
+    #6f7872;
+
+  text-decoration:
+    none;
+}
+
+
+.contact-modal-footer a:hover {
+  color:
+    #00a9dd;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (
+  min-width: 700px
+) and (
+  max-width: 999px
+) {
+
+  .contact-panel.contact-panel-soft,
+  .contact-panel {
+    grid-template-columns:
+      1fr;
+  }
+
+  .contact-details {
+    display: grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    border-left:
+      0 !important;
+
+    border-top:
+      1px solid
+      rgba(46, 77, 105, 0.085) !important;
+  }
+
+  .contact-detail:nth-child(odd) {
+    border-right:
+      1px solid
+      rgba(46, 77, 105, 0.085) !important;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 699px
+) {
+
+  .contact-panel.contact-panel-soft,
+  .contact-panel {
+    grid-template-columns:
+      1fr;
+
+    min-height:
+      0;
+
+    margin-top:
+      30px;
+
+    border-radius:
+      25px;
+  }
+
+
+  .contact-main {
+    padding:
+      34px
+      22px
+      38px;
+  }
+
+
+  .contact-heading {
+    font-size:
+      clamp(
+        36px,
+        10.5vw,
+        41px
+      ) !important;
+
+    line-height:
+      0.99 !important;
+  }
+
+
+  .contact-copy {
+    margin-top:
+      22px;
+
+    font-size:
+      14px;
+
+    line-height:
+      1.65;
+  }
+
+
+  .contact-actions {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+
+    margin-top:
+      28px;
+  }
+
+
+  .contact-primary,
+  .contact-secondary {
+    width:
+      100%;
+  }
+
+
+  .contact-details {
+    border-left:
+      0 !important;
+
+    border-top:
+      1px solid
+      rgba(46, 77, 105, 0.085) !important;
+  }
+
+
+  .contact-detail {
+    padding:
+      20px
+      22px;
+  }
+
+
+  .contact-modal-backdrop {
+    align-items:
+      end;
+
+    padding:
+      10px;
+  }
+
+
+  .contact-modal {
+    width:
+      100%;
+
+    padding:
+      25px
+      20px
+      calc(
+        22px +
+        env(
+          safe-area-inset-bottom
+        )
+      );
+
+    border-radius:
+      25px
+      25px
+      18px
+      18px;
+  }
+
+
+  .contact-modal-title {
+    font-size:
+      27px;
+  }
+
+
+  .contact-modal-options {
+    margin-top:
+      23px;
+  }
+
+
+  .contact-modal-option {
+    grid-template-columns:
+      50px
+      minmax(0, 1fr)
+      auto;
+
+    padding:
+      12px;
+  }
+
+
+  .contact-modal-option-icon {
+    width:
+      50px;
+
+    height:
+      50px;
+  }
+
+
+  .contact-modal-option-icon svg {
+    width:
+      20px;
+
+    height:
+      20px;
+  }
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes contactBackdropIn {
+  from {
+    opacity:
+      0;
+  }
+
+  to {
+    opacity:
+      1;
+  }
+}
+
+
+@keyframes contactModalIn {
+  from {
+    opacity:
+      0;
+
+    transform:
+      translateY(12px)
+      scale(0.985);
+  }
+
+  to {
+    opacity:
+      1;
+
+    transform:
+      none;
+  }
+}
+
+
+@media (
+  prefers-reduced-motion:
+  reduce
+) {
+
+  .contact-modal-backdrop,
+  .contact-modal {
+    animation:
+      none;
+  }
+
+
+  .contact-primary,
+  .contact-secondary,
+  .contact-detail a,
+  .contact-modal-close,
+  .contact-modal-option,
+  .contact-modal-option-icon {
+    transition:
+      none;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — EDITORIAL SPLIT LAYOUT
+   ========================================================= */
+
+.contact-layout-section,
+#contact {
+  background: #eef4fc !important;
+}
+
+
+/* Main layout */
+
+.contact-layout {
+  margin-top: 48px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(480px, 1.05fr);
+
+  align-items: center;
+
+  gap: clamp(
+    60px,
+    8vw,
+    130px
+  );
+}
+
+
+/* =========================================================
+   LEFT SIDE
+   ========================================================= */
+
+.contact-intro {
+  max-width: 700px;
+}
+
+
+.contact-small {
+  display: block;
+
+  margin-bottom: 25px;
+
+  color:
+    #74818b !important;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-heading {
+  margin: 0;
+
+  max-width: 720px;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    clamp(
+      48px,
+      5.2vw,
+      74px
+    ) !important;
+
+  font-weight:
+    400 !important;
+
+  line-height:
+    0.98 !important;
+
+  letter-spacing:
+    -0.048em !important;
+
+  color:
+    #171918 !important;
+}
+
+
+.contact-heading span {
+  display: block;
+
+  color:
+    #a7b0b7 !important;
+
+  font-weight:
+    400 !important;
+}
+
+
+.contact-copy {
+  margin:
+    30px
+    0
+    0;
+
+  max-width:
+    540px;
+
+  color:
+    #697681 !important;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.75;
+}
+
+
+.contact-actions {
+  display: flex;
+
+  flex-wrap:
+    wrap;
+
+  gap: 10px;
+
+  margin-top:
+    34px;
+}
+
+
+.contact-primary,
+.contact-secondary {
+  min-height:
+    46px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    20px;
+
+  border-radius:
+    999px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  font-weight:
+    500;
+
+  line-height:
+    1;
+
+  cursor:
+    pointer;
+
+  text-decoration:
+    none;
+
+  transition:
+    0.2s ease;
+}
+
+
+.contact-primary {
+  border:
+    0;
+
+  background:
+    #00b9f3 !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+.contact-primary:hover {
+  background:
+    #009fcf !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.contact-secondary {
+  border:
+    1px solid
+    rgba(
+      32,
+      49,
+      64,
+      0.12
+    ) !important;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.62
+    ) !important;
+
+  color:
+    #222826 !important;
+}
+
+
+.contact-secondary:hover {
+  background:
+    #ffffff !important;
+
+  border-color:
+    rgba(
+      0,
+      185,
+      243,
+      0.20
+    ) !important;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   RIGHT CONTACT CARD
+   ========================================================= */
+
+.contact-info-card {
+  overflow:
+    hidden;
+
+  border:
+    1px solid
+    rgba(
+      37,
+      64,
+      89,
+      0.07
+    );
+
+  border-radius:
+    30px;
+
+  background:
+    #ffffff;
+
+  box-shadow:
+    0 18px 50px
+    rgba(
+      34,
+      59,
+      82,
+      0.055
+    );
+}
+
+
+.contact-card-header {
+  padding:
+    34px
+    34px
+    28px;
+}
+
+
+.contact-card-eyebrow {
+  display:
+    block;
+
+  margin-bottom:
+    12px;
+
+  color:
+    #8b979f;
+
+  font-size:
+    9px;
+
+  font-weight:
+    600;
+
+  letter-spacing:
+    0.15em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-card-header h3 {
+  margin: 0;
+
+  max-width:
+    420px;
+
+  font-family:
+    var(--font-display);
+
+  color:
+    #181b1a;
+
+  font-size:
+    clamp(
+      28px,
+      2.5vw,
+      38px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    1.04;
+
+  letter-spacing:
+    -0.04em;
+}
+
+
+/* Contact rows */
+
+.contact-card-list {
+  border-top:
+    1px solid
+    rgba(
+      37,
+      64,
+      89,
+      0.07
+    );
+}
+
+
+.contact-card-row {
+  min-height:
+    104px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    16px;
+
+  padding:
+    23px
+    34px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      37,
+      64,
+      89,
+      0.07
+    );
+}
+
+
+.contact-card-row-last {
+  border-bottom:
+    0;
+}
+
+
+.contact-detail-icon {
+  width:
+    42px;
+
+  height:
+    42px;
+
+  flex:
+    0
+    0
+    42px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #eef7fc !important;
+
+  color:
+    #758994 !important;
+}
+
+
+.contact-detail-icon svg {
+  width:
+    18px;
+
+  height:
+    18px;
+}
+
+
+.contact-detail-content {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-start;
+
+  gap:
+    5px;
+}
+
+
+.contact-detail-label {
+  color:
+    #909ba3 !important;
+
+  font-size:
+    9px;
+
+  font-weight:
+    600;
+
+  line-height:
+    1;
+
+  letter-spacing:
+    0.14em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-detail-content a,
+.contact-detail-value {
+  color:
+    #263139 !important;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    16px;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.4;
+
+  letter-spacing:
+    -0.015em;
+
+  text-decoration:
+    none;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.contact-detail-content a:hover {
+  color:
+    #00a9dd !important;
+}
+
+
+/* Bottom booking action */
+
+.contact-card-book {
+  width:
+    calc(100% - 68px);
+
+  min-height:
+    50px;
+
+  margin:
+    10px
+    34px
+    34px;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    space-between;
+
+  padding:
+    0
+    20px;
+
+  border:
+    0;
+
+  border-radius:
+    999px;
+
+  background:
+    #171918;
+
+  color:
+    #ffffff;
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  font-weight:
+    500;
+
+  cursor:
+    pointer;
+
+  transition:
+    background-color
+    0.2s ease,
+    transform
+    0.2s ease;
+}
+
+
+.contact-card-book:hover {
+  background:
+    #00a9dd;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.contact-card-book span {
+  font-size:
+    15px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (
+  max-width: 1000px
+) {
+
+  .contact-layout {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      48px;
+  }
+
+
+  .contact-intro {
+    max-width:
+      700px;
+  }
+
+
+  .contact-info-card {
+    max-width:
+      720px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (
+  max-width: 639px
+) {
+
+  .contact-layout {
+    margin-top:
+      30px;
+
+    gap:
+      36px;
+  }
+
+
+  .contact-heading {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        41px
+      ) !important;
+  }
+
+
+  .contact-copy {
+    margin-top:
+      22px;
+
+    font-size:
+      14px;
+
+    line-height:
+      1.65;
+  }
+
+
+  .contact-actions {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .contact-primary,
+  .contact-secondary {
+    width:
+      100%;
+  }
+
+
+  .contact-info-card {
+    border-radius:
+      24px;
+  }
+
+
+  .contact-card-header {
+    padding:
+      26px
+      22px
+      22px;
+  }
+
+
+  .contact-card-header h3 {
+    font-size:
+      27px;
+  }
+
+
+  .contact-card-row {
+    min-height:
+      92px;
+
+    padding:
+      20px
+      22px;
+  }
+
+
+  .contact-card-book {
+    width:
+      calc(100% - 44px);
+
+    margin:
+      10px
+      22px
+      22px;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — CLEAN WHITE + SIMPLE DETAILS CARD
+   ========================================================= */
+
+#contact,
+.contact-white-section,
+.contact-layout-section {
+  background: #ffffff !important;
+}
+
+
+/* Main spacing */
+
+.contact-layout {
+  margin-top: 48px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(420px, 0.8fr);
+
+  align-items: center;
+
+  gap:
+    clamp(
+      70px,
+      9vw,
+      150px
+    );
+}
+
+
+/* ---------------------------------------------------------
+   LEFT SIDE
+   --------------------------------------------------------- */
+
+.contact-intro {
+  max-width: 690px;
+}
+
+
+.contact-small {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: #7e8580 !important;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+
+.contact-heading {
+  margin: 0;
+
+  max-width: 700px;
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(
+      48px,
+      5.1vw,
+      72px
+    ) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.98 !important;
+
+  letter-spacing:
+    -0.048em !important;
+
+  color: #171918 !important;
+}
+
+
+.contact-heading span {
+  display: block;
+
+  color: #aaaead !important;
+
+  font-weight: 400 !important;
+}
+
+
+.contact-copy {
+  margin: 30px 0 0;
+
+  max-width: 530px;
+
+  color: #737a76 !important;
+
+  font-size: 15px;
+
+  line-height: 1.75;
+}
+
+
+.contact-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT SIMPLE INFO CARD
+   --------------------------------------------------------- */
+
+.contact-simple-card {
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.055);
+
+  border-radius: 28px;
+
+  background: #f5f5f7;
+
+  box-shadow:
+    0 12px 34px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-simple-row {
+  min-height: 112px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding:
+    24px
+    30px;
+
+  border-bottom:
+    1px solid
+    rgba(20, 21, 20, 0.065);
+}
+
+
+.contact-simple-row-last {
+  border-bottom: 0;
+}
+
+
+.contact-simple-icon {
+  width: 44px;
+  height: 44px;
+
+  flex:
+    0
+    0
+    44px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #77838a;
+
+  box-shadow:
+    0 4px 12px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-simple-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+
+.contact-simple-content {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 6px;
+}
+
+
+.contact-simple-content a,
+.contact-simple-content span {
+  color: #252b28;
+
+  font-family:
+    var(--font-display);
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.4;
+
+  letter-spacing:
+    -0.018em;
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.contact-sime-content a:hover {
+  color: #00a9dd;
+}
+
+
+.contact-simple-emails {
+  gap: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+
+    gap: 46px;
+  }
+
+
+  .contact-simple-card {
+    max-width: 720px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 639px) {
+
+  .contact-layout {
+    margin-top: 30px;
+
+    gap: 34px;
+  }
+
+
+  .contact-heading {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        41px
+      ) !important;
+  }
+
+
+  .contact-copy {
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+  }
+
+
+  .contact-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .contact-primary,
+  .contact-secondary {
+    width: 100%;
+  }
+
+
+  .contact-simple-card {
+    border-radius: 22px;
+  }
+
+
+  .contact-simple-row {
+    min-height: 88px;
+
+    gap: 14px;
+
+    padding:
+      18px
+      20px;
+  }
+
+
+  .contact-simple-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+
+  .contact-simple-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .contact-simple-content a,
+  .contact-simple-content span {
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — CLEAN WHITE + SIMPLE DETAILS CARD
+   ========================================================= */
+
+#contact,
+.contact-white-section,
+.contact-layout-section {
+  background: #ffffff !important;
+}
+
+
+/* Main spacing */
+
+.contact-layout {
+  margin-top: 48px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(420px, 0.8fr);
+
+  align-items: center;
+
+  gap:
+    clamp(
+      70px,
+      9vw,
+      150px
+    );
+}
+
+
+/* ---------------------------------------------------------
+   LEFT SIDE
+   --------------------------------------------------------- */
+
+.contact-intro {
+  max-width: 690px;
+}
+
+
+.contact-small {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: #7e8580 !important;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+
+.contact-heading {
+  margin: 0;
+
+  max-width: 700px;
+
+  font-family: var(--font-display);
+
+  font-size:
+    clamp(
+      48px,
+      5.1vw,
+      72px
+    ) !important;
+
+  font-weight: 400 !important;
+
+  line-height: 0.98 !important;
+
+  letter-spacing:
+    -0.048em !important;
+
+  color: #171918 !important;
+}
+
+
+.contact-heading span {
+  display: block;
+
+  color: #aaaead !important;
+
+  font-weight: 400 !important;
+}
+
+
+.contact-copy {
+  margin: 30px 0 0;
+
+  max-width: 530px;
+
+  color: #737a76 !important;
+
+  font-size: 15px;
+
+  line-height: 1.75;
+}
+
+
+.contact-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-top: 34px;
+}
+
+
+/* ---------------------------------------------------------
+   RIGHT SIMPLE INFO CARD
+   --------------------------------------------------------- */
+
+.contact-simple-card {
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.055);
+
+  border-radius: 28px;
+
+  background: #f5f5f7;
+
+  box-shadow:
+    0 12px 34px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-simple-row {
+  min-height: 112px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding:
+    24px
+    30px;
+
+  border-bottom:
+    1px solid
+    rgba(20, 21, 20, 0.065);
+}
+
+
+.contact-simple-row-last {
+  border-bottom: 0;
+}
+
+
+.contact-simple-icon {
+  width: 44px;
+  height: 44px;
+
+  flex:
+    0
+    0
+    44px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  color: #77838a;
+
+  box-shadow:
+    0 4px 12px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-simple-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+
+.contact-simple-content {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 6px;
+}
+
+
+.contact-simple-content a,
+.contact-simple-content span {
+  color: #252b28;
+
+  font-family:
+    var(--font-display);
+
+  font-size: 17px;
+
+  font-weight: 400;
+
+  line-height: 1.4;
+
+  letter-spacing:
+    -0.018em;
+
+  text-decoration: none;
+
+  overflow-wrap: anywhere;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.contact-simple-content a:hover {
+  color: #00a9dd;
+}
+
+
+.contact-simple-emails {
+  gap: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+
+  .contact-layout {
+    grid-template-columns: 1fr;
+
+    gap: 46px;
+  }
+
+
+  .contact-simple-card {
+    max-width: 720px;
+  }
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 639px) {
+
+  .contact-layout {
+    margin-top: 30px;
+
+    gap: 34px;
+  }
+
+
+  .contact-heading {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        41px
+      ) !important;
+  }
+
+
+  .contact-copy {
+    margin-top: 22px;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+  }
+
+
+  .contact-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .contact-primary,
+  .contact-secondary {
+    width: 100%;
+  }
+
+
+  .contact-simple-card {
+    border-radius: 22px;
+  }
+
+
+  .contact-simple-row {
+    min-height: 88px;
+
+    gap: 14px;
+
+    padding:
+      18px
+      20px;
+  }
+
+
+  .contact-simple-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+
+  .contact-simple-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .contact-simple-content a,
+  .contact-simple-content span {
+    font-size: 15px;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — ORIGINAL CARD FEEL / SOFT GREY VERSION
+   ========================================================= */
+
+#contact,
+.contact-grey-section {
+  background: #ffffff !important;
+}
+
+
+/* Main rounded card */
+
+.contact-grey-card {
+  margin-top: 46px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.45fr)
+    minmax(330px, 0.55fr);
+
+  min-height: 590px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.05);
+
+  border-radius: 30px;
+
+  background:
+    #f5f5f7;
+
+  color:
+    #171918;
+
+  box-shadow:
+    0 12px 38px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+/* =========================================================
+   LEFT
+   ========================================================= */
+
+.contact-grey-main {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding:
+    58px
+    56px;
+}
+
+
+.contact-grey-small {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color:
+    #858984;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-grey-heading {
+  margin: 0;
+
+  max-width: 760px;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    clamp(
+      48px,
+      5.3vw,
+      74px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.048em;
+
+  color:
+    #171918;
+}
+
+
+.contact-grey-heading span {
+  display: block;
+
+  color:
+    #a8aaa7;
+}
+
+
+.contact-grey-copy {
+  margin:
+    28px
+    0
+    0;
+
+  max-width:
+    540px;
+
+  color:
+    #707570;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.72;
+}
+
+
+.contact-grey-actions {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    10px;
+
+  margin-top:
+    34px;
+}
+
+
+.contact-grey-primary,
+.contact-grey-secondary {
+  min-height:
+    46px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    19px;
+
+  border-radius:
+    999px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  font-weight:
+    500;
+
+  text-decoration:
+    none;
+
+  cursor:
+    pointer;
+
+  transition:
+    0.2s ease;
+}
+
+
+.contact-grey-primary {
+  border:
+    0;
+
+  background:
+    #00b9f3;
+
+  color:
+    #ffffff;
+}
+
+
+.contact-grey-primary:hover {
+  background:
+    #009fcf;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.contact-grey-secondary {
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.11);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  color:
+    #1f2421;
+}
+
+
+.contact-grey-secondary:hover {
+  border-color:
+    rgba(0, 185, 243, 0.20);
+
+  background:
+    #ffffff;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   RIGHT DETAILS
+   ========================================================= */
+
+.contact-grey-details {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  border-left:
+    1px solid
+    rgba(20, 21, 20, 0.075);
+
+  background:
+    rgba(255, 255, 255, 0.20);
+}
+
+
+.contact-grey-row {
+  flex:
+    1;
+
+  min-height:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    16px;
+
+  padding:
+    24px
+    30px;
+
+  border-bottom:
+    1px solid
+    rgba(20, 21, 20, 0.075);
+}
+
+
+.contact-grey-row-last {
+  border-bottom:
+    0;
+}
+
+
+.contact-grey-icon {
+  width:
+    40px;
+
+  height:
+    40px;
+
+  flex:
+    0
+    0
+    40px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #ffffff;
+
+  color:
+    #7c8780;
+
+  box-shadow:
+    0 4px 12px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-grey-icon svg {
+  width:
+    18px;
+
+  height:
+    18px;
+}
+
+
+.contact-grey-value {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-start;
+
+  gap:
+    5px;
+}
+
+
+.contact-grey-value a,
+.contact-grey-value span {
+  color:
+    #242a27;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    16px;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.4;
+
+  letter-spacing:
+    -0.015em;
+
+  text-decoration:
+    none;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.contact-grey-value a {
+  transition:
+    color
+    0.2s ease;
+}
+
+
+.contact-grey-value a:hover {
+  color:
+    #00a9dd;
+}
+
+
+.contact-grey-emails {
+  gap:
+    5px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 999px) {
+
+  .contact-grey-card {
+    grid-template-columns:
+      1fr;
+
+    min-height:
+      0;
+  }
+
+
+  .contact-grey-details {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    border-left:
+      0;
+
+    border-top:
+      1px solid
+      rgba(20, 21, 20, 0.075);
+  }
+
+
+  .contact-grey-row:nth-child(odd) {
+    border-right:
+      1px solid
+      rgba(20, 21, 20, 0.075);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .contact-grey-card {
+    margin-top:
+      30px;
+
+    border-radius:
+      25px;
+  }
+
+
+  .contact-grey-main {
+    padding:
+      34px
+      22px
+      38px;
+  }
+
+
+  .contact-grey-heading {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        41px
+      );
+
+    line-height:
+      0.99;
+  }
+
+
+  .contact-grey-copy {
+    margin-top:
+      22px;
+
+    font-size:
+      14px;
+
+    line-height:
+      1.65;
+  }
+
+
+  .contact-grey-actions {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .contact-grey-primary,
+  .contact-grey-secondary {
+    width:
+      100%;
+  }
+
+
+  .contact-grey-details {
+    display:
+      flex;
+
+    flex-direction:
+      column;
+  }
+
+
+  .contact-grey-row {
+    min-height:
+      88px;
+
+    padding:
+      18px
+      22px;
+
+    border-right:
+      0 !important;
+  }
+
+
+  .contact-grey-icon {
+    width:
+      38px;
+
+    height:
+      38px;
+
+    flex-basis:
+      38px;
+  }
+
+
+  .contact-grey-icon svg {
+    width:
+      17px;
+
+    height:
+      17px;
+  }
+
+
+  .contact-grey-value a,
+  .contact-grey-value span {
+    font-size:
+      15px;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — ORIGINAL CARD FEEL / SOFT GREY VERSION
+   ========================================================= */
+
+#contact,
+.contact-grey-section {
+  background: #ffffff !important;
+}
+
+
+/* Main rounded card */
+
+.contact-grey-card {
+  margin-top: 46px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.45fr)
+    minmax(330px, 0.55fr);
+
+  min-height: 590px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.05);
+
+  border-radius: 30px;
+
+  background:
+    #f5f5f7;
+
+  color:
+    #171918;
+
+  box-shadow:
+    0 12px 38px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+/* =========================================================
+   LEFT
+   ========================================================= */
+
+.contact-grey-main {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding:
+    58px
+    56px;
+}
+
+
+.contact-grey-small {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color:
+    #858984;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing:
+    0.16em;
+
+  text-transform:
+    uppercase;
+}
+
+
+.contact-grey-heading {
+  margin: 0;
+
+  max-width: 760px;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    clamp(
+      48px,
+      5.3vw,
+      74px
+    );
+
+  font-weight:
+    400;
+
+  line-height:
+    0.98;
+
+  letter-spacing:
+    -0.048em;
+
+  color:
+    #171918;
+}
+
+
+.contact-grey-heading span {
+  display: block;
+
+  color:
+    #a8aaa7;
+}
+
+
+.contact-grey-copy {
+  margin:
+    28px
+    0
+    0;
+
+  max-width:
+    540px;
+
+  color:
+    #707570;
+
+  font-size:
+    15px;
+
+  line-height:
+    1.72;
+}
+
+
+.contact-grey-actions {
+  display:
+    flex;
+
+  flex-wrap:
+    wrap;
+
+  gap:
+    10px;
+
+  margin-top:
+    34px;
+}
+
+
+.contact-grey-primary,
+.contact-grey-secondary {
+  min-height:
+    46px;
+
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  justify-content:
+    center;
+
+  padding:
+    0
+    19px;
+
+  border-radius:
+    999px;
+
+  font-family:
+    inherit;
+
+  font-size:
+    13px;
+
+  font-weight:
+    500;
+
+  text-decoration:
+    none;
+
+  cursor:
+    pointer;
+
+  transition:
+    0.2s ease;
+}
+
+
+.contact-grey-primary {
+  border:
+    0;
+
+  background:
+    #00b9f3;
+
+  color:
+    #ffffff;
+}
+
+
+.contact-grey-primary:hover {
+  background:
+    #009fcf;
+
+  transform:
+    translateY(-1px);
+}
+
+
+.contact-grey-secondary {
+  border:
+    1px solid
+    rgba(20, 21, 20, 0.11);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+
+  color:
+    #1f2421;
+}
+
+
+.contact-grey-secondary:hover {
+  border-color:
+    rgba(0, 185, 243, 0.20);
+
+  background:
+    #ffffff;
+
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   RIGHT DETAILS
+   ========================================================= */
+
+.contact-grey-details {
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  border-left:
+    1px solid
+    rgba(20, 21, 20, 0.075);
+
+  background:
+    rgba(255, 255, 255, 0.20);
+}
+
+
+.contact-grey-row {
+  flex:
+    1;
+
+  min-height:
+    0;
+
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    16px;
+
+  padding:
+    24px
+    30px;
+
+  border-bottom:
+    1px solid
+    rgba(20, 21, 20, 0.075);
+}
+
+
+.contact-grey-row-last {
+  border-bottom:
+    0;
+}
+
+
+.contact-grey-icon {
+  width:
+    40px;
+
+  height:
+    40px;
+
+  flex:
+    0
+    0
+    40px;
+
+  display:
+    grid;
+
+  place-items:
+    center;
+
+  border-radius:
+    50%;
+
+  background:
+    #ffffff;
+
+  color:
+    #7c8780;
+
+  box-shadow:
+    0 4px 12px
+    rgba(20, 21, 20, 0.025);
+}
+
+
+.contact-grey-icon svg {
+  width:
+    18px;
+
+  height:
+    18px;
+}
+
+
+.contact-grey-value {
+  min-width:
+    0;
+
+  display:
+    flex;
+
+  flex-direction:
+    column;
+
+  align-items:
+    flex-start;
+
+  gap:
+    5px;
+}
+
+
+.contact-grey-value a,
+.contact-grey-value span {
+  color:
+    #242a27;
+
+  font-family:
+    var(--font-display);
+
+  font-size:
+    16px;
+
+  font-weight:
+    400;
+
+  line-height:
+    1.4;
+
+  letter-spacing:
+    -0.015em;
+
+  text-decoration:
+    none;
+
+  overflow-wrap:
+    anywhere;
+}
+
+
+.contact-grey-value a {
+  transition:
+    color
+    0.2s ease;
+}
+
+
+.contact-grey-value a:hover {
+  color:
+    #00a9dd;
+}
+
+
+.contact-grey-emails {
+  gap:
+    5px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 999px) {
+
+  .contact-grey-card {
+    grid-template-columns:
+      1fr;
+
+    min-height:
+      0;
+  }
+
+
+  .contact-grey-details {
+    display:
+      grid;
+
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+
+    border-left:
+      0;
+
+    border-top:
+      1px solid
+      rgba(20, 21, 20, 0.075);
+  }
+
+
+  .contact-grey-row:nth-child(odd) {
+    border-right:
+      1px solid
+      rgba(20, 21, 20, 0.075);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 639px) {
+
+  .contact-grey-card {
+    margin-top:
+      30px;
+
+    border-radius:
+      25px;
+  }
+
+
+  .contact-grey-main {
+    padding:
+      34px
+      22px
+      38px;
+  }
+
+
+  .contact-grey-heading {
+    font-size:
+      clamp(
+        36px,
+        10vw,
+        41px
+      );
+
+    line-height:
+      0.99;
+  }
+
+
+  .contact-grey-copy {
+    margin-top:
+      22px;
+
+    font-size:
+      14px;
+
+    line-height:
+      1.65;
+  }
+
+
+  .contact-grey-actions {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .contact-grey-primary,
+  .contact-grey-secondary {
+    width:
+      100%;
+  }
+
+
+  .contact-grey-details {
+    display:
+      flex;
+
+    flex-direction:
+      column;
+  }
+
+
+  .contact-grey-row {
+    min-height:
+      88px;
+
+    padding:
+      18px
+      22px;
+
+    border-right:
+      0 !important;
+  }
+
+
+  .contact-grey-icon {
+    width:
+      38px;
+
+    height:
+      38px;
+
+    flex-basis:
+      38px;
+  }
+
+
+  .contact-grey-icon svg {
+    width:
+      17px;
+
+    height:
+      17px;
+  }
+
+
+  .contact-grey-value a,
+  .contact-grey-value span {
+    font-size:
+      15px;
+  }
+}
+
+
+/* =========================================================
+   CONTACT — DARK CHARCOAL FINAL VERSION
+   ========================================================= */
+
+#contact,
+.contact-grey-section {
+  background: #ffffff !important;
+}
+
+
+/* Main unified card */
+
+.contact-grey-card {
+  background: #181a18 !important;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.04) !important;
+
+  box-shadow:
+    0 16px 44px
+    rgba(17, 18, 17, 0.08) !important;
+}
+
+
+/* Left content */
+
+.contact-grey-small {
+  color:
+    rgba(255, 255, 255, 0.42) !important;
+}
+
+
+.contact-grey-heading {
+  color:
+    #ffffff !important;
+}
+
+
+.contact-grey-heading span {
+  color:
+    rgba(255, 255, 255, 0.36) !important;
+}
+
+
+.contact-grey-copy {
+  color:
+    rgba(255, 255, 255, 0.55) !important;
+}
+
+
+/* Buttons */
+
+.contact-grey-primary {
+  background:
+    #00b9f3 !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+.contact-grey-primary:hover {
+  background:
+    #009fcf !important;
+}
+
+
+.contact-grey-secondary {
+  border-color:
+    rgba(255, 255, 255, 0.16) !important;
+
+  background:
+    rgba(255, 255, 255, 0.04) !important;
+
+  color:
+    #ffffff !important;
+}
+
+
+.contact-grey-secondary:hover {
+  background:
+    #ffffff !important;
+
+  border-color:
+    #ffffff !important;
+
+  color:
+    #181a18 !important;
+}
+
+
+/* Right-hand details area */
+
+.contact-grey-details {
+  border-left-color:
+    rgba(255, 255, 255, 0.09) !important;
+
+  background:
+    rgba(255, 255, 255, 0.018) !important;
+}
+
+
+.contact-grey-row {
+  border-bottom-color:
+    rgba(255, 255, 255, 0.09) !important;
+}
+
+
+.contact-grey-icon {
+  background:
+    rgba(255, 255, 255, 0.055) !important;
+
+  color:
+    rgba(255, 255, 255, 0.48) !important;
+
+  box-shadow:
+    none !important;
+}
+
+
+.contact-grey-value a,
+.contact-grey-value span {
+  color:
+    rgba(255, 255, 255, 0.82) !important;
+}
+
+
+.contact-grey-value a:hover {
+  color:
+    #00b9f3 !important;
+}
+
+
+/* Tablet separators */
+
+@media (max-width: 999px) {
+
+  .contact-grey-details {
+    border-top-color:
+      rgba(255, 255, 255, 0.09) !important;
+  }
+
+
+  .contact-grey-row:nth-child(odd) {
+    border-right-color:
+      rgba(255, 255, 255, 0.09) !important;
+  }
+}
+
+
+/* Mobile */
+
+@media (max-width: 639px) {
+
+  .contact-grey-row {
+    border-right:
+      0 !important;
   }
 }

@@ -1,68 +1,143 @@
-import { useEffect, useState } from "react";
-import myndworksMark from "../assets/myndworks-mark.svg";
-import { cn } from "./ui";
+import {
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 
-const NAV_LINKS = [
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Your first visit", href: "#first-visit" },
-  { label: "Stories", href: "#stories" },
-  { label: "FAQ", href: "#faq" },
-] as const;
+import myndworksMark from "../assets/myndworks-mark.svg";
+
+const NAV_ITEMS = [
+  {
+    label: "About",
+    href: "#about",
+  },
+  {
+    label: "Services",
+    href: "#services",
+  },
+  {
+    label: "Your first visit",
+    href: "#first-visit",
+  },
+  {
+    label: "Stories",
+    href: "#stories",
+  },
+  {
+    label: "FAQ",
+    href: "#faq",
+  },
+];
 
 export function Header() {
-  const [open, setOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    lastScrollY.current = window.scrollY;
 
-    onScroll();
+    const handleScroll = () => {
+      if (ticking.current) {
+        return;
+      }
 
-    window.addEventListener("scroll", onScroll, {
-      passive: true,
-    });
+      ticking.current = true;
+
+      window.requestAnimationFrame(() => {
+        const currentY = Math.max(
+          window.scrollY,
+          0
+        );
+
+        const difference =
+          currentY - lastScrollY.current;
+
+        setScrolled(currentY > 40);
+
+        /*
+         * Always show the navigation near
+         * the top of the page.
+         */
+        if (currentY < 100) {
+          setHidden(false);
+        }
+
+        /*
+         * Never hide it while the mobile
+         * navigation is open.
+         */
+        else if (menuOpen) {
+          setHidden(false);
+        }
+
+        /*
+         * Meaningful downward movement.
+         */
+        else if (difference > 7) {
+          setHidden(true);
+        }
+
+        /*
+         * Meaningful upward movement.
+         */
+        else if (difference < -7) {
+          setHidden(false);
+        }
+
+        lastScrollY.current = currentY;
+        ticking.current = false;
+      });
+    };
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
     };
-  }, []);
+  }, [menuOpen]);
 
-  useEffect(() => {
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setOpen(false);
-      }
-    };
-
-    const onResize = () => {
-      if (window.innerWidth >= 768) {
-        setOpen(false);
-      }
-    };
-
-    window.addEventListener("keydown", onKey);
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("resize", onResize);
-    };
-  }, []);
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   return (
-    <header className="site-header">
-      <div className={cn("nav-shell", scrolled && "is-scrolled")}>
+    <header
+      className={
+        hidden
+          ? "site-header is-hidden"
+          : "site-header"
+      }
+    >
+      <div
+        className={
+          scrolled
+            ? "nav-shell is-scrolled"
+            : "nav-shell"
+        }
+      >
         <a
-          className="brand"
+          className="header-brand"
           href="#top"
+          onClick={closeMenu}
           aria-label="MyndWorks home"
         >
           <img
-            className="brand-mark"
+            className="header-brand-mark"
             src={myndworksMark}
             alt=""
-            aria-hidden="true"
           />
 
           <span className="wordmark">
@@ -72,14 +147,14 @@ export function Header() {
 
         <nav
           className="desktop-nav"
-          aria-label="Primary navigation"
+          aria-label="Main navigation"
         >
-          {NAV_LINKS.map((link) => (
+          {NAV_ITEMS.map((item) => (
             <a
-              key={link.href}
-              href={link.href}
+              href={item.href}
+              key={item.href}
             >
-              {link.label}
+              {item.label}
             </a>
           ))}
         </nav>
@@ -93,17 +168,21 @@ export function Header() {
 
         <button
           type="button"
-          className={cn(
-            "menu-toggle",
-            open && "is-open"
-          )}
-          aria-label={
-            open ? "Close menu" : "Open menu"
+          className={
+            menuOpen
+              ? "menu-toggle is-open"
+              : "menu-toggle"
           }
-          aria-expanded={open}
-          aria-controls="mobile-navigation"
+          aria-expanded={menuOpen}
+          aria-label={
+            menuOpen
+              ? "Close navigation"
+              : "Open navigation"
+          }
           onClick={() =>
-            setOpen((value) => !value)
+            setMenuOpen(
+              (current) => !current
+            )
           }
         >
           <span className="menu-toggle-line" />
@@ -112,34 +191,32 @@ export function Header() {
         </button>
       </div>
 
-      <nav
-        id="mobile-navigation"
-        className={cn(
-          "mobile-menu",
-          open && "is-open"
-        )}
-        aria-label="Mobile navigation"
-        aria-hidden={!open}
+      <div
+        className={
+          menuOpen
+            ? "mobile-menu is-open"
+            : "mobile-menu"
+        }
       >
-        {NAV_LINKS.map((link) => (
+        {NAV_ITEMS.map((item) => (
           <a
-            key={link.href}
             className="mobile-link"
-            href={link.href}
-            onClick={() => setOpen(false)}
+            href={item.href}
+            key={item.href}
+            onClick={closeMenu}
           >
-            {link.label}
+            {item.label}
           </a>
         ))}
 
         <a
           className="btn-lime"
           href="#contact"
-          onClick={() => setOpen(false)}
+          onClick={closeMenu}
         >
           Book a session
         </a>
-      </nav>
+      </div>
     </header>
   );
 }

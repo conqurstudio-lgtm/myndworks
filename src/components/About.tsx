@@ -1,78 +1,86 @@
-import aboutHands from "../assets/about-hands.png";
 import aboutOffice from "../assets/about-office.png";
 import { Reveal } from "./ui";
 
 export function About() {
   return (
-    <section id="about" className="about-section">
-      <Reveal>
-        <div className="section-eyebrow">
-          Who we are
-        </div>
-      </Reveal>
+    <section
+      id="about"
+      className="source-about-section about-clean"
+    >
+      <div className="about-clean-inner">
 
-      <div className="about-grid">
-        <Reveal className="about-column-left">
-          <h2 className="about-heading">
-            A calmer way to
-            <span> care for your mind</span>
-          </h2>
-
-          <div className="about-image-wrap about-image-small">
-            <img
-              className="about-image-media about-image-hands"
-              src={aboutHands}
-              alt="A group of hands joined together in support"
-            />
-
-            <div className="about-stat about-stat-year">
-              <strong>2022</strong>
-              <span>Year established</span>
-            </div>
+        <Reveal>
+          <div className="section-eyebrow">
+            Who we are
           </div>
         </Reveal>
 
-        <Reveal
-          className="about-copy"
-          delay={120}
-        >
-          <p>
-            MyndWorks is a mental wellbeing company that seeks to offer a
-            multifaceted approach to dealing with mental health.
-            <span>
-              {" "}
-              Established in 2022 to increase awareness of mental illnesses and
-              promote mental health, we offer individual, family and couples
-              therapy, in-person and virtual, as well as assessments and
-              medico-legal assessments.
-            </span>
-          </p>
 
-          <a
-            className="about-button"
-            href="#services"
+        <div className="about-clean-grid">
+
+          {/* =================================================
+              LEFT — ABOUT INFORMATION
+              ================================================= */}
+
+          <Reveal className="about-clean-copy">
+
+            <h2 className="about-clean-heading">
+              A calmer way to
+              <span> care for your mind</span>
+            </h2>
+
+
+            <p className="about-clean-description">
+              MyndWorks is a mental wellbeing
+              company that seeks to offer a
+              multifaceted approach to dealing
+              with mental health.{" "}
+
+              <span>
+                Established in 2022 to increase
+                awareness of mental illnesses
+                and promote mental health, we
+                offer individual, family and
+                couples therapy, in-person and
+                virtual, as well as assessments
+                and medico-legal assessments.
+              </span>
+            </p>
+
+
+            <a
+              href="#services"
+              className="about-clean-cta"
+            >
+              <span>
+                Explore our services
+              </span>
+
+              <span aria-hidden="true">
+                →
+              </span>
+            </a>
+
+          </Reveal>
+
+
+          {/* =================================================
+              RIGHT — MYNDWORKS OFFICE
+              ================================================= */}
+
+          <Reveal
+            className="about-clean-visual"
+            delay={120}
           >
-            Explore our services →
-          </a>
-        </Reveal>
-
-        <Reveal
-          className="about-column-right"
-          delay={240}
-        >
-          <div className="about-image-wrap about-image-large">
             <img
-              className="about-image-media about-image-office"
               src={aboutOffice}
-              alt="The MyndWorks office and consultation environment"
+              alt="A calm MyndWorks therapy environment"
+              className="about-clean-image"
             />
+          </Reveal>
 
-            <div className="about-stat about-stat-session">
-              <strong>In-person + virtual</strong>
-              <span>Sessions that fit your life</span>
-            </div>
-          </div>
-        </Reveal>
+        </div>
+
       </div>
     </section>
   );

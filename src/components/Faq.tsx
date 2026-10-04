@@ -3,104 +3,124 @@ import { Reveal } from "./ui";
 
 const FAQS = [
   {
-    question: "What can I expect on my first appointment?",
-    answer:
-      "The first session aims to know more about you and the problem that brings you to therapy. Unpacking your life history takes time and forms an important part of the therapeutic process. These stories can offer insight into your relationships and how they affect you. It is also important to remember that meaningful change does not happen in a single session — working through long-standing trauma, depression or other challenges takes time.",
+    q: "What can I expect on my first appointment?",
+    a:
+      "The first session aims to know more about the patient and their presenting problem. Unpacking one's life history takes time and it is an important part of the therapeutic process. These stories give insight into the relationships that the patient has and how they affect them. People must not expect that their problem will be fixed in one session, resolving years of trauma and depression takes time.",
   },
   {
-    question: "Which other professions work with mental health?",
-    answer:
-      "Mental wellbeing may involve support from Occupational Therapists, Social Workers, Speech Therapists, Audiologists, Dietitians, Physiotherapists and Medical Doctors. Each profession can play an important role in holistic health and wellbeing because psychological, social, physical and other factors may all influence mental health.",
+    q: "Which other professions work with mental health?",
+    a:
+      "Occupational Therapists, Social workers, Speech Therapists, Audiologists, Dietitians, Physiotherapists and Medical Drs. Each of these practitioners plays an important role in providing holistic health and wellbeing, as some psychiatric conditions occur due to psychological, social, physical as well as spiritual factors.",
   },
   {
-    question: "Do psychologists use the same treatment method?",
-    answer:
-      "Therapy is structured case by case because every person is different, even when people are experiencing similar conditions. A therapist may draw on different therapeutic approaches such as CBT, psychodynamic therapy and solution-focused therapy, depending on the person's needs as well as the therapist's training and areas of practice.",
+    q: "Do psychologists use the same treatment method?",
+    a:
+      "Therapy is set up on a case by case situation as people are uniquely different even if they are suffering from the same condition. People will also respond differently to similar situations. As a result, therapy is structured to fit the individual's challenges. Therapists also use different therapeutic modalities such as CBT, psychodynamic and solution focused, based on the therapist's interests and training.",
   },
-] as const;
+];
 
 export function Faq() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] =
+    useState<number | null>(0);
 
   return (
-    <section id="faq" className="faq-section">
+    <section
+      id="faq"
+      className="source-faq-section"
+    >
       <Reveal>
-        <div className="section-eyebrow">
-          Frequently asked questions
+        <div className="source-faq-eyebrow">
+          <span
+            className="source-faq-star"
+            aria-hidden="true"
+          >
+            ✳
+          </span>
+
+          <span>
+            Frequently asked questions
+          </span>
+
+          <span
+            className="source-faq-line"
+            aria-hidden="true"
+          />
         </div>
       </Reveal>
 
-      <div className="faq-grid">
-        <Reveal className="faq-intro">
-          <h2 className="faq-heading">
-            Good questions,
-            <span> honest answers</span>
+      <div className="source-faq-grid">
+        <Reveal className="source-faq-intro">
+          <h2 className="source-faq-heading">
+            Good questions,{" "}
+            <span>
+              honest answers
+            </span>
           </h2>
 
-          <p className="faq-lede">
-            Starting therapy can feel like a big step.
-            Here are some of the questions people commonly
-            have before beginning.
+          <p className="source-faq-copy">
+            Starting therapy can feel like a
+            big step. Here's what people ask
+            us most often.
           </p>
-
-          <a
-            className="faq-contact-link"
-            href="#contact"
-          >
-            <span>Still have a question?</span>
-            <span
-              className="faq-contact-icon"
-              aria-hidden="true"
-            >
-              ↗
-            </span>
-          </a>
         </Reveal>
 
         <Reveal
-          className="faq-list"
-          delay={120}
+          className="source-faq-list"
+          delay={100}
         >
-          {FAQS.map((item, index) => {
-            const isOpen = open === index;
+          {FAQS.map((faq, index) => {
+            const isOpen =
+              open === index;
 
             return (
-              <article
-                className={
+              <div
+                className={[
+                  "source-faq-item",
                   isOpen
-                    ? "faq-item is-open"
-                    : "faq-item"
-                }
-                key={item.question}
+                    ? "is-open"
+                    : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
+                key={faq.q}
               >
                 <button
                   type="button"
-                  className="faq-question"
-                  aria-expanded={isOpen}
+                  className="source-faq-trigger"
                   onClick={() =>
-                    setOpen(isOpen ? null : index)
+                    setOpen(
+                      isOpen
+                        ? null
+                        : index
+                    )
                   }
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-answer-${index}`}
                 >
-                  <span>
-                    {item.question}
+                  <span className="source-faq-question">
+                    {faq.q}
                   </span>
 
                   <span
-                    className="faq-toggle"
+                    className="source-faq-plus"
                     aria-hidden="true"
                   >
                     +
                   </span>
                 </button>
 
-                <div className="faq-answer-wrap">
-                  <div className="faq-answer-inner">
+                <div
+                  id={`faq-answer-${index}`}
+                  className="source-faq-answer"
+                  aria-hidden={!isOpen}
+                >
+                  <div className="source-faq-answer-inner">
                     <p>
-                      {item.answer}
+                      {faq.a}
                     </p>
                   </div>
                 </div>
-              </article>
+              </div>
             );
           })}
         </Reveal>
