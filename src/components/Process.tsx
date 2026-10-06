@@ -42,7 +42,18 @@ export function Process() {
     >
 
       {/* ===================================================
-          IMAGE BANNER
+          SECTION CHAPTER HEADER
+          =================================================== */}
+
+      <Reveal>
+        <div className="section-eyebrow">
+          Your first visit
+        </div>
+      </Reveal>
+
+
+      {/* ===================================================
+          IMAGE FEATURE
           =================================================== */}
 
       <Reveal>
@@ -60,20 +71,6 @@ export function Process() {
           />
 
           <div className="visit-banner-content">
-
-            <div className="visit-banner-eyebrow">
-              <span
-                className="visit-banner-eyebrow-star"
-                aria-hidden="true"
-              >
-                ✳
-              </span>
-
-              <span>
-                Your first visit
-              </span>
-            </div>
-
 
             <h2 className="visit-banner-heading">
               Your journey,

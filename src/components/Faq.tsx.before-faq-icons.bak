@@ -168,9 +168,7 @@ export function Faq() {
                     <span
                       className="source-faq-plus"
                       aria-hidden="true"
-                    >
-                      {isOpen ? "×" : "+"}
-                    </span>
+                    />
                   </button>
 
 
