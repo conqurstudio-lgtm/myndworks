@@ -5,7 +5,7 @@ import {
 } from "react";
 
 import { Reveal } from "./ui";
-import contactSessionImage from "../assets/contact-session.png";
+import contactSessionImage from "../assets/optimized/contact-session.webp";
 
 
 /* =========================================================
@@ -1480,6 +1480,8 @@ export function Contact() {
                 className="mw-contact-image-photo"
                 src={contactSessionImage}
                 alt="A therapist speaking with a client during a supportive session"
+              loading="lazy"
+              decoding="async"
               />
 
             </div>

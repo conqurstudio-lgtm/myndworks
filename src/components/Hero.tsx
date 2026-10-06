@@ -1,4 +1,4 @@
-import myndworksHero from "../assets/myndworks-hero.png";
+import myndworksHero from "../assets/optimized/myndworks-hero.webp";
 import { Reveal } from "./ui";
 
 export function Hero() {
@@ -12,6 +12,9 @@ export function Hero() {
           className="hero-image"
           src={myndworksHero}
           alt="A therapist speaking with a client in a calm wellness setting"
+        loading="eager"
+        fetchPriority="high"
+        decoding="async"
         />
 
         <div

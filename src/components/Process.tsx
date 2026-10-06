@@ -1,4 +1,4 @@
-import firstVisitBanner from "../assets/first-visit-sky.png";
+import firstVisitBanner from "../assets/optimized/first-visit-sky.webp";
 import { Reveal } from "./ui";
 
 
@@ -63,6 +63,8 @@ export function Process() {
             className="visit-banner-image"
             src={firstVisitBanner}
             alt=""
+          loading="lazy"
+          decoding="async"
           />
 
           <div

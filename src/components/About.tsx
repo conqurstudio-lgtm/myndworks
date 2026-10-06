@@ -1,4 +1,4 @@
-import aboutOffice from "../assets/about-office.png";
+import aboutOffice from "../assets/optimized/about-office.webp";
 import { Reveal } from "./ui";
 
 export function About() {
@@ -76,6 +76,8 @@ export function About() {
               src={aboutOffice}
               alt="A calm MyndWorks therapy environment"
               className="about-clean-image"
+            loading="lazy"
+            decoding="async"
             />
           </Reveal>
 
