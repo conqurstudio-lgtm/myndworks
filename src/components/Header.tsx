@@ -262,8 +262,7 @@ export function Header() {
           className="desktop-nav"
           aria-label="Main navigation"
         >
-          {NAV_ITEMS.map(
-            (item) => (
+          {NAV_ITEMS.filter((item) => item.href !== "#first-visit" && item.href !== "#stories").map((item) => (
               <a
                 href={item.href}
                 key={item.href}
@@ -272,7 +271,8 @@ export function Header() {
               </a>
             )
           )}
-        </nav>
+                  <a href="/blog">Journal</a>
+</nav>
 
 
         <a
@@ -321,8 +321,7 @@ export function Header() {
             : "mobile-menu"
         }
       >
-        {NAV_ITEMS.map(
-          (item) => (
+        {NAV_ITEMS.filter((item) => item.href !== "#first-visit" && item.href !== "#stories").map((item) => (
             <a
               className="mobile-link"
               href={item.href}
@@ -335,7 +334,15 @@ export function Header() {
         )}
 
 
-        <a
+                <a
+          className="mobile-link"
+          href="/blog"
+          onClick={closeMenu}
+        >
+          Journal
+        </a>
+
+<a
           className="btn-lime"
           href="#contact"
           onClick={closeMenu}
