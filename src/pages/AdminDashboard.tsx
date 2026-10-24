@@ -71,14 +71,14 @@ export function AdminDashboard() {
             <span className="mw-admin-module-arrow">→</span>
           </a>
 
-          <div className="mw-admin-module-card is-disabled">
+          <a className="mw-admin-module-card" href="/admin/blogs">
             <span className="mw-admin-module-index">02</span>
             <div>
               <h2>Blogs</h2>
               <p>Create and publish MyndWorks articles.</p>
             </div>
-            <span className="mw-admin-module-status">Coming later</span>
-          </div>
+            <span className="mw-admin-module-arrow">→</span>
+          </a>
         </div>
       </section>
     </main>

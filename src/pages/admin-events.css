@@ -773,3 +773,158 @@ a.mw-event-row:hover {
   }
 }
 /* === MYNDWORKS RSVP STATUS CONTROLS END === */
+
+/* === MYNDWORKS BLOGS ADMIN V1 START === */
+.mw-blogs-admin,
+.mw-blog-editor {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 58px 0 90px;
+  border-top: 1px solid rgba(41, 67, 77, 0.1);
+}
+
+.mw-blog-stats {
+  margin-top: 44px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mw-blog-stats > div {
+  padding: 20px;
+  border: 1px solid rgba(41, 67, 77, 0.07);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.mw-blog-stats span {
+  display: block;
+  color: rgba(41, 67, 77, 0.5);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mw-blog-stats strong {
+  display: block;
+  margin-top: 8px;
+  color: #29434d;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.mw-blog-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.mw-blog-row {
+  padding: 22px;
+  display: grid;
+  grid-template-columns: 1.5fr 0.5fr;
+  gap: 30px;
+  border: 1px solid rgba(41, 67, 77, 0.07);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.mw-blog-row-main h2 {
+  margin: 8px 0 0;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.mw-blog-row-main p {
+  margin: 8px 0 0;
+  max-width: 700px;
+  color: rgba(41, 67, 77, 0.58);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.mw-blog-row-meta {
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  color: rgba(41, 67, 77, 0.45);
+  font-size: 9px;
+}
+
+.mw-blog-status {
+  display: inline-block;
+  width: fit-content;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mw-blog-status.is-published {
+  background: rgba(0, 185, 243, 0.08);
+  color: #24728a;
+}
+
+.mw-blog-status.is-draft {
+  background: rgba(41, 67, 77, 0.06);
+  color: rgba(41, 67, 77, 0.62);
+}
+
+.mw-blog-empty {
+  margin-top: 18px;
+  padding: 42px;
+  border: 1px solid rgba(41, 67, 77, 0.07);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.mw-blog-empty > span {
+  color: #00b9f3;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mw-blog-empty h2 {
+  margin: 10px 0 22px;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.mw-blog-content-editor {
+  min-height: 360px;
+  line-height: 1.7;
+}
+
+.mw-blog-save-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mw-blog-secondary {
+  border: 1px solid rgba(41, 67, 77, 0.14);
+  border-radius: 999px;
+  padding: 11px 15px;
+  background: #fff;
+  color: #29434d;
+  font: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .mw-blog-stats { grid-template-columns: 1fr; }
+  .mw-blog-row { grid-template-columns: 1fr; }
+  .mw-blog-save-actions { width: 100%; }
+  .mw-blog-save-actions button { flex: 1; }
+}
+/* === MYNDWORKS BLOGS ADMIN V1 END === */

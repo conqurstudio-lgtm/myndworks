@@ -1,3 +1,5 @@
+import { AdminBlogNew } from "./pages/AdminBlogNew";
+import { AdminBlogsDashboard } from "./pages/AdminBlogsDashboard";
 import { PublicEventPage } from "./pages/PublicEventPage";
 import { AdminEventEdit } from "./pages/AdminEventEdit";
 import { AdminEventNew } from "./pages/AdminEventNew";
@@ -25,6 +27,14 @@ export default function App() {
 
   if (pathname === "/admin") {
     return <AdminDashboard />;
+  }
+
+  if (pathname === "/admin/blogs/new") {
+    return <AdminBlogNew />;
+  }
+
+  if (pathname === "/admin/blogs") {
+    return <AdminBlogsDashboard />;
   }
 
   if (pathname === "/admin/events/new") {
