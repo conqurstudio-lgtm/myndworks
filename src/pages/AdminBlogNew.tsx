@@ -1,3 +1,4 @@
+import { BlogEditor } from "../components/BlogEditor";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "./admin-events.css";
@@ -146,10 +147,13 @@ export function AdminBlogNew() {
             </div>
 
             <div className="mw-event-form-fields">
-              <label className="mw-field is-full">
+              <div className="mw-field is-full">
                 <span>Content</span>
-                <textarea className="mw-blog-content-editor" rows={18} value={content} onChange={(e) => setContent(e.target.value)} placeholder="Write the article here..." />
-              </label>
+                <BlogEditor
+                  value={content}
+                  onChange={setContent}
+                />
+              </div>
             </div>
           </div>
 

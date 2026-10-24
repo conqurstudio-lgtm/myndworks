@@ -1,3 +1,5 @@
+import { PublicBlogPage } from "./pages/PublicBlogPage";
+import { AdminBlogEdit } from "./pages/AdminBlogEdit";
 import { AdminBlogNew } from "./pages/AdminBlogNew";
 import { AdminBlogsDashboard } from "./pages/AdminBlogsDashboard";
 import { PublicEventPage } from "./pages/PublicEventPage";
@@ -33,6 +35,17 @@ export default function App() {
     return <AdminBlogNew />;
   }
 
+  if (
+    pathname.startsWith("/admin/blogs/") &&
+    pathname !== "/admin/blogs/new"
+  ) {
+    return (
+      <AdminBlogEdit
+        blogId={pathname.replace("/admin/blogs/", "")}
+      />
+    );
+  }
+
   if (pathname === "/admin/blogs") {
     return <AdminBlogsDashboard />;
   }
@@ -54,6 +67,14 @@ export default function App() {
 
   if (pathname === "/admin/events") {
     return <AdminEventsDashboard />;
+  }
+
+  if (pathname.startsWith("/blog/")) {
+    return (
+      <PublicBlogPage
+        slug={decodeURIComponent(pathname.replace("/blog/", ""))}
+      />
+    );
   }
 
   if (pathname.startsWith("/events/")) {
