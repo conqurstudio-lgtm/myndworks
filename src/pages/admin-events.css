@@ -725,3 +725,51 @@ a.mw-event-row:hover {
   .mw-event-rsvp-table-wrap { overflow: visible; }
 }
 /* === MYNDWORKS RSVP ADMIN V1 END === */
+
+/* === MYNDWORKS RSVP STATUS CONTROLS START === */
+.mw-rsvp-status-select {
+  min-width: 108px;
+  padding: 7px 28px 7px 9px;
+  border: 1px solid rgba(41, 67, 77, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #29434d;
+  font: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mw-rsvp-status-select.is-confirmed {
+  border-color: rgba(0, 185, 243, 0.2);
+  background: rgba(0, 185, 243, 0.08);
+  color: #24728a;
+}
+
+.mw-rsvp-status-select.is-waitlisted {
+  background: rgba(184, 139, 44, 0.08);
+  color: #86641c;
+}
+
+.mw-rsvp-status-select.is-cancelled {
+  background: rgba(165, 58, 47, 0.06);
+  color: #925047;
+}
+
+.mw-rsvp-status-select:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+@media print {
+  .mw-rsvp-status-select {
+    appearance: none;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: #29434d;
+  }
+}
+/* === MYNDWORKS RSVP STATUS CONTROLS END === */

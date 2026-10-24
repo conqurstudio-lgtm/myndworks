@@ -62,6 +62,7 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
   const [saved, setSaved] = useState(false);
   const [rsvps, setRsvps] = useState<RsvpRow[]>([]);
   const [rsvpLoading, setRsvpLoading] = useState(true);
+  const [updatingRsvpId, setUpdatingRsvpId] = useState("");
 
   const [title, setTitle] = useState("");
   const [shortDescription, setShortDescription] = useState("");
@@ -266,6 +267,35 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
     (sum, rsvp) => sum + Number(rsvp.guest_count || 0),
     0,
   );
+  async function updateRsvpStatus(
+    rsvpId: string,
+    nextStatus: RsvpRow["status"],
+  ) {
+    setError("");
+    setUpdatingRsvpId(rsvpId);
+
+    const { error: updateError } = await supabase
+      .from("event_rsvps")
+      .update({ status: nextStatus })
+      .eq("id", rsvpId);
+
+    if (updateError) {
+      setError(updateError.message);
+      setUpdatingRsvpId("");
+      return;
+    }
+
+    setRsvps((current) =>
+      current.map((rsvp) =>
+        rsvp.id === rsvpId
+          ? { ...rsvp, status: nextStatus }
+          : rsvp,
+      ),
+    );
+
+    setUpdatingRsvpId("");
+  }
+
 
   function exportRsvpsCsv() {
     const escapeCsv = (value: string | number | null) =>
@@ -512,7 +542,24 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
                       <td><strong>{rsvp.first_name} {rsvp.last_name}</strong>{rsvp.note && <small>{rsvp.note}</small>}</td>
                       <td><span>{rsvp.email}</span>{rsvp.phone && <small>{rsvp.phone}</small>}</td>
                       <td>{rsvp.guest_count}</td>
-                      <td><span className={`mw-event-status is-${rsvp.status}`}>{rsvp.status}</span></td>
+                      <td>
+                        <select
+                          className={`mw-rsvp-status-select is-${rsvp.status}`}
+                          value={rsvp.status}
+                          disabled={updatingRsvpId === rsvp.id}
+                          onChange={(e) =>
+                            updateRsvpStatus(
+                              rsvp.id,
+                              e.target.value as RsvpRow["status"],
+                            )
+                          }
+                          aria-label={`RSVP status for ${rsvp.first_name} ${rsvp.last_name}`}
+                        >
+                          <option value="confirmed">Confirmed</option>
+                          <option value="waitlisted">Waitlisted</option>
+                          <option value="cancelled">Cancelled</option>
+                        </select>
+                      </td>
                       <td>{new Date(rsvp.created_at).toLocaleDateString("en-ZA", { day: "2-digit", month: "short", year: "numeric" })}</td>
                     </tr>
                   ))}

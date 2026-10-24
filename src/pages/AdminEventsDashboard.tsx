@@ -205,7 +205,11 @@ export function AdminEventsDashboard() {
         ) : (
           <div className="mw-events-list">
             {events.map((event) => (
-              <article className="mw-event-row" key={event.id}>
+              <a
+                className="mw-event-row"
+                key={event.id}
+                href={`/admin/events/${event.id}`}
+              >
                 <div className="mw-event-row-main">
                   <span className={`mw-event-status is-${event.status}`}>
                     {event.status}
@@ -229,7 +233,7 @@ export function AdminEventsDashboard() {
                   </span>
                   <span className="mw-event-row-arrow">→</span>
                 </div>
-              </article>
+              </a>
             ))}
           </div>
         )}

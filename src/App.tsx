@@ -1,3 +1,5 @@
+import { PublicEventPage } from "./pages/PublicEventPage";
+import { AdminEventEdit } from "./pages/AdminEventEdit";
 import { AdminEventNew } from "./pages/AdminEventNew";
 import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminEventsLogin } from "./pages/AdminEventsLogin";
@@ -29,8 +31,27 @@ export default function App() {
     return <AdminEventNew />;
   }
 
+  if (
+    pathname.startsWith("/admin/events/") &&
+    pathname !== "/admin/events/login"
+  ) {
+    return (
+      <AdminEventEdit
+        eventId={pathname.replace("/admin/events/", "")}
+      />
+    );
+  }
+
   if (pathname === "/admin/events") {
     return <AdminEventsDashboard />;
+  }
+
+  if (pathname.startsWith("/events/")) {
+    return (
+      <PublicEventPage
+        slug={decodeURIComponent(pathname.replace("/events/", ""))}
+      />
+    );
   }
 
 return (
