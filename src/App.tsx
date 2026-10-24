@@ -1,3 +1,5 @@
+import { AdminEventNew } from "./pages/AdminEventNew";
+import { AdminDashboard } from "./pages/AdminDashboard";
 import { AdminEventsLogin } from "./pages/AdminEventsLogin";
 import { AdminEventsDashboard } from "./pages/AdminEventsDashboard";
 import { ScrollToTop } from "./components/ScrollToTop";
@@ -15,8 +17,16 @@ import { Footer } from "./components/Footer";
 export default function App() {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
 
-  if (pathname === "/admin/events/login") {
+  if (pathname === "/admin/login" || pathname === "/admin/events/login") {
     return <AdminEventsLogin />;
+  }
+
+  if (pathname === "/admin") {
+    return <AdminDashboard />;
+  }
+
+  if (pathname === "/admin/events/new") {
+    return <AdminEventNew />;
   }
 
   if (pathname === "/admin/events") {

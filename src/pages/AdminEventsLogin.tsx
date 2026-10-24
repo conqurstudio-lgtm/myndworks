@@ -38,7 +38,7 @@ export function AdminEventsLogin() {
       return;
     }
 
-    window.location.href = "/admin/events";
+    window.location.href = "/admin";
   }
 
   return (
@@ -47,9 +47,9 @@ export function AdminEventsLogin() {
         <div className="mw-admin-brand">MyndWorks</div>
 
         <div className="mw-admin-copy">
-          <span className="mw-admin-label">Events administration</span>
+          <span className="mw-admin-label">MyndWorks Admin</span>
           <h1>Welcome back.</h1>
-          <p>Sign in to create events and manage RSVPs.</p>
+          <p>Sign in to manage MyndWorks content.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="mw-admin-form">
