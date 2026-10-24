@@ -1,0 +1,285 @@
+.mw-public-event-shell {
+  min-height: 100vh;
+  padding: 20px;
+  background: #f8fafb;
+  color: #29434d;
+  font-family: "Inter", sans-serif;
+}
+
+.mw-public-event-header,
+.mw-public-event-hero,
+.mw-public-event-info,
+.mw-public-event-share,
+.mw-public-event-footer {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.mw-public-event-header {
+  padding: 16px 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mw-public-event-brand {
+  color: #29434d;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+}
+
+.mw-public-event-home {
+  color: rgba(41,67,77,.6);
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.mw-public-event-hero {
+  padding: 72px 0 54px;
+  display: grid;
+  grid-template-columns: minmax(0,.9fr) minmax(0,1.1fr);
+  gap: 54px;
+  align-items: end;
+  border-top: 1px solid rgba(41,67,77,.1);
+}
+
+.mw-public-event-kicker,
+.mw-public-event-description > span,
+.mw-public-event-share > div > span {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: #00b9f3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.mw-public-event-copy h1 {
+  margin: 0;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(46px,7vw,86px);
+  font-weight: 500;
+  line-height: .98;
+  letter-spacing: -.055em;
+}
+
+.mw-public-event-copy p {
+  max-width: 550px;
+  margin: 22px 0 0;
+  color: rgba(41,67,77,.68);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.mw-public-event-cover {
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 26px;
+  background: #eaf5f8;
+}
+
+.mw-public-event-cover img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.mw-public-event-cover-placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(0,185,243,.2), transparent 35%),
+    linear-gradient(145deg, #29434d, #355866);
+}
+
+.mw-public-event-cover-placeholder span {
+  color: #fff;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(28px,5vw,52px);
+  font-weight: 500;
+  letter-spacing: -.04em;
+}
+
+.mw-public-event-info {
+  padding: 54px 0 70px;
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 70px;
+  border-top: 1px solid rgba(41,67,77,.1);
+}
+
+.mw-public-event-facts {
+  display: grid;
+  gap: 24px;
+}
+
+.mw-public-event-facts > div {
+  display: grid;
+  gap: 6px;
+}
+
+.mw-public-event-facts span {
+  color: rgba(41,67,77,.45);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.mw-public-event-facts strong {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.mw-public-event-facts small {
+  color: rgba(41,67,77,.58);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.mw-public-event-description p {
+  margin: 0;
+  color: rgba(41,67,77,.76);
+  font-size: 15px;
+  line-height: 1.85;
+  white-space: pre-wrap;
+}
+
+.mw-public-event-share {
+  padding: 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1px solid rgba(41,67,77,.07);
+}
+
+.mw-public-event-share p {
+  margin: 0;
+  color: rgba(41,67,77,.58);
+  font-size: 12px;
+}
+
+.mw-public-event-share-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.mw-public-event-share-actions button,
+.mw-public-event-share-actions a {
+  border: 1px solid rgba(41,67,77,.13);
+  border-radius: 999px;
+  padding: 11px 15px;
+  background: #fff;
+  color: #29434d;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mw-public-event-share-actions a {
+  border-color: #29434d;
+  background: #29434d;
+  color: #fff;
+}
+
+.mw-public-event-footer {
+  padding: 70px 0 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: rgba(41,67,77,.4);
+  font-size: 10px;
+}
+
+.mw-public-event-loading,
+.mw-public-event-not-found {
+  max-width: 680px;
+  margin: 14vh auto;
+}
+
+.mw-public-event-not-found > span {
+  display: block;
+  margin-top: 60px;
+  color: #00b9f3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.mw-public-event-not-found h1 {
+  margin: 12px 0 24px;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(40px,6vw,64px);
+  font-weight: 500;
+  letter-spacing: -.045em;
+}
+
+@media (max-width: 800px) {
+  .mw-public-event-hero,
+  .mw-public-event-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-public-event-shell { padding: 16px; }
+  .mw-public-event-share { align-items: flex-start; flex-direction: column; padding: 24px; }
+  .mw-public-event-share-actions { width: 100%; display: grid; }
+  .mw-public-event-share-actions button,
+  .mw-public-event-share-actions a { text-align: center; }
+  .mw-public-event-footer { flex-direction: column; }
+}
+
+/* === MYNDWORKS PUBLIC RSVP V1 START === */
+.mw-public-event-rsvp {
+  max-width: 1180px;
+  margin: 0 auto 18px;
+  padding: 42px;
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 60px;
+  background: #fff;
+  border: 1px solid rgba(41, 67, 77, 0.07);
+  border-radius: 24px;
+}
+.mw-public-event-rsvp-intro h2 { margin: 0; font-family: "Inter Tight", sans-serif; font-size: clamp(30px, 4vw, 46px); font-weight: 500; letter-spacing: -0.045em; }
+.mw-public-event-rsvp-intro p { margin: 14px 0 0; max-width: 390px; color: rgba(41, 67, 77, 0.62); font-size: 12px; line-height: 1.65; }
+.mw-public-event-rsvp-form { display: grid; gap: 18px; }
+.mw-public-event-rsvp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.mw-public-event-rsvp-grid label { display: grid; gap: 7px; }
+.mw-public-event-rsvp-grid label.is-full { grid-column: 1 / -1; }
+.mw-public-event-rsvp-grid label > span { font-size: 10px; font-weight: 600; }
+.mw-public-event-rsvp-grid input,
+.mw-public-event-rsvp-grid select,
+.mw-public-event-rsvp-grid textarea { width: 100%; box-sizing: border-box; padding: 12px 13px; border: 1px solid rgba(41, 67, 77, 0.13); border-radius: 11px; background: #fff; color: #29434d; font: inherit; font-size: 12px; outline: none; }
+.mw-public-event-rsvp-grid textarea { resize: vertical; line-height: 1.55; }
+.mw-public-event-rsvp-grid input:focus,
+.mw-public-event-rsvp-grid select:focus,
+.mw-public-event-rsvp-grid textarea:focus { border-color: #00b9f3; box-shadow: 0 0 0 3px rgba(0, 185, 243, 0.08); }
+.mw-public-event-consent { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; color: rgba(41, 67, 77, 0.64); font-size: 10px; line-height: 1.5; }
+.mw-public-event-consent input { margin-top: 2px; }
+.mw-public-event-rsvp-form > button { width: fit-content; border: 0; border-radius: 999px; padding: 13px 18px; background: #29434d; color: #fff; font: inherit; font-size: 11px; font-weight: 600; cursor: pointer; }
+.mw-public-event-rsvp-form > button:disabled { opacity: 0.6; }
+.mw-public-event-rsvp-error { padding: 11px 12px; border-radius: 10px; background: #fff2f0; color: #a53a2f; font-size: 11px; }
+.mw-public-event-rsvp-success,
+.mw-public-event-rsvp-closed { padding: 28px; border-radius: 18px; background: #f8fafb; border: 1px solid rgba(41, 67, 77, 0.07); }
+.mw-public-event-rsvp-success > span,
+.mw-public-event-rsvp-closed > span { color: #00b9f3; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.mw-public-event-rsvp-success h3 { margin: 10px 0 8px; font-family: "Inter Tight", sans-serif; font-size: 28px; font-weight: 500; letter-spacing: -0.035em; }
+.mw-public-event-rsvp-success p,
+.mw-public-event-rsvp-closed p { margin: 8px 0 0; color: rgba(41, 67, 77, 0.62); font-size: 12px; line-height: 1.6; }
+@media (max-width: 800px) { .mw-public-event-rsvp { grid-template-columns: 1fr; gap: 34px; } }
+@media (max-width: 600px) { .mw-public-event-rsvp { padding: 24px; } .mw-public-event-rsvp-grid { grid-template-columns: 1fr; } .mw-public-event-rsvp-grid label.is-full { grid-column: auto; } .mw-public-event-rsvp-form > button { width: 100%; } }
+/* === MYNDWORKS PUBLIC RSVP V1 END === */
