@@ -1,3 +1,5 @@
+import { AdminEventsLogin } from "./pages/AdminEventsLogin";
+import { AdminEventsDashboard } from "./pages/AdminEventsDashboard";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -11,7 +13,17 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
 export default function App() {
-  return (
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+
+  if (pathname === "/admin/events/login") {
+    return <AdminEventsLogin />;
+  }
+
+  if (pathname === "/admin/events") {
+    return <AdminEventsDashboard />;
+  }
+
+return (
     <div className="mw-page-shell">
       <ScrollToTop />
       <Header />

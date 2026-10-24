@@ -7,3 +7,7 @@ dist/
 .vite/
 
 myndworks-current-review.zip
+.vercel
+
+# Local environment variables
+.env.local
