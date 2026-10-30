@@ -73,6 +73,8 @@ export function Footer() {
             <a href="#services">Services</a>
             <a href="#first-visit">Your first visit</a>
             <a href="#stories">Stories</a>
+            <a href="/blog">Journal</a>
+            <a href="/events">Events</a>
             <a href="#faq">FAQ</a>
           </nav>
         </div>
@@ -118,6 +120,10 @@ export function Footer() {
 
             <a href="#contact">
               <span>Book a session →</span>
+            </a>
+
+            <a href="/admin/login">
+              <span>Admin login →</span>
             </a>
           </div>
         </div>

@@ -17,12 +17,12 @@ const NAV_ITEMS = [
     href: "#services",
   },
   {
-    label: "Your first visit",
-    href: "#first-visit",
+    label: "Journal",
+    href: "/blog",
   },
   {
-    label: "Stories",
-    href: "#stories",
+    label: "Events",
+    href: "/events",
   },
   {
     label: "FAQ",
@@ -262,17 +262,15 @@ export function Header() {
           className="desktop-nav"
           aria-label="Main navigation"
         >
-          {NAV_ITEMS.filter((item) => item.href !== "#first-visit" && item.href !== "#stories").map((item) => (
-              <a
-                href={item.href}
-                key={item.href}
-              >
-                {item.label}
-              </a>
-            )
-          )}
-                  <a href="/blog">Journal</a>
-</nav>
+          {NAV_ITEMS.map((item) => (
+            <a
+              href={item.href}
+              key={item.href}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
 
 
         <a
@@ -321,28 +319,18 @@ export function Header() {
             : "mobile-menu"
         }
       >
-        {NAV_ITEMS.filter((item) => item.href !== "#first-visit" && item.href !== "#stories").map((item) => (
-            <a
-              className="mobile-link"
-              href={item.href}
-              key={item.href}
-              onClick={closeMenu}
-            >
-              {item.label}
-            </a>
-          )
-        )}
+        {NAV_ITEMS.map((item) => (
+          <a
+            className="mobile-link"
+            href={item.href}
+            key={item.href}
+            onClick={closeMenu}
+          >
+            {item.label}
+          </a>
+        ))}
 
-
-                <a
-          className="mobile-link"
-          href="/blog"
-          onClick={closeMenu}
-        >
-          Journal
-        </a>
-
-<a
+        <a
           className="btn-lime"
           href="#contact"
           onClick={closeMenu}

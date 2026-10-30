@@ -6211,3 +6211,76 @@ body.contact-modal-open {
       0 !important;
   }
 }
+
+/* === MYNDWORKS EMAIL CARD DROPDOWN START === */
+.mw-contact-image-modal-option[type="button"] {
+  width: 100%;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mw-contact-image-email-dropdown {
+  margin-top: -4px;
+  padding: 14px 16px 16px;
+  border: 1px solid rgba(41, 67, 77, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.mw-contact-image-email-dropdown p {
+  margin: 0;
+  color: rgba(41, 67, 77, 0.62);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.mw-contact-image-email-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.mw-contact-image-email-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0 13px;
+  border: 1px solid rgba(41, 67, 77, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #29434d;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mw-contact-image-email-action.is-primary {
+  background: #29434d;
+  color: #fff;
+  border-color: #29434d;
+}
+
+.mw-contact-image-email-dropdown small {
+  display: block;
+  margin-top: 9px;
+  color: rgba(41, 67, 77, 0.5);
+  font-size: 10px;
+}
+
+@media (max-width: 520px) {
+  .mw-contact-image-email-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .mw-contact-image-email-action {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+/* === MYNDWORKS EMAIL CARD DROPDOWN END === */

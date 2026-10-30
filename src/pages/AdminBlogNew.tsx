@@ -1,5 +1,9 @@
-import { BlogEditor } from "../components/BlogEditor";
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { supabase } from "../lib/supabase";
 import "./admin-events.css";
 
@@ -20,16 +24,21 @@ export function AdminBlogNew() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
+  const [coverImageFile, setCoverImageFile] =
+    useState<File | null>(null);
+  const [coverPreview, setCoverPreview] = useState("");
+
   const [title, setTitle] = useState("");
   const [excerpt, setExcerpt] = useState("");
   const [content, setContent] = useState("");
-  const [authorName, setAuthorName] = useState("MyndWorks");
 
   useEffect(() => {
     let active = true;
 
     async function checkAccess() {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
 
       if (!session?.user) {
         window.location.replace("/admin/login");
@@ -55,35 +64,134 @@ export function AdminBlogNew() {
     }
 
     checkAccess();
-    return () => { active = false; };
+
+    return () => {
+      active = false;
+    };
   }, []);
 
-  async function saveBlog(status: BlogStatus) {
+  function handleCoverChange(
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      setCoverImageFile(null);
+      setCoverPreview("");
+      return;
+    }
+
     setError("");
 
-    const cleanTitle = title.trim();
-    const slug = slugify(cleanTitle);
+    if (
+      !["image/jpeg", "image/png", "image/webp"].includes(
+        file.type,
+      )
+    ) {
+      setError("Use a JPG, PNG or WebP image.");
+      event.target.value = "";
+      return;
+    }
 
-    if (cleanTitle.length < 2 || !slug) {
-      setError("Please enter a blog title.");
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Cover image must be 5 MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
+    setCoverImageFile(file);
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setCoverPreview(
+        typeof reader.result === "string"
+          ? reader.result
+          : "",
+      );
+    };
+    reader.readAsDataURL(file);
+  }
+
+  async function savePost(status: BlogStatus) {
+    setError("");
+
+    const slug = slugify(title);
+
+    if (!title.trim() || !slug) {
+      setError("Please enter an article title.");
+      return;
+    }
+
+    if (!content.trim()) {
+      setError("Please add the article content.");
       return;
     }
 
     setSaving(true);
 
-    const { error: insertError } = await supabase.from("blog_posts").insert({
-      title: cleanTitle,
+    let coverImageUrl: string | null = null;
+    let uploadedObjectPath: string | null = null;
+
+    if (coverImageFile) {
+      const safeName = coverImageFile.name
+        .toLowerCase()
+        .replace(/[^a-z0-9.]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+      const objectPath =
+        `new/${userId}/${Date.now()}-${safeName}`;
+
+      const { error: uploadError } =
+        await supabase.storage
+          .from("blog-covers")
+          .upload(objectPath, coverImageFile, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+      if (uploadError) {
+        setError(uploadError.message);
+        setSaving(false);
+        return;
+      }
+
+      const { data } = supabase.storage
+        .from("blog-covers")
+        .getPublicUrl(objectPath);
+
+      coverImageUrl = data.publicUrl;
+      uploadedObjectPath = objectPath;
+    }
+
+    const payload = {
+      title: title.trim(),
       slug,
       excerpt: excerpt.trim() || null,
       content: content.trim(),
-      author_name: authorName.trim() || "MyndWorks",
+      cover_image_url: coverImageUrl,
       status,
-      published_at: status === "published" ? new Date().toISOString() : null,
       created_by: userId,
-    });
+    };
+
+    const { error: insertError } = await supabase
+      .from("blog_posts")
+      .insert(payload);
 
     if (insertError) {
-      setError(insertError.code === "23505" ? "Another article already uses this public link." : insertError.message);
+      if (uploadedObjectPath) {
+        await supabase.storage
+          .from("blog-covers")
+          .remove([uploadedObjectPath]);
+      }
+
+      if (insertError.code === "23505") {
+        setError(
+          "An article with this title/link already exists. Change the title slightly.",
+        );
+      } else {
+        setError(insertError.message);
+      }
+
       setSaving(false);
       return;
     }
@@ -91,82 +199,214 @@ export function AdminBlogNew() {
     window.location.href = "/admin/blogs";
   }
 
+  function handleSubmit(
+    event: FormEvent<HTMLFormElement>,
+  ) {
+    event.preventDefault();
+  }
+
   if (!allowed) {
-    return <main className="mw-admin-auth"><div className="mw-admin-loading">Checking access…</div></main>;
+    return (
+      <main className="mw-admin-auth">
+        <div className="mw-admin-loading">
+          Checking access…
+        </div>
+      </main>
+    );
   }
 
   return (
     <main className="mw-events-admin-shell">
       <header className="mw-events-admin-header">
         <div>
-          <a className="mw-admin-brand mw-admin-brand-link" href="/admin">MyndWorks</a>
-          <span className="mw-admin-label">Admin / Blogs</span>
+          <a
+            className="mw-admin-brand mw-admin-brand-link"
+            href="/admin"
+          >
+            MyndWorks
+          </a>
+          <span className="mw-admin-label">
+            Admin / Journal
+          </span>
         </div>
       </header>
 
-      <section className="mw-blog-editor">
+      <section className="mw-event-editor">
         <div className="mw-event-editor-head">
           <div>
-            <a className="mw-admin-back-link" href="/admin/blogs">← Blogs</a>
-            <span className="mw-admin-label">New article</span>
-            <h1>Create blog</h1>
-            <p>Write the article first. Editing, cover images and the public article page come next.</p>
+            <a
+              className="mw-admin-back-link"
+              href="/admin/blogs"
+            >
+              ← Journal
+            </a>
+
+            <span className="mw-admin-label">
+              New article
+            </span>
+
+            <h1>Create article</h1>
+
+            <p>
+              Add the article information, cover image and
+              content below.
+            </p>
           </div>
         </div>
 
-        <div className="mw-event-form">
+        <form
+          className="mw-event-form"
+          onSubmit={handleSubmit}
+        >
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
               <span>01</span>
-              <div><h2>Article details</h2><p>Title, author and public summary.</p></div>
+              <div>
+                <h2>Cover image</h2>
+                <p>
+                  Optional. Recommended: wide landscape image
+                  under 5 MB.
+                </p>
+              </div>
             </div>
 
-            <div className="mw-event-form-fields is-grid">
-              <label className="mw-field is-full">
-                <span>Article title</span>
-                <input type="text" maxLength={180} value={title} onChange={(e) => setTitle(e.target.value)} />
-                {title && <small>Public link: /blog/{slugify(title)}</small>}
+            <div className="mw-event-cover-editor">
+              <div className="mw-event-cover-preview">
+                {coverPreview ? (
+                  <img src={coverPreview} alt="" />
+                ) : (
+                  <span>No cover image selected</span>
+                )}
+              </div>
+
+              <label className="mw-event-upload-button">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={handleCoverChange}
+                  disabled={saving}
+                />
+
+                {coverImageFile
+                  ? "Change cover image"
+                  : "Choose cover image"}
               </label>
 
-              <label className="mw-field">
-                <span>Author</span>
-                <input type="text" value={authorName} onChange={(e) => setAuthorName(e.target.value)} />
-              </label>
-
-              <label className="mw-field is-full">
-                <span>Excerpt</span>
-                <textarea rows={3} maxLength={320} value={excerpt} onChange={(e) => setExcerpt(e.target.value)} placeholder="A short introduction shown on article cards." />
-              </label>
+              {coverImageFile && (
+                <small>
+                  {coverImageFile.name} — image will upload
+                  when the article is saved.
+                </small>
+              )}
             </div>
           </div>
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
               <span>02</span>
-              <div><h2>Article content</h2><p>Write the main article body.</p></div>
+              <div>
+                <h2>Article details</h2>
+                <p>
+                  The information people will see on the
+                  Journal page.
+                </p>
+              </div>
             </div>
 
             <div className="mw-event-form-fields">
-              <div className="mw-field is-full">
-                <span>Content</span>
-                <BlogEditor
-                  value={content}
-                  onChange={setContent}
+              <label className="mw-field is-full">
+                <span>Article title</span>
+                <input
+                  type="text"
+                  required
+                  maxLength={180}
+                  value={title}
+                  onChange={(e) =>
+                    setTitle(e.target.value)
+                  }
+                  placeholder="Signs of emotional burnout and how to reset"
                 />
+
+                {title && (
+                  <small>
+                    Link preview: /blog/{slugify(title)}
+                  </small>
+                )}
+              </label>
+
+              <label className="mw-field is-full">
+                <span>Excerpt</span>
+                <textarea
+                  rows={3}
+                  maxLength={320}
+                  value={excerpt}
+                  onChange={(e) =>
+                    setExcerpt(e.target.value)
+                  }
+                  placeholder="A short summary for cards and sharing."
+                />
+              </label>
+            </div>
+          </div>
+
+          <div className="mw-event-form-section">
+            <div className="mw-event-form-section-title">
+              <span>03</span>
+              <div>
+                <h2>Article content</h2>
+                <p>
+                  Write the full article content below.
+                </p>
               </div>
             </div>
-          </div>
 
-          {error && <div className="mw-admin-error">{error}</div>}
-
-          <div className="mw-event-form-actions">
-            <a href="/admin/blogs">← Back to blogs</a>
-            <div className="mw-blog-save-actions">
-              <button type="button" className="mw-blog-secondary" disabled={saving} onClick={() => saveBlog("draft")}>Save draft</button>
-              <button type="button" className="mw-admin-primary" disabled={saving} onClick={() => saveBlog("published")}>{saving ? "Saving..." : "Publish"}</button>
+            <div className="mw-event-form-fields">
+              <label className="mw-field is-full">
+                <span>Content</span>
+                <textarea
+                  rows={18}
+                  value={content}
+                  onChange={(e) =>
+                    setContent(e.target.value)
+                  }
+                  placeholder="Write your article content here..."
+                />
+              </label>
             </div>
           </div>
-        </div>
+
+          {error && (
+            <div className="mw-admin-error mw-event-form-error">
+              {error}
+            </div>
+          )}
+
+          <div className="mw-event-form-actions">
+            <a href="/admin/blogs">Cancel</a>
+
+            <div>
+              <button
+                type="button"
+                className="mw-event-secondary-button"
+                disabled={saving}
+                onClick={() => savePost("draft")}
+              >
+                {saving ? "Saving..." : "Save draft"}
+              </button>
+
+              <button
+                type="button"
+                className="mw-admin-primary"
+                disabled={saving}
+                onClick={() => savePost("published")}
+              >
+                {saving
+                  ? "Saving..."
+                  : "Publish article"}
+              </button>
+            </div>
+          </div>
+        </form>
       </section>
     </main>
   );

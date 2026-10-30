@@ -1303,6 +1303,16 @@ export function Contact() {
     setIsConnectOpen,
   ] = useState(false);
 
+  const [
+    isEmailOpen,
+    setIsEmailOpen,
+  ] = useState(false);
+
+  const [
+    emailCopied,
+    setEmailCopied,
+  ] = useState(false);
+
 
   const closeRef =
     useRef<HTMLButtonElement>(null);
@@ -1374,6 +1384,22 @@ export function Contact() {
 
   }, [isConnectOpen]);
 
+
+  async function copyEmailAddress() {
+    try {
+      await navigator.clipboard.writeText(PRIMARY_EMAIL);
+      setEmailCopied(true);
+
+      window.setTimeout(() => {
+        setEmailCopied(false);
+      }, 1800);
+    } catch {
+      window.prompt(
+        "Copy Sphe's email address:",
+        PRIMARY_EMAIL,
+      );
+    }
+  }
 
   return (
     <>
@@ -1455,9 +1481,11 @@ export function Contact() {
                 <button
                   type="button"
                   className="mw-contact-image-primary"
-                  onClick={() =>
-                    setIsConnectOpen(true)
-                  }
+                  onClick={() => {
+                    setIsEmailOpen(false);
+                    setEmailCopied(false);
+                    setIsConnectOpen(true);
+                  }}
                 >
                   Book a session
                   <span aria-hidden="true">
@@ -1749,15 +1777,19 @@ export function Contact() {
 
               {/* EMAIL */}
 
-              <a
+              <button
+                type="button"
                 className="mw-contact-image-modal-option"
-                href={PRIMARY_EMAIL_URL}
+                onClick={() => {
+                  setIsEmailOpen((current) => !current);
+                  setEmailCopied(false);
+                }}
+                aria-expanded={isEmailOpen}
               >
 
                 <span className="mw-contact-image-modal-option-icon">
                   <ContactIcon kind="mail" />
                 </span>
-
 
                 <span className="mw-contact-image-modal-option-copy">
 
@@ -1771,12 +1803,35 @@ export function Contact() {
 
                 </span>
 
-
                 <span className="mw-contact-image-modal-option-arrow">
                   <ContactIcon kind="arrow" />
                 </span>
 
-              </a>
+              </button>
+
+              {isEmailOpen && (
+                <div className="mw-contact-image-email-dropdown">
+                  <p>
+                    Email me to get started.
+                  </p>
+
+                  <div className="mw-contact-image-email-actions">
+                    <button
+                      type="button"
+                      className="mw-contact-image-email-action is-primary"
+                      onClick={copyEmailAddress}
+                    >
+                      {emailCopied
+                        ? "Email copied"
+                        : "Copy my email"}
+                    </button>
+                  </div>
+
+                  {emailCopied && (
+                    <small>{PRIMARY_EMAIL}</small>
+                  )}
+                </div>
+              )}
 
             </div>
 

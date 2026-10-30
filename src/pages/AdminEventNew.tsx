@@ -1,4 +1,9 @@
-import { useEffect, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useState,
+  type ChangeEvent,
+  type FormEvent,
+} from "react";
 import { supabase } from "../lib/supabase";
 import "./admin-events.css";
 
@@ -20,13 +25,19 @@ export function AdminEventNew() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
+  const [coverImageFile, setCoverImageFile] =
+    useState<File | null>(null);
+  const [coverPreview, setCoverPreview] = useState("");
+
   const [title, setTitle] = useState("");
-  const [shortDescription, setShortDescription] = useState("");
+  const [shortDescription, setShortDescription] =
+    useState("");
   const [description, setDescription] = useState("");
   const [eventDate, setEventDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [venueType, setVenueType] = useState<VenueType>("in_person");
+  const [venueType, setVenueType] =
+    useState<VenueType>("in_person");
   const [venueName, setVenueName] = useState("");
   const [venueAddress, setVenueAddress] = useState("");
   const [onlineUrl, setOnlineUrl] = useState("");
@@ -71,6 +82,50 @@ export function AdminEventNew() {
     };
   }, []);
 
+  function handleCoverChange(
+    event: ChangeEvent<HTMLInputElement>,
+  ) {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      setCoverImageFile(null);
+      setCoverPreview("");
+      return;
+    }
+
+    setError("");
+
+    if (
+      !["image/jpeg", "image/png", "image/webp"].includes(
+        file.type,
+      )
+    ) {
+      setError("Use a JPG, PNG or WebP image.");
+      event.target.value = "";
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Cover image must be 5 MB or smaller.");
+      event.target.value = "";
+      return;
+    }
+
+    setCoverImageFile(file);
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setCoverPreview(
+        typeof reader.result === "string"
+          ? reader.result
+          : "",
+      );
+    };
+
+    reader.readAsDataURL(file);
+  }
+
   async function saveEvent(status: EventStatus) {
     setError("");
 
@@ -88,11 +143,47 @@ export function AdminEventNew() {
 
     setSaving(true);
 
+    let coverImageUrl: string | null = null;
+    let uploadedObjectPath: string | null = null;
+
+    if (coverImageFile) {
+      const safeName = coverImageFile.name
+        .toLowerCase()
+        .replace(/[^a-z0-9.]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+      const objectPath =
+        `new/${userId}/${Date.now()}-${safeName}`;
+
+      const { error: uploadError } =
+        await supabase.storage
+          .from("event-covers")
+          .upload(objectPath, coverImageFile, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+      if (uploadError) {
+        setError(uploadError.message);
+        setSaving(false);
+        return;
+      }
+
+      const { data } = supabase.storage
+        .from("event-covers")
+        .getPublicUrl(objectPath);
+
+      coverImageUrl = data.publicUrl;
+      uploadedObjectPath = objectPath;
+    }
+
     const payload = {
       title: title.trim(),
       slug,
-      short_description: shortDescription.trim() || null,
+      short_description:
+        shortDescription.trim() || null,
       description: description.trim(),
+      cover_image_url: coverImageUrl,
       event_date: eventDate,
       start_time: startTime,
       end_time: endTime || null,
@@ -114,6 +205,12 @@ export function AdminEventNew() {
       .insert(payload);
 
     if (insertError) {
+      if (uploadedObjectPath) {
+        await supabase.storage
+          .from("event-covers")
+          .remove([uploadedObjectPath]);
+      }
+
       if (insertError.code === "23505") {
         setError(
           "An event with this title/link already exists. Change the title slightly.",
@@ -129,14 +226,18 @@ export function AdminEventNew() {
     window.location.href = "/admin/events";
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(
+    event: FormEvent<HTMLFormElement>,
+  ) {
     event.preventDefault();
   }
 
   if (!allowed) {
     return (
       <main className="mw-admin-auth">
-        <div className="mw-admin-loading">Checking access…</div>
+        <div className="mw-admin-loading">
+          Checking access…
+        </div>
       </main>
     );
   }
@@ -145,35 +246,97 @@ export function AdminEventNew() {
     <main className="mw-events-admin-shell">
       <header className="mw-events-admin-header">
         <div>
-          <a className="mw-admin-brand mw-admin-brand-link" href="/admin">
+          <a
+            className="mw-admin-brand mw-admin-brand-link"
+            href="/admin"
+          >
             MyndWorks
           </a>
-          <span className="mw-admin-label">Admin / Events</span>
+          <span className="mw-admin-label">
+            Admin / Events
+          </span>
         </div>
       </header>
 
       <section className="mw-event-editor">
         <div className="mw-event-editor-head">
           <div>
-            <a className="mw-admin-back-link" href="/admin/events">
+            <a
+              className="mw-admin-back-link"
+              href="/admin/events"
+            >
               ← Events
             </a>
-            <span className="mw-admin-label">New event</span>
+
+            <span className="mw-admin-label">
+              New event
+            </span>
+
             <h1>Create event</h1>
+
             <p>
-              Add the event information now. Cover image and public
-              sharing will be added in the next step.
+              Add the event information, cover image and
+              attendance details below.
             </p>
           </div>
         </div>
 
-        <form className="mw-event-form" onSubmit={handleSubmit}>
+        <form
+          className="mw-event-form"
+          onSubmit={handleSubmit}
+        >
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
               <span>01</span>
               <div>
+                <h2>Cover image</h2>
+                <p>
+                  Optional. Recommended: wide landscape image
+                  under 5 MB.
+                </p>
+              </div>
+            </div>
+
+            <div className="mw-event-cover-editor">
+              <div className="mw-event-cover-preview">
+                {coverPreview ? (
+                  <img src={coverPreview} alt="" />
+                ) : (
+                  <span>No cover image selected</span>
+                )}
+              </div>
+
+              <label className="mw-event-upload-button">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  onChange={handleCoverChange}
+                  disabled={saving}
+                />
+
+                {coverImageFile
+                  ? "Change cover image"
+                  : "Choose cover image"}
+              </label>
+
+              {coverImageFile && (
+                <small>
+                  {coverImageFile.name} — image will upload
+                  when the event is saved.
+                </small>
+              )}
+            </div>
+          </div>
+
+          <div className="mw-event-form-section">
+            <div className="mw-event-form-section-title">
+              <span>02</span>
+              <div>
                 <h2>Event details</h2>
-                <p>The information people will see on the event page.</p>
+                <p>
+                  The information people will see on the event
+                  page.
+                </p>
               </div>
             </div>
 
@@ -185,11 +348,16 @@ export function AdminEventNew() {
                   required
                   maxLength={160}
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) =>
+                    setTitle(e.target.value)
+                  }
                   placeholder="MyndWorks Wellness Morning"
                 />
+
                 {title && (
-                  <small>Link preview: /events/{slugify(title)}</small>
+                  <small>
+                    Link preview: /events/{slugify(title)}
+                  </small>
                 )}
               </label>
 
@@ -199,7 +367,9 @@ export function AdminEventNew() {
                   rows={2}
                   maxLength={280}
                   value={shortDescription}
-                  onChange={(e) => setShortDescription(e.target.value)}
+                  onChange={(e) =>
+                    setShortDescription(e.target.value)
+                  }
                   placeholder="A short introduction for event cards and sharing."
                 />
               </label>
@@ -209,7 +379,9 @@ export function AdminEventNew() {
                 <textarea
                   rows={6}
                   value={description}
-                  onChange={(e) => setDescription(e.target.value)}
+                  onChange={(e) =>
+                    setDescription(e.target.value)
+                  }
                   placeholder="Tell guests what the event is about and what to expect."
                 />
               </label>
@@ -218,10 +390,12 @@ export function AdminEventNew() {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>02</span>
+              <span>03</span>
               <div>
                 <h2>Date & time</h2>
-                <p>All event times use Africa/Johannesburg.</p>
+                <p>
+                  All event times use Africa/Johannesburg.
+                </p>
               </div>
             </div>
 
@@ -232,7 +406,9 @@ export function AdminEventNew() {
                   type="date"
                   required
                   value={eventDate}
-                  onChange={(e) => setEventDate(e.target.value)}
+                  onChange={(e) =>
+                    setEventDate(e.target.value)
+                  }
                 />
               </label>
 
@@ -242,7 +418,9 @@ export function AdminEventNew() {
                   type="time"
                   required
                   value={startTime}
-                  onChange={(e) => setStartTime(e.target.value)}
+                  onChange={(e) =>
+                    setStartTime(e.target.value)
+                  }
                 />
               </label>
 
@@ -251,7 +429,9 @@ export function AdminEventNew() {
                 <input
                   type="time"
                   value={endTime}
-                  onChange={(e) => setEndTime(e.target.value)}
+                  onChange={(e) =>
+                    setEndTime(e.target.value)
+                  }
                 />
               </label>
 
@@ -260,7 +440,9 @@ export function AdminEventNew() {
                 <input
                   type="datetime-local"
                   value={rsvpClosesAt}
-                  onChange={(e) => setRsvpClosesAt(e.target.value)}
+                  onChange={(e) =>
+                    setRsvpClosesAt(e.target.value)
+                  }
                 />
               </label>
             </div>
@@ -268,10 +450,12 @@ export function AdminEventNew() {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>03</span>
+              <span>04</span>
               <div>
                 <h2>Venue</h2>
-                <p>Choose how guests will attend the event.</p>
+                <p>
+                  Choose how guests will attend the event.
+                </p>
               </div>
             </div>
 
@@ -281,10 +465,14 @@ export function AdminEventNew() {
                 <select
                   value={venueType}
                   onChange={(e) =>
-                    setVenueType(e.target.value as VenueType)
+                    setVenueType(
+                      e.target.value as VenueType,
+                    )
                   }
                 >
-                  <option value="in_person">In person</option>
+                  <option value="in_person">
+                    In person
+                  </option>
                   <option value="online">Online</option>
                   <option value="hybrid">Hybrid</option>
                 </select>
@@ -296,7 +484,9 @@ export function AdminEventNew() {
                   type="number"
                   min="1"
                   value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
+                  onChange={(e) =>
+                    setCapacity(e.target.value)
+                  }
                   placeholder="Optional"
                 />
               </label>
@@ -308,7 +498,9 @@ export function AdminEventNew() {
                     <input
                       type="text"
                       value={venueName}
-                      onChange={(e) => setVenueName(e.target.value)}
+                      onChange={(e) =>
+                        setVenueName(e.target.value)
+                      }
                       placeholder="MyndWorks"
                     />
                   </label>
@@ -318,7 +510,9 @@ export function AdminEventNew() {
                     <input
                       type="text"
                       value={venueAddress}
-                      onChange={(e) => setVenueAddress(e.target.value)}
+                      onChange={(e) =>
+                        setVenueAddress(e.target.value)
+                      }
                       placeholder="Street address"
                     />
                   </label>
@@ -331,7 +525,9 @@ export function AdminEventNew() {
                   <input
                     type="url"
                     value={onlineUrl}
-                    onChange={(e) => setOnlineUrl(e.target.value)}
+                    onChange={(e) =>
+                      setOnlineUrl(e.target.value)
+                    }
                     placeholder="https://..."
                   />
                 </label>
@@ -355,7 +551,7 @@ export function AdminEventNew() {
                 disabled={saving}
                 onClick={() => saveEvent("draft")}
               >
-                Save draft
+                {saving ? "Saving..." : "Save draft"}
               </button>
 
               <button
@@ -364,7 +560,9 @@ export function AdminEventNew() {
                 disabled={saving}
                 onClick={() => saveEvent("published")}
               >
-                {saving ? "Saving..." : "Publish event"}
+                {saving
+                  ? "Saving..."
+                  : "Publish event"}
               </button>
             </div>
           </div>

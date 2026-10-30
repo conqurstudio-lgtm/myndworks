@@ -155,11 +155,13 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
     return () => { active = false; };
   }, [eventId]);
 
-  async function saveEvent() {
+  async function saveEvent(nextStatus?: EventStatus) {
     setError("");
     setSaved(false);
 
     const slug = slugify(title);
+
+    const finalStatus = nextStatus ?? status;
 
     if (!title.trim() || !slug) {
       setError("Please enter an event title.");
@@ -190,7 +192,7 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
         online_url: onlineUrl.trim() || null,
         capacity: capacity ? Number(capacity) : null,
         rsvp_closes_at: rsvpClosesAt ? new Date(rsvpClosesAt).toISOString() : null,
-        status,
+        status: finalStatus,
       })
       .eq("id", eventId);
 
@@ -202,6 +204,7 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
       return;
     }
 
+    setStatus(finalStatus);
     setSaved(true);
     setSaving(false);
   }
@@ -507,9 +510,32 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
 
           <div className="mw-event-form-actions">
             <a href="/admin/events">← Back to events</a>
-            <button type="button" className="mw-admin-primary" disabled={saving || uploading} onClick={saveEvent}>
-              {saving ? "Saving..." : "Save changes"}
-            </button>
+
+            <div>
+              <button
+                type="button"
+                className={
+                  status === "draft"
+                    ? "mw-event-secondary-button"
+                    : "mw-admin-primary"
+                }
+                disabled={saving || uploading}
+                onClick={() => saveEvent()}
+              >
+                {saving ? "Saving..." : "Save changes"}
+              </button>
+
+              {status === "draft" && (
+                <button
+                  type="button"
+                  className="mw-admin-primary"
+                  disabled={saving || uploading}
+                  onClick={() => saveEvent("published")}
+                >
+                  {saving ? "Publishing..." : "Publish event"}
+                </button>
+              )}
+            </div>
           </div>
         </div>
 

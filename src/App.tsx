@@ -1,3 +1,5 @@
+import { PublicEventsIndex } from "./pages/PublicEventsIndex";
+import { PublicBlogIndex } from "./pages/PublicBlogIndex";
 import { PublicBlogPage } from "./pages/PublicBlogPage";
 import { AdminBlogEdit } from "./pages/AdminBlogEdit";
 import { AdminBlogNew } from "./pages/AdminBlogNew";
@@ -69,12 +71,20 @@ export default function App() {
     return <AdminEventsDashboard />;
   }
 
+  if (pathname === "/blog") {
+    return <PublicBlogIndex />;
+  }
+
   if (pathname.startsWith("/blog/")) {
     return (
       <PublicBlogPage
         slug={decodeURIComponent(pathname.replace("/blog/", ""))}
       />
     );
+  }
+
+  if (pathname === "/events") {
+    return <PublicEventsIndex />;
   }
 
   if (pathname.startsWith("/events/")) {
