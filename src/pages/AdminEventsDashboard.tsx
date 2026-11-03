@@ -8,7 +8,8 @@ type EventRow = {
   slug: string;
   event_date: string;
   start_time: string;
-  venue_name: string | null;
+    cover_image_url: string | null;
+venue_name: string | null;
   venue_type: string;
   status: "draft" | "published" | "closed" | "past";
 };
@@ -18,6 +19,45 @@ type RsvpRow = {
   guest_count: number;
   status: string;
 };
+
+type EventSummaryIconKind =
+  | "events"
+  | "published"
+  | "guests";
+
+function EventSummaryIcon({
+  kind,
+}: {
+  kind: EventSummaryIconKind;
+}) {
+  if (kind === "events") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 4.5h14v15H5z" />
+        <path d="M8 3v3M16 3v3M5 8h14" />
+        <path d="M8.5 11.5h3M8.5 15h6.5" />
+      </svg>
+    );
+  }
+
+  if (kind === "published") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 3.8 14.3 6l3.2-.1.8 3 2.5 2-1.5 2.8.7 3.1-3 1-1.7 2.7-2.8-1.4-3 1.2-1.6-2.8-3.1-.9.8-3.1L4 11l2.4-2 .6-3.1 3.2.2L12 3.8Z" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="9" cy="8" r="2.6" />
+      <circle cx="16.5" cy="9" r="2" />
+      <path d="M4.5 18c.4-3.4 2-5.1 4.5-5.1s4.1 1.7 4.5 5.1" />
+      <path d="M13.8 14c2.8-.2 4.7 1.2 5.4 4" />
+    </svg>
+  );
+}
 
 export function AdminEventsDashboard() {
   const [allowed, setAllowed] = useState(false);
@@ -56,7 +96,7 @@ export function AdminEventsDashboard() {
           supabase
             .from("events")
             .select(
-              "id,title,slug,event_date,start_time,venue_name,venue_type,status",
+              "id,title,slug,event_date,start_time,cover_image_url,venue_name,venue_type,status",
             )
             .order("event_date", { ascending: true })
             .order("start_time", { ascending: true }),
@@ -139,7 +179,7 @@ export function AdminEventsDashboard() {
           <a className="mw-admin-brand mw-admin-brand-link" href="/admin">
             MyndWorks
           </a>
-          <span className="mw-admin-label">Admin / Events</span>
+
         </div>
 
         <button
@@ -155,9 +195,12 @@ export function AdminEventsDashboard() {
         <div className="mw-events-page-head">
           <div>
             <a className="mw-admin-back-link" href="/admin">
-              ← Admin
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to Admin</span>
             </a>
-            <span className="mw-admin-label">Events management</span>
+
             <h1>Events</h1>
             <p>Create, publish and manage MyndWorks events.</p>
           </div>
@@ -170,18 +213,32 @@ export function AdminEventsDashboard() {
           </a>
         </div>
 
-        <div className="mw-events-stats">
-          <div>
-            <span>Events</span>
+        <div className="mw-events-stats mw-events-stats-v2 mw-event-summary-grid">
+          <div className="mw-event-summary-card">
+            <div className="mw-event-summary-card-head">
+              <span>Events</span>
+              <EventSummaryIcon kind="events" />
+            </div>
             <strong>{events.length}</strong>
+            <small>All events</small>
           </div>
-          <div>
-            <span>Published</span>
+
+          <div className="mw-event-summary-card">
+            <div className="mw-event-summary-card-head">
+              <span>Published</span>
+              <EventSummaryIcon kind="published" />
+            </div>
             <strong>{publishedCount}</strong>
+            <small>Visible on the website</small>
           </div>
-          <div>
-            <span>Confirmed guests</span>
+
+          <div className="mw-event-summary-card">
+            <div className="mw-event-summary-card-head">
+              <span>Confirmed guests</span>
+              <EventSummaryIcon kind="guests" />
+            </div>
             <strong>{totalGuests}</strong>
+            <small>Across all events</small>
           </div>
         </div>
 
@@ -189,7 +246,7 @@ export function AdminEventsDashboard() {
 
         {events.length === 0 ? (
           <div className="mw-events-empty">
-            <span className="mw-admin-label">No events yet</span>
+
             <h2>Create your first MyndWorks event.</h2>
             <p>
               Save it as a draft while preparing it, or publish it when
@@ -204,37 +261,64 @@ export function AdminEventsDashboard() {
           </div>
         ) : (
           <div className="mw-events-list">
-            {events.map((event) => (
-              <a
-                className="mw-event-row"
-                key={event.id}
-                href={`/admin/events/${event.id}`}
-              >
-                <div className="mw-event-row-main">
-                  <span className={`mw-event-status is-${event.status}`}>
-                    {event.status}
+            {events.map((event) => {
+              const guestCount = totals.get(event.id) ?? 0;
+              const venueLabel =
+                event.venue_type === "online"
+                  ? "Online"
+                  : event.venue_name || "Venue TBC";
+
+              return (
+                <a
+                  className="mw-event-row"
+                  key={event.id}
+                  href={`/admin/events/${event.id}`}
+                >
+                  <span className="mw-event-row-thumb" aria-hidden="true">
+                    {event.cover_image_url ? (
+                      <img src={event.cover_image_url} alt="" />
+                    ) : (
+                      <span className="mw-event-row-thumb-placeholder">
+                        MyndWorks
+                      </span>
+                    )}
                   </span>
-                  <h2>{event.title}</h2>
-                  <div className="mw-event-row-meta">
-                    <span>{formatDate(event.event_date)}</span>
-                    <span>{formatTime(event.start_time)}</span>
-                    <span>
-                      {event.venue_type === "online"
-                        ? "Online"
-                        : event.venue_name || "Venue TBC"}
+
+                  <div className="mw-event-row-main">
+                    <span className={`mw-event-status is-${event.status}`}>
+                      {event.status}
+                    </span>
+
+                    <h2>{event.title}</h2>
+
+                    <div className="mw-event-row-meta">
+                      <span className="mw-event-meta-pill">
+                        {formatDate(event.event_date)}
+                      </span>
+                      <span className="mw-event-meta-pill">
+                        {formatTime(event.start_time)}
+                      </span>
+                      <span className="mw-event-meta-pill">
+                        {venueLabel}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="mw-event-row-side">
+                    <span className="mw-event-rsvp-count">
+                      <strong>{guestCount}</strong>
+                      <span>
+                        {guestCount === 1 ? "guest" : "guests"}
+                      </span>
+                    </span>
+
+                    <span className="mw-event-row-arrow-ring" aria-hidden="true">
+                      <span className="mw-event-row-arrow">→</span>
                     </span>
                   </div>
-                </div>
-
-                <div className="mw-event-row-side">
-                  <span className="mw-event-rsvp-count">
-                    <strong>{totals.get(event.id) ?? 0}</strong>
-                    guests
-                  </span>
-                  <span className="mw-event-row-arrow">→</span>
-                </div>
-              </a>
-            ))}
+                </a>
+              );
+            })}
           </div>
         )}
       </section>

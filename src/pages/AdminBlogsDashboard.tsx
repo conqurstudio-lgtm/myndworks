@@ -7,11 +7,50 @@ type BlogRow = {
   title: string;
   slug: string;
   excerpt: string | null;
+  cover_image_url: string | null;
   author_name: string | null;
   status: "draft" | "published";
   published_at: string | null;
   updated_at: string;
 };
+
+type BlogSummaryIconKind =
+  | "articles"
+  | "published"
+  | "drafts";
+
+function BlogSummaryIcon({
+  kind,
+}: {
+  kind: BlogSummaryIconKind;
+}) {
+  if (kind === "articles") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 3.5h8l4 4v13H6z" />
+        <path d="M14 3.5v4h4" />
+        <path d="M9 12h6M9 15.5h5" />
+      </svg>
+    );
+  }
+
+  if (kind === "published") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="m8.6 12 2.1 2.2 4.8-5" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="m5 16.8-.6 2.8 2.8-.6L17.5 8.7 15.3 6.5 5 16.8Z" />
+      <path d="m13.9 7.9 2.2 2.2" />
+      <path d="M9 20h10" />
+    </svg>
+  );
+}
 
 export function AdminBlogsDashboard() {
   const [allowed, setAllowed] = useState(false);
@@ -47,7 +86,7 @@ export function AdminBlogsDashboard() {
       const { data, error: fetchError } = await supabase
         .from("blog_posts")
         .select(
-          "id,title,slug,excerpt,author_name,status,published_at,updated_at",
+          "id,title,slug,excerpt,cover_image_url,author_name,status,published_at,updated_at",
         )
         .order("updated_at", { ascending: false });
 
@@ -89,41 +128,57 @@ export function AdminBlogsDashboard() {
           <a className="mw-admin-brand mw-admin-brand-link" href="/admin">
             MyndWorks
           </a>
-          <span className="mw-admin-label">Admin / Blogs</span>
         </div>
-
-        <a
-          className="mw-admin-primary mw-admin-primary-link"
-          href="/admin/blogs/new"
-        >
-          + New blog
-        </a>
       </header>
 
       <section className="mw-blogs-admin">
-        <div className="mw-admin-section-head">
+        <div className="mw-events-page-head mw-blogs-page-head">
           <div>
             <a className="mw-admin-back-link" href="/admin">
-              ← Admin
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to Admin</span>
             </a>
-            <span className="mw-admin-label">Content management</span>
+
             <h1>Blogs</h1>
             <p>Create and publish MyndWorks articles from one place.</p>
           </div>
+
+          <a
+            className="mw-admin-primary mw-admin-primary-link"
+            href="/admin/blogs/new"
+          >
+            + New blog
+          </a>
         </div>
 
-        <div className="mw-blog-stats">
-          <div>
-            <span>Total articles</span>
+        <div className="mw-blog-stats mw-blog-summary-grid">
+          <div className="mw-blog-summary-card">
+            <div className="mw-blog-summary-card-head">
+              <span>Total articles</span>
+              <BlogSummaryIcon kind="articles" />
+            </div>
             <strong>{blogs.length}</strong>
+            <small>All articles</small>
           </div>
-          <div>
-            <span>Published</span>
+
+          <div className="mw-blog-summary-card">
+            <div className="mw-blog-summary-card-head">
+              <span>Published</span>
+              <BlogSummaryIcon kind="published" />
+            </div>
             <strong>{publishedCount}</strong>
+            <small>Visible on the website</small>
           </div>
-          <div>
-            <span>Drafts</span>
+
+          <div className="mw-blog-summary-card">
+            <div className="mw-blog-summary-card-head">
+              <span>Drafts</span>
+              <BlogSummaryIcon kind="drafts" />
+            </div>
             <strong>{blogs.length - publishedCount}</strong>
+            <small>Still in progress</small>
           </div>
         </div>
 
@@ -144,33 +199,48 @@ export function AdminBlogsDashboard() {
           <div className="mw-blog-list">
             {blogs.map((blog) => (
               <a
-                className="mw-blog-row"
+                className="mw-blog-row mw-blog-row-v2"
                 key={blog.id}
                 href={`/admin/blogs/${blog.id}`}
               >
+                <span className="mw-blog-row-thumb" aria-hidden="true">
+                  {blog.cover_image_url ? (
+                    <img src={blog.cover_image_url} alt="" />
+                  ) : (
+                    <span className="mw-blog-row-thumb-placeholder">
+                      Journal
+                    </span>
+                  )}
+                </span>
+
                 <div className="mw-blog-row-main">
                   <span className={`mw-blog-status is-${blog.status}`}>
                     {blog.status}
                   </span>
+
                   <h2>{blog.title}</h2>
+
                   {blog.excerpt && <p>{blog.excerpt}</p>}
+
+                  <div className="mw-blog-row-details">
+                    <span>{blog.author_name || "MyndWorks"}</span>
+                    <span>
+                      Updated{" "}
+                      {new Date(blog.updated_at).toLocaleDateString(
+                        "en-ZA",
+                        {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        },
+                      )}
+                    </span>
+                  </div>
                 </div>
 
-                <div className="mw-blog-row-meta">
-                  <span>{blog.author_name || "MyndWorks"}</span>
-                  <span>
-                    Updated{" "}
-                    {new Date(blog.updated_at).toLocaleDateString(
-                      "en-ZA",
-                      {
-                        day: "2-digit",
-                        month: "short",
-                        year: "numeric",
-                      },
-                    )}
-                  </span>
-                  <span>/blog/{blog.slug}</span>
-                </div>
+                <span className="mw-blog-row-arrow" aria-hidden="true">
+                  ↗
+                </span>
               </a>
             ))}
           </div>

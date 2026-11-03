@@ -334,15 +334,18 @@ export function AdminEventEdit({ eventId }: { eventId: string }) {
       <header className="mw-events-admin-header">
         <div>
           <a className="mw-admin-brand mw-admin-brand-link" href="/admin">MyndWorks</a>
-          <span className="mw-admin-label">Admin / Events</span>
         </div>
       </header>
 
       <section className="mw-event-editor">
         <div className="mw-event-editor-head">
           <div>
-            <a className="mw-admin-back-link" href="/admin/events">← Events</a>
-            <span className="mw-admin-label">Edit event</span>
+            <a className="mw-admin-back-link" href="/admin/events">
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to events</span>
+            </a>
             <h1>{title || "Event"}</h1>
             <p>Update event details, publishing status and cover image.</p>
           </div>

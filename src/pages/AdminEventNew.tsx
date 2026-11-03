@@ -252,25 +252,18 @@ export function AdminEventNew() {
           >
             MyndWorks
           </a>
-          <span className="mw-admin-label">
-            Admin / Events
-          </span>
         </div>
       </header>
 
-      <section className="mw-event-editor">
+      <section className="mw-event-editor mw-event-new-shell">
         <div className="mw-event-editor-head">
           <div>
-            <a
-              className="mw-admin-back-link"
-              href="/admin/events"
-            >
-              ← Events
+            <a className="mw-admin-back-link" href="/admin/events">
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to events</span>
             </a>
-
-            <span className="mw-admin-label">
-              New event
-            </span>
 
             <h1>Create event</h1>
 

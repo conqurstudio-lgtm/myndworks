@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { supabase } from "../lib/supabase";
+import myndworksMark from "../assets/myndworks-mark.svg";
 import "./admin-events.css";
 
 export function AdminEventsLogin() {
@@ -44,10 +45,15 @@ export function AdminEventsLogin() {
   return (
     <main className="mw-admin-auth">
       <section className="mw-admin-login-card">
-        <div className="mw-admin-brand">MyndWorks</div>
+        <div className="mw-admin-login-brand">
+          <span className="mw-admin-login-brand-mark">
+            <img src={myndworksMark} alt="" />
+          </span>
+          <span className="mw-admin-brand">MyndWorks</span>
+        </div>
 
         <div className="mw-admin-copy">
-          <span className="mw-admin-label">MyndWorks Admin</span>
+
           <h1>Welcome back.</h1>
           <p>Sign in to manage MyndWorks content.</p>
         </div>
@@ -86,7 +92,7 @@ export function AdminEventsLogin() {
           </button>
         </form>
 
-        <a className="mw-admin-back" href="/">← Back to MyndWorks</a>
+        <a className="mw-admin-back mw-admin-back-button" href="/">Back to MyndWorks</a>
       </section>
     </main>
   );

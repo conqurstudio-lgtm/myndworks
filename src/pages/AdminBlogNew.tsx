@@ -7,6 +7,7 @@ import {
 import { supabase } from "../lib/supabase";
 import "./admin-events.css";
 
+import { BlogEditor } from "../components/BlogEditor";
 type BlogStatus = "draft" | "published";
 
 function slugify(value: string) {
@@ -225,25 +226,21 @@ export function AdminBlogNew() {
           >
             MyndWorks
           </a>
-          <span className="mw-admin-label">
-            Admin / Journal
-          </span>
         </div>
       </header>
 
-      <section className="mw-event-editor">
+      <section className="mw-event-editor mw-blog-editor mw-blog-new-shell">
         <div className="mw-event-editor-head">
           <div>
             <a
               className="mw-admin-back-link"
               href="/admin/blogs"
             >
-              ← Journal
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to blogs</span>
             </a>
-
-            <span className="mw-admin-label">
-              New article
-            </span>
 
             <h1>Create article</h1>
 
@@ -260,7 +257,6 @@ export function AdminBlogNew() {
         >
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>01</span>
               <div>
                 <h2>Cover image</h2>
                 <p>
@@ -303,7 +299,6 @@ export function AdminBlogNew() {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>02</span>
               <div>
                 <h2>Article details</h2>
                 <p>
@@ -351,7 +346,6 @@ export function AdminBlogNew() {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>03</span>
               <div>
                 <h2>Article content</h2>
                 <p>
@@ -361,17 +355,13 @@ export function AdminBlogNew() {
             </div>
 
             <div className="mw-event-form-fields">
-              <label className="mw-field is-full">
+              <div className="mw-field is-full">
                 <span>Content</span>
-                <textarea
-                  rows={18}
+                <BlogEditor
                   value={content}
-                  onChange={(e) =>
-                    setContent(e.target.value)
-                  }
-                  placeholder="Write your article content here..."
+                  onChange={setContent}
                 />
-              </label>
+              </div>
             </div>
           </div>
 
@@ -382,7 +372,6 @@ export function AdminBlogNew() {
           )}
 
           <div className="mw-event-form-actions">
-            <a href="/admin/blogs">Cancel</a>
 
             <div>
               <button

@@ -230,7 +230,6 @@ export function AdminBlogEdit({ blogId }: { blogId: string }) {
           <a className="mw-admin-brand mw-admin-brand-link" href="/admin">
             MyndWorks
           </a>
-          <span className="mw-admin-label">Admin / Blogs</span>
         </div>
       </header>
 
@@ -238,9 +237,11 @@ export function AdminBlogEdit({ blogId }: { blogId: string }) {
         <div className="mw-event-editor-head">
           <div>
             <a className="mw-admin-back-link" href="/admin/blogs">
-              ← Blogs
+              <span className="mw-admin-back-link-icon" aria-hidden="true">
+                ←
+              </span>
+              <span>Back to blogs</span>
             </a>
-            <span className="mw-admin-label">Edit article</span>
             <h1>{title || "Article"}</h1>
             <p>Update the article, cover image and publishing status.</p>
           </div>
@@ -260,7 +261,6 @@ export function AdminBlogEdit({ blogId }: { blogId: string }) {
         <div className="mw-event-form">
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>01</span>
               <div>
                 <h2>Cover image</h2>
                 <p>Recommended: wide landscape image under 5 MB.</p>
@@ -290,7 +290,6 @@ export function AdminBlogEdit({ blogId }: { blogId: string }) {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>02</span>
               <div>
                 <h2>Article details</h2>
                 <p>Title, author and public summary.</p>
@@ -345,7 +344,6 @@ export function AdminBlogEdit({ blogId }: { blogId: string }) {
 
           <div className="mw-event-form-section">
             <div className="mw-event-form-section-title">
-              <span>03</span>
               <div>
                 <h2>Article content</h2>
                 <p>Write the main article body.</p>
