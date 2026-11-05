@@ -22,12 +22,23 @@ import { Faq } from "./components/Faq";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 
+import { AdminProfile } from "./pages/AdminProfile";
 export default function App() {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
 
   if (pathname === "/admin/login" || pathname === "/admin/events/login") {
     return <AdminEventsLogin />;
   }
+
+  if (pathname === "/admin/profile") {
+
+
+    return <AdminProfile />;
+
+
+  }
+
+
 
   if (pathname === "/admin") {
     return <AdminDashboard />;

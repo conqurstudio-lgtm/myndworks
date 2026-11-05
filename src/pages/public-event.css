@@ -283,3 +283,325 @@
 @media (max-width: 800px) { .mw-public-event-rsvp { grid-template-columns: 1fr; gap: 34px; } }
 @media (max-width: 600px) { .mw-public-event-rsvp { padding: 24px; } .mw-public-event-rsvp-grid { grid-template-columns: 1fr; } .mw-public-event-rsvp-grid label.is-full { grid-column: auto; } .mw-public-event-rsvp-form > button { width: 100%; } }
 /* === MYNDWORKS PUBLIC RSVP V1 END === */
+
+/* === MYNDWORKS PUBLIC EVENT DETAIL REFINEMENT START === */
+
+.mw-public-event-shell-integrated {
+  min-height: auto;
+  padding: 126px 20px 36px;
+}
+
+.mw-public-event-back {
+  max-width: 1180px;
+  margin: 0 auto 34px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(41, 67, 77, 0.64);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mw-public-event-back span {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(41, 67, 77, 0.16);
+  border-radius: 50%;
+  color: #29434d;
+}
+
+.mw-public-event-hero {
+  padding: 0 0 58px !important;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr) !important;
+  gap: clamp(48px, 7vw, 90px) !important;
+  align-items: start !important;
+  border-top: 0 !important;
+}
+
+.mw-public-event-copy {
+  padding-top: 18px;
+}
+
+.mw-public-event-copy h1 {
+  max-width: 650px;
+  font-size: clamp(52px, 5.8vw, 78px) !important;
+  line-height: 0.98 !important;
+}
+
+.mw-public-event-copy > p {
+  max-width: 520px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.mw-public-event-cover {
+  aspect-ratio: 16 / 10 !important;
+  border-radius: 24px !important;
+}
+
+.mw-public-event-hero-facts {
+  margin-top: 38px;
+  padding-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 28px;
+  border-top: 1px solid rgba(41, 67, 77, 0.10);
+}
+
+.mw-public-event-hero-facts > div {
+  display: grid;
+  gap: 7px;
+}
+
+.mw-public-event-hero-facts span,
+.mw-public-event-location-copy > span {
+  color: rgba(41, 67, 77, 0.43);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.mw-public-event-hero-facts strong {
+  max-width: 220px;
+  color: #29434d;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.mw-public-event-about,
+.mw-public-event-location {
+  max-width: 1180px;
+  margin: 0 auto 22px;
+  padding-top: 48px;
+}
+
+.mw-public-event-chapter {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 11px;
+  margin-bottom: 34px;
+}
+
+.mw-public-event-chapter img {
+  width: 13px;
+  height: 13px;
+  object-fit: contain;
+}
+
+.mw-public-event-chapter span {
+  color: rgba(41, 67, 77, 0.64);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mw-public-event-chapter i {
+  height: 1px;
+  background: rgba(41, 67, 77, 0.11);
+}
+
+.mw-public-event-about-copy {
+  max-width: 760px;
+  padding: 0 0 34px;
+}
+
+.mw-public-event-about-copy p {
+  margin: 0;
+  color: rgba(41, 67, 77, 0.78);
+  font-size: clamp(18px, 2vw, 25px);
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+}
+
+.mw-public-event-location-card {
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
+  min-height: 320px;
+  border: 1px solid rgba(41, 67, 77, 0.08);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.mw-public-event-location-copy {
+  padding: 42px;
+  align-self: center;
+}
+
+.mw-public-event-location-copy h2 {
+  margin: 10px 0 0;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.045em;
+}
+
+.mw-public-event-location-copy p {
+  max-width: 320px;
+  margin: 16px 0 0;
+  color: rgba(41, 67, 77, 0.60);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.mw-public-event-location-copy a {
+  width: fit-content;
+  margin-top: 26px;
+  display: inline-flex;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(41, 67, 77, 0.22);
+  color: #29434d;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mw-public-event-map {
+  min-height: 320px;
+  background: #eef3f4;
+}
+
+.mw-public-event-map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  display: block;
+  border: 0;
+  filter: saturate(0.78) contrast(0.96);
+}
+
+.mw-public-event-rsvp,
+.mw-public-event-share {
+  margin-top: 22px;
+}
+
+@media (max-width: 900px) {
+  .mw-public-event-hero {
+    grid-template-columns: 1fr !important;
+    gap: 36px !important;
+  }
+
+  .mw-public-event-copy {
+    padding-top: 0;
+  }
+
+  .mw-public-event-location-card {
+    grid-template-columns: 1fr;
+  }
+
+  .mw-public-event-location-copy {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-public-event-shell-integrated {
+    padding: 102px 18px 28px;
+  }
+
+  .mw-public-event-back {
+    margin-bottom: 28px;
+  }
+
+  .mw-public-event-hero {
+    padding-bottom: 42px !important;
+  }
+
+  .mw-public-event-copy h1 {
+    font-size: clamp(44px, 13.5vw, 62px) !important;
+  }
+
+  .mw-public-event-hero-facts {
+    margin-top: 28px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .mw-public-event-hero-facts strong {
+    max-width: none;
+  }
+
+  .mw-public-event-cover {
+    aspect-ratio: 4 / 3 !important;
+    border-radius: 18px !important;
+  }
+
+  .mw-public-event-about,
+  .mw-public-event-location {
+    padding-top: 34px;
+  }
+
+  .mw-public-event-chapter {
+    margin-bottom: 24px;
+  }
+
+  .mw-public-event-about-copy p {
+    font-size: 18px;
+  }
+
+  .mw-public-event-location-card {
+    border-radius: 18px;
+  }
+
+  .mw-public-event-location-copy {
+    padding: 28px 24px;
+  }
+
+  .mw-public-event-map,
+  .mw-public-event-map iframe {
+    min-height: 260px;
+  }
+}
+
+/* === MYNDWORKS PUBLIC EVENT DETAIL REFINEMENT END === */
+
+/* === MYNDWORKS SHARE ICON START === */
+
+.mw-public-event-share-actions .mw-public-event-share-icon {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(41, 67, 77, 0.14);
+  border-radius: 50%;
+  background: transparent;
+  color: #29434d;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    transform 180ms ease;
+}
+
+.mw-public-event-share-actions .mw-public-event-share-icon svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.mw-public-event-share-actions .mw-public-event-share-icon:hover {
+  border-color: rgba(0, 185, 243, 0.42);
+  background: rgba(0, 185, 243, 0.08);
+  color: #00b9f3;
+  transform: translateY(-1px);
+}
+
+.mw-public-event-share-actions .mw-public-event-share-icon:focus-visible {
+  outline: 2px solid rgba(0, 185, 243, 0.35);
+  outline-offset: 3px;
+}
+
+/* === MYNDWORKS SHARE ICON END === */

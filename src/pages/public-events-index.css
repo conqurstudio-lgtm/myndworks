@@ -291,3 +291,498 @@
     gap: 8px;
   }
 }
+
+/* === MYNDWORKS EVENTS MAIN-SITE INTEGRATION START === */
+
+.mw-events-public-shell-integrated {
+  padding-top: 120px;
+  padding-bottom: 72px;
+}
+
+.mw-events-public-section-head {
+  margin-bottom: 22px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.mw-events-public-section-head > span {
+  color: #00b9f3;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mw-events-public-section-head > p {
+  margin: 0;
+  color: rgba(41, 67, 77, 0.52);
+  font-size: 11px;
+}
+
+.mw-events-public-empty.is-compact {
+  padding-top: 12px;
+  padding-bottom: 16px;
+}
+
+.mw-events-public-past {
+  margin-top: 74px;
+  padding-top: 42px;
+  border-top: 1px solid rgba(41, 67, 77, 0.09);
+}
+
+.mw-events-public-grid.is-past .mw-events-public-card {
+  opacity: 0.9;
+}
+
+@media (max-width: 800px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 104px;
+  }
+
+  .mw-events-public-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 92px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .mw-events-public-past {
+    margin-top: 54px;
+    padding-top: 32px;
+  }
+}
+
+/* === MYNDWORKS EVENTS MAIN-SITE INTEGRATION END === */
+
+/* === MYNDWORKS SIMPLE EVENTS HEADER START === */
+
+.mw-events-public-shell-integrated {
+  padding-top: 110px;
+}
+
+.mw-events-public-page-title {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 54px 0 58px;
+  text-align: center;
+  border-bottom: 1px solid rgba(41, 67, 77, 0.09);
+}
+
+.mw-events-public-page-title h1 {
+  margin: 0;
+  color: #29434d;
+  font-family: "Inter Tight", sans-serif;
+  font-size: clamp(48px, 6vw, 76px);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+}
+
+.mw-events-public-feed {
+  padding-top: 46px;
+}
+
+@media (max-width: 800px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 92px;
+  }
+
+  .mw-events-public-page-title {
+    padding: 42px 0 44px;
+  }
+
+  .mw-events-public-feed {
+    padding-top: 36px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 82px;
+  }
+
+  .mw-events-public-page-title {
+    padding: 34px 0 36px;
+  }
+
+  .mw-events-public-page-title h1 {
+    font-size: clamp(44px, 14vw, 58px);
+  }
+
+  .mw-events-public-feed {
+    padding-top: 30px;
+  }
+}
+
+/* === MYNDWORKS SIMPLE EVENTS HEADER END === */
+
+/* === MYNDWORKS EVENTS CHAPTER STYLE START === */
+
+/* Remove space that belonged to the standalone Events title */
+.mw-events-public-shell-integrated {
+  padding-top: 104px;
+}
+
+.mw-events-public-page-title {
+  display: none !important;
+}
+
+.mw-events-public-feed {
+  padding-top: 42px;
+}
+
+/* Same chapter language as the homepage section dividers */
+.mw-events-public-chapter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin: 0 0 38px;
+  color: #6f756f;
+  font-size: 9.5px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mw-events-public-chapter-icon {
+  display: block;
+  width: 15px;
+  height: 15px;
+  min-width: 15px;
+  flex: 0 0 15px;
+  object-fit: contain;
+}
+
+.mw-events-public-chapter-label {
+  display: inline-block;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.mw-events-public-chapter-line {
+  display: block;
+  flex: 1 1 auto;
+  height: 1px;
+  margin-left: 2px;
+  background: rgba(20, 21, 20, 0.09);
+}
+
+/* Keep the past-event spacing calm and editorial */
+.mw-events-public-past {
+  margin-top: 74px;
+  padding-top: 0;
+  border-top: 0;
+}
+
+@media (max-width: 800px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 92px;
+  }
+
+  .mw-events-public-feed {
+    padding-top: 34px;
+  }
+
+  .mw-events-public-chapter {
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-events-public-shell-integrated {
+    padding-top: 82px;
+  }
+
+  .mw-events-public-feed {
+    padding-top: 28px;
+  }
+
+  .mw-events-public-chapter {
+    gap: 9px;
+    margin-bottom: 26px;
+    font-size: 9.5px;
+    letter-spacing: 0.17em;
+  }
+
+  .mw-events-public-chapter-icon {
+    width: 14px;
+    height: 14px;
+    min-width: 14px;
+    flex-basis: 14px;
+  }
+
+  .mw-events-public-past {
+    margin-top: 54px;
+  }
+}
+
+/* === MYNDWORKS EVENTS CHAPTER STYLE END === */
+
+/* === MYNDWORKS EVENT DATE HIERARCHY START === */
+
+/* The chapter divider already provides structure; remove the old feed rule. */
+.mw-events-public-feed {
+  border-top: 0 !important;
+}
+
+/* Clear date/status hierarchy while keeping the MyndWorks restraint. */
+.mw-events-public-date-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 15px 0 0;
+}
+
+.mw-events-public-status-tag {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border: 1px solid rgba(41, 67, 77, 0.10);
+  border-radius: 999px;
+  background: #f8fafb;
+  color: rgba(41, 67, 77, 0.62);
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.mw-events-public-card.is-upcoming-event
+.mw-events-public-status-tag {
+  border-color: rgba(0, 185, 243, 0.16);
+  background: rgba(0, 185, 243, 0.07);
+  color: #008fbd;
+}
+
+.mw-events-public-date-lockup {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  color: #29434d;
+}
+
+.mw-events-public-date-lockup > strong {
+  display: block;
+  font-family: "Inter Tight", sans-serif;
+  font-size: 40px;
+  font-weight: 450;
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+}
+
+.mw-events-public-date-lockup > span {
+  display: grid;
+  gap: 2px;
+  padding-bottom: 1px;
+  color: rgba(41, 67, 77, 0.68);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+}
+
+.mw-events-public-date-lockup small {
+  color: rgba(41, 67, 77, 0.40);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.mw-events-public-meta {
+  margin-top: 13px;
+  gap: 10px;
+  color: rgba(41, 67, 77, 0.46);
+}
+
+.mw-events-public-card h2 {
+  margin-top: 8px;
+}
+
+.mw-events-public-grid.is-past .mw-events-public-card {
+  opacity: 1 !important;
+}
+
+@media (max-width: 800px) {
+  .mw-events-public-date-lockup > strong {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 620px) {
+  .mw-events-public-date-row {
+    margin-top: 18px;
+  }
+
+  .mw-events-public-date-lockup > strong {
+    font-size: 38px;
+  }
+
+  .mw-events-public-status-tag {
+    min-height: 23px;
+    padding: 0 9px;
+  }
+}
+
+/* === MYNDWORKS EVENT DATE HIERARCHY END === */
+
+/* === MYNDWORKS EVENT STRIP START === */
+
+/* Attach the image and event timing into one visual unit. */
+.mw-events-public-image {
+  border-radius: 20px 20px 0 0 !important;
+}
+
+.mw-events-public-event-strip {
+  min-height: 42px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 13px;
+  border: 1px solid rgba(41, 67, 77, 0.08);
+  border-top: 0;
+  border-radius: 0 0 14px 14px;
+  background: rgba(41, 67, 77, 0.025);
+  color: #29434d;
+}
+
+.mw-events-public-event-strip .mw-events-public-status-tag {
+  min-height: 22px;
+  padding: 0 8px;
+  background: transparent;
+}
+
+.mw-events-public-card.is-upcoming-event
+.mw-events-public-event-strip .mw-events-public-status-tag {
+  background: rgba(0, 185, 243, 0.06);
+}
+
+.mw-events-public-strip-date {
+  color: rgba(41, 67, 77, 0.72);
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mw-events-public-strip-time {
+  color: rgba(41, 67, 77, 0.48);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* Previous large date treatment is no longer needed. */
+.mw-events-public-date-row,
+.mw-events-public-date-lockup,
+.mw-events-public-meta {
+  display: none !important;
+}
+
+.mw-events-public-copy {
+  padding-top: 16px;
+}
+
+.mw-events-public-card h2 {
+  margin-top: 0 !important;
+}
+
+@media (max-width: 620px) {
+  .mw-events-public-image,
+  .mw-events-public-card.is-featured
+  .mw-events-public-image {
+    border-radius: 16px 16px 0 0 !important;
+  }
+
+  .mw-events-public-event-strip {
+    min-height: 44px;
+    grid-template-columns: auto 1fr;
+    gap: 8px 12px;
+    padding: 10px 12px;
+    border-radius: 0 0 13px 13px;
+  }
+
+  .mw-events-public-strip-time {
+    grid-column: 2;
+  }
+}
+
+/* === MYNDWORKS EVENT STRIP END === */
+
+/* === MYNDWORKS EVENT STRIP HOVER + VENUE START === */
+
+/* Keep the image + strip feeling like one component. */
+.mw-events-public-event-strip {
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease;
+}
+
+/* MyndWorks interaction colour */
+.mw-events-public-card:hover .mw-events-public-event-strip,
+.mw-events-public-card:focus-visible .mw-events-public-event-strip {
+  background: #00b9f3;
+  border-color: #00b9f3;
+}
+
+/* Flip strip content cleanly to white */
+.mw-events-public-card:hover .mw-events-public-status-tag,
+.mw-events-public-card:focus-visible .mw-events-public-status-tag {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+
+.mw-events-public-card:hover .mw-events-public-strip-date,
+.mw-events-public-card:hover .mw-events-public-strip-time,
+.mw-events-public-card:focus-visible .mw-events-public-strip-date,
+.mw-events-public-card:focus-visible .mw-events-public-strip-time {
+  color: #ffffff;
+}
+
+/* Listing cards only need the venue name.
+   Full address stays available on the event detail page. */
+.mw-events-public-place small {
+  display: none !important;
+}
+
+/* Give venue name a little more clarity now that it stands alone. */
+.mw-events-public-place {
+  margin-top: 18px;
+  color: rgba(41, 67, 77, 0.78);
+}
+
+.mw-events-public-place > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.mw-events-public-place > span::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  flex: 0 0 5px;
+  border-radius: 50%;
+  background: rgba(41, 67, 77, 0.28);
+}
+
+/* === MYNDWORKS EVENT STRIP HOVER + VENUE END === */

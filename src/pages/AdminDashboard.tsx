@@ -124,13 +124,22 @@ export function AdminDashboard() {
           MyndWorks
         </div>
 
-        <button
+        <div className="mw-admin-header-actions">
+          <a
+            className="mw-admin-account-link"
+            href="/admin/profile"
+          >
+            My account
+          </a>
+
+          <button
           className="mw-admin-signout"
           type="button"
           onClick={signOut}
         >
           Sign out
         </button>
+        </div>
       </header>
 
       <section className="mw-admin-home mw-admin-home-v2">

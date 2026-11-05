@@ -8255,3 +8255,50 @@ body .section-eyebrow {
 
 
 /* === MYNDWORKS STORIES SOFT PANEL FINAL END === */
+
+/* === MYNDWORKS TOP OVERSCROLL FIX START === */
+/*
+  Prevent the browser's elastic/rubber-band overscroll from exposing
+  the default white document canvas above the Hero.
+  This does not alter normal page layout or scrolling.
+*/
+html {
+  background-color: #f8fafb;
+  overscroll-behavior-y: none;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+/* === MYNDWORKS TOP OVERSCROLL FIX END === */
+
+/* === MYNDWORKS MOBILE EDGE-TO-EDGE START ===
+   Paint the site into the iPhone status/safe area.
+   Only the floating navigation itself is offset below the notch.
+   Do not add top safe-area padding to body, #root or page sections.
+*/
+
+@media (max-width: 699px) {
+  html,
+  body,
+  #root {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+
+  body {
+    min-height: 100dvh;
+  }
+
+  .site-header {
+    top: 0 !important;
+    padding-top: calc(10px + env(safe-area-inset-top, 0px)) !important;
+  }
+}
+
+/* === MYNDWORKS MOBILE EDGE-TO-EDGE END === */

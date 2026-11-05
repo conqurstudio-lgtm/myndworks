@@ -32,6 +32,13 @@ const NAV_ITEMS = [
 
 
 export function Header() {
+  const isHomePage = window.location.pathname === "/";
+
+  const resolveSiteHref = (href: string) => {
+    if (!href.startsWith("#")) return href;
+    return isHomePage ? href : `/${href}`;
+  };
+
   const [menuOpen, setMenuOpen] =
     useState(false);
 
@@ -241,7 +248,7 @@ export function Header() {
       >
         <a
           className="header-brand"
-          href="#top"
+          href={isHomePage ? "#top" : "/"}
           onClick={closeMenu}
           aria-label="MyndWorks home"
         >
@@ -264,7 +271,7 @@ export function Header() {
         >
           {NAV_ITEMS.map((item) => (
             <a
-              href={item.href}
+              href={resolveSiteHref(item.href)}
               key={item.href}
             >
               {item.label}
@@ -275,7 +282,7 @@ export function Header() {
 
         <a
           className="btn-lime header-cta"
-          href="#contact"
+          href={resolveSiteHref("#contact")}
         >
           Book a session
         </a>
@@ -322,7 +329,7 @@ export function Header() {
         {NAV_ITEMS.map((item) => (
           <a
             className="mobile-link"
-            href={item.href}
+            href={resolveSiteHref(item.href)}
             key={item.href}
             onClick={closeMenu}
           >
@@ -332,7 +339,7 @@ export function Header() {
 
         <a
           className="btn-lime"
-          href="#contact"
+          href={resolveSiteHref("#contact")}
           onClick={closeMenu}
         >
           Book a session
